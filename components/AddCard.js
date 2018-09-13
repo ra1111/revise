@@ -114,7 +114,7 @@ handleAnswer5 = (answer5) => {
 					</View>
 				</View>
         <Button 
-        	onPress={() => this.sbmtCard(title, question, this.state.answer1,this.state.answer2,this.state.answer3,this.state.answer4,this.state.answer5)}
+        	onPress={() => this.sbmtCard(title, question, answer)}
 					title={"Add"}
 					backgroundColor="#03A9F4"
 					icon={{name: 'add'}} 
