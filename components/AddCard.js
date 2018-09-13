@@ -10,11 +10,7 @@ class AddCard extends React.Component {
 
 	state= {
 		question: '',
-		answer4: '',
-		answer1:'',
-		answer2: '',
-		answer3: '',
-		answer5: '',
+answer:[],
 
 	}
 
@@ -31,29 +27,39 @@ class AddCard extends React.Component {
   }
 
   handleAnswer1 = (answer1) => {
+	  let ans=this.state.answer.slice();
+	  ans[0]=answer1,
 	  this.setState({
-	  answer1
+	  answer:ans,
 	  })
   }
   handleAnswer2 = (answer2) => {
+	let ans=this.state.answer.slice();
+	ans[1]=answer2,
 	this.setState({
-	answer2
+		answer:ans,
 	})
 }
 handleAnswer3 = (answer3) => {
+	let ans=this.state.answer.slice();
+	ans[2]=answer3,
 	this.setState({
-	answer3
+		answer:ans,
 	})
 }
 handleAnswer4 = (answer4) => {
+	let ans=this.state.answer.slice();
+	ans[3]=answer4,
 	this.setState({
-	answer4
+		answer:ans,
 	})
 }
 handleAnswer5 = (answer5) => {
+	let ans=this.state.answer.slice();
+	ans[4]=answer5,
 	console.log(this.state)
 	this.setState({
-	answer5
+		answer:ans,
 	})
 }
   sbmtCard = (title, question, answer) => {
@@ -108,7 +114,7 @@ handleAnswer5 = (answer5) => {
 					</View>
 				</View>
         <Button 
-        	onPress={() => this.sbmtCard(title, question, answer)}
+        	onPress={() => this.sbmtCard(title, question, this.state.answer1,this.state.answer2,this.state.answer3,this.state.answer4,this.state.answer5)}
 					title={"Add"}
 					backgroundColor="#03A9F4"
 					icon={{name: 'add'}} 
