@@ -4,17 +4,19 @@ import { connect } from 'react-redux'
 import { AddNewCard } from '../actions'
 import { updateDeck } from '../utils/api'
 import { Button, FormLabel, FormInput } from 'react-native-elements'
+import thunk from '../node_modules/redux-thunk';
 
 class AddCard extends React.Component {
 
 	state= {
 		question: '',
-		answer: '',
-	}
+		answer4: '',
+		answer1:'',
+		answer2: '',
+		answer3: '',
+		answer5: '',
 
-	// componentWillMount() {
-	// 	this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
-	// }
+	}
 
   static navigationOptions = ({ navigation }) => {
   	return {
@@ -28,12 +30,32 @@ class AddCard extends React.Component {
   	})
   }
 
-  handleAnswer = (answer) => {
-  	this.setState({
-  		answer,
-  	})
+  handleAnswer1 = (answer1) => {
+	  this.setState({
+	  answer1
+	  })
   }
-
+  handleAnswer2 = (answer2) => {
+	this.setState({
+	answer2
+	})
+}
+handleAnswer3 = (answer3) => {
+	this.setState({
+	answer3
+	})
+}
+handleAnswer4 = (answer4) => {
+	this.setState({
+	answer4
+	})
+}
+handleAnswer5 = (answer5) => {
+	console.log(this.state)
+	this.setState({
+	answer5
+	})
+}
   sbmtCard = (title, question, answer) => {
   	if(question === '' || answer === '') {
   		alert("Please Enter Question and Answer");
@@ -78,7 +100,11 @@ class AddCard extends React.Component {
 					</View>
 					<View style={styles.formView}>
 						<FormLabel labelStyle={{fontSize:20}}>Enter the Points</FormLabel>
-						<FormInput placeholder="Notes" multiline={false}  maxLength={40} ref={input => this.aInput = input} onChangeText={this.handleAnswer}/>
+						<FormInput placeholder="Notes" multiline={false}  maxLength={40} ref={input => this.aInput = input} onChangeText={this.handleAnswer1}/>
+						<FormInput placeholder="Notes" multiline={false}  maxLength={40} ref={input => this.aInput = input} onChangeText={this.handleAnswer2}/>
+						<FormInput placeholder="Notes" multiline={false}  maxLength={40} ref={input => this.aInput = input} onChangeText={this.handleAnswer3}/>
+						<FormInput placeholder="Notes" multiline={false}  maxLength={40} ref={input => this.aInput = input} onChangeText={this.handleAnswer4}/>
+						<FormInput placeholder="Notes" multiline={false}  maxLength={40} ref={input => this.aInput = input} onChangeText={this.handleAnswer5}/>
 					</View>
 				</View>
         <Button 
