@@ -9,6 +9,7 @@ import {
 
 
 function decks (state={deckData: []}, action) {
+	console.log(state,action);
 	switch(action.type) {
 		case RECEIVE_DECKS :
 		return {
@@ -24,8 +25,9 @@ function decks (state={deckData: []}, action) {
 		return {
 			...state,
 			deckData: state.deckData.map(deck => {
+			
 				return deck.title === action.title 
-				? {title: deck.title, questions: deck.questions.concat({question:action.question, answer: action.answer})} 
+				? {title: deck.title, questions:deck.questions? deck.questions.concat({question:action.question, answer: action.answer}):{question:action.question, answer: action.answer}} 
 				: {...deck}
 			})
 		}

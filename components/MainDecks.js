@@ -75,7 +75,7 @@ function Decks ({deck, navProps}) {
           {deck: deck})}>
         <Text style={styles.rowContent}>{deck.title}</Text>
       </TouchableOpacity>
-      <Text style={styles.deckCount}>{1} Cards</Text>
+      <Text style={styles.deckCount}>Cards</Text>
     </View>
   )
 }

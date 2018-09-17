@@ -75,7 +75,7 @@ class App extends Component {
     console.log(this.props);
     return (
       <View style={styles.container}>
-      <View>
+      {/* <View>
         <Button onPress={this.selectPhoto.bind(this)} >
           <View style={[styles.img, styles.imgContainer, this.state.imgSource === null && styles.round]}>
             {this.state.imgSource === null ?
@@ -101,13 +101,21 @@ class App extends Component {
             <Text>Cancel recognition</Text>
           </View>
         </Button>
-        </View>
+        </View> */}
         <View style={styles.border}/>
         <View>
-          <Button onPress={()=>{this.props.navigation.navigate('AddCard')}}>
+          <Button onPress={()=>{this.props.navigation.navigate('AddDeck')}}>
             <View style={[styles.img, styles.imgContainer,styles.round]}>
 
           <Text> Enter the Notes</Text>
+          </View>
+</Button>
+          </View>
+          <View>
+          <Button onPress={()=>{this.props.navigation.navigate('MainDeck')}}>
+            <View style={[styles.img, styles.imgContainer,styles.round]}>
+
+          <Text> See the Notes</Text>
           </View>
 </Button>
           </View>

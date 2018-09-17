@@ -84,37 +84,38 @@ const MainNavigator = StackNavigator({
               backgroundColor: 'gray',
             },
           }
-        }
+        },
 
+  
+
+  AddDeck: {
+    screen: AddDeck,
+    navigationOptions: {
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: 'gray',
+      }
+    },
   },
-  // Home: {
-  //   screen: MainDecks,
-  //   navigationOptions: {
-  //     headerTintColor: 'white',
-  //     headerStyle: {
-  //       backgroundColor: 'gray',
-  //     },
-  //   },
-  // },
-  // AddDeck: {
-  //   screen: AddDeck,
-  //   navigationOptions: {
-  //     headerTintColor: 'white',
-  //     headerStyle: {
-  //       backgroundColor: 'gray',
-  //     }
-  //   },
-  // },
-  // DeckDetail: {
-  //   screen: Tabs,
-  //   navigationOptions: {
-  //     headerTintColor: 'white',
-  //     headerStyle: {
-  //       backgroundColor: 'gray',
-  //     }
-  //   },
-  // },
-
+  DeckDetail: {
+    screen: Tabs,
+    navigationOptions: {
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: 'gray',
+      }
+    },
+  },
+  MainDeck: {
+    screen: MainDecks,
+    navigationOptions: {
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: 'gray',
+      }
+    },
+  },
+},
 {
   cardStyle: {
     paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight

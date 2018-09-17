@@ -57,13 +57,12 @@ handleAnswer4 = (answer4) => {
 handleAnswer5 = (answer5) => {
 	let ans=this.state.answer.slice();
 	ans[4]=answer5,
-	console.log(this.state)
 	this.setState({
 		answer:ans,
 	})
 }
   sbmtCard = (title, question, answer) => {
-  	if(question === '' || answer === '') {
+  	if(question === '' || answer[0] === '') {
   		alert("Please Enter Question and Answer");
   	} else {
 	  	const newCard = {
@@ -74,8 +73,9 @@ handleAnswer5 = (answer5) => {
 	  	let newDeck = ''
 	  	let key = ''
 	  	this.props.deckData.map((deck,index) => {
+			  console.log(deck.questions,deck)
 	  		if(deck.title === title) {
-	  			newDeck = {title: deck.title, questions: deck.questions.concat({question,answer})};
+	  			newDeck = {title: deck.title, questions: deck.questions?deck.questions.concat({question,answer}):{question,answer}};
 		  		key = index;
 	  		}
 	  	});
@@ -84,7 +84,7 @@ handleAnswer5 = (answer5) => {
 	  	// save to AsyncStorage
 	  	updateDeck({title, newDeck});
 	  	// reset form
-	  	this.setState({ question: '', answer: '' });
+	  	this.setState({ question: '', answer: [] });
 	  	this.qInput.clearText();
 	  	this.aInput.clearText();
 	  	// go back to Deck
