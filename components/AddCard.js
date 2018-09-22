@@ -64,23 +64,25 @@ handleAnswer5 = (answer5) => {
   sbmtCard = (title, question, answer) => {
   	if(question === '' || answer[0] === '') {
   		alert("Please Enter Question and Answer");
-  	} else {
+  	} else {	
 	  	const newCard = {
 	  		title,
 	  		question,
-	  		answer,
+	  	answer:answer[0],
 	  	}
 	  	let newDeck = ''
 	  	let key = ''
-	  	this.props.deckData.map((deck,index) => {
-			  console.log(deck.questions,deck)
-	  		if(deck.title === title) {
-	  			newDeck = {title: deck.title, questions: deck.questions?deck.questions.concat({question,answer}):{question,answer}};
-		  		key = index;
-	  		}
-	  	});
-	  	// add new deck to store
-	  	this.props.dispatch(AddNewCard(newCard));
+		  this.props.deckData.map((deck,index) => {
+			  console.log(deck,index,"TITLEVXUGS")
+			if(deck.title === title) {
+				console.log(deck,"TITLEMATCHES")
+				newDeck = {title: deck.title, questions: deck.questions.concat({question,answer})};
+				key = index;
+			}
+		});
+		console.log(newDeck,"NEW DECK");
+		  this.props.dispatch(AddNewCard(newCard));
+
 	  	// save to AsyncStorage
 	  	updateDeck({title, newDeck});
 	  	// reset form
@@ -96,7 +98,7 @@ handleAnswer5 = (answer5) => {
 	render() {
 		const { question } = this.state;
 		const { answer } = this.state;
-		const { title } = 'noe need';
+		const { title } = this.props.navigation.state.params.deck;
 		return (
 			<View style={styles.container}>
 				<View style={{marginTop: 40}}>
