@@ -128,8 +128,11 @@ class QuizCard extends React.Component {
   		>
   			<View>
   				{this.state.flip === false 
-  					? <Text style={styles.cardText}>{item.question}</Text>
-  				  : <Text style={styles.cardText}>{item.answer}</Text>
+  					? <Text style={styles.cardText}>{item.question}</Text>:
+					  item.answerArr.map((value, index) => {
+						return <Text style={styles.cardText}>{value}</Text>
+					  })
+  				   
   				}
   			</View>
   			<Button
