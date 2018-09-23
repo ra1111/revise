@@ -120,6 +120,7 @@ class QuizCard extends React.Component {
 	}
 
   renderCardContent(item, index, totalLength) {
+	  console.log(item,"this is item")
   	return (
   		<Card
   			key={item}

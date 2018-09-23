@@ -33,12 +33,13 @@ export function DeleteDeck(title) {
 	}
 }
 
-export function AddNewCard({title, question, answer}) {
+export function AddNewCard({title, question, answer,answerArr}) {
 	console.log(title,question,answer,'hi')
 	return {
 		type: ADD_CARD,
 		title,
 		question,
 		answer,
+		answerArr
 	}
 }

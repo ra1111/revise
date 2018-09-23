@@ -11,6 +11,7 @@ class AddCard extends React.Component {
 	state= {
 		question: '',
 answer:[],
+noteNumber:[],
 
 	}
 
@@ -26,40 +27,44 @@ answer:[],
   	})
   }
 
-  handleAnswer1 = (answer1) => {
-	  let ans=this.state.answer.slice();
-	  ans[0]=answer1,
-	  this.setState({
-	  answer:ans,
-	  })
-  }
-  handleAnswer2 = (answer2) => {
+handleAnswer=(answer)=>{
+	
+	let prev=answer.slice(0,-1);
+	
+
 	let ans=this.state.answer.slice();
-	ans[1]=answer2,
-	this.setState({
-		answer:ans,
-	})
+	if(prev=='')
+{
+	ans.push(answer)
+	console.log(ans,"first")
+
+	
 }
-handleAnswer3 = (answer3) => {
-	let ans=this.state.answer.slice();
-	ans[2]=answer3,
-	this.setState({
-		answer:ans,
-	})
+else{
+
+	for(let i=0;i<ans.length;i++)
+	{
+		if (ans[i].match(prev))
+		{
+ans[i]=answer;
+console.log(ans,"match");
+		}
+	}
+	
+
 }
-handleAnswer4 = (answer4) => {
-	let ans=this.state.answer.slice();
-	ans[3]=answer4,
 	this.setState({
 		answer:ans,
 	})
+console.log(this.state.answer);
 }
-handleAnswer5 = (answer5) => {
-	let ans=this.state.answer.slice();
-	ans[4]=answer5,
+addNote=()=>{
+	let noteNumber=this.state.noteNumber;
+	noteNumber.push(<FormInput placeholder="Notes" multiline={false}  maxLength={40} ref={input => this.aInput = input} onChangeText={this.handleAnswer}/>)
 	this.setState({
-		answer:ans,
-	})
+		noteNumber
+
+})
 }
   sbmtCard = (title, question, answer) => {
   	if(question === '' || answer[0] === '') {
@@ -68,7 +73,8 @@ handleAnswer5 = (answer5) => {
 	  	const newCard = {
 	  		title,
 	  		question,
-	  	answer:answer[0],
+		  answer:answer[0],
+		  answerArr:answer
 	  	}
 	  	let newDeck = ''
 	  	let key = ''
@@ -108,18 +114,26 @@ handleAnswer5 = (answer5) => {
 					</View>
 					<View style={styles.formView}>
 						<FormLabel labelStyle={{fontSize:20}}>Enter the Points</FormLabel>
-						<FormInput placeholder="Notes" multiline={false}  maxLength={40} ref={input => this.aInput = input} onChangeText={this.handleAnswer1}/>
-						<FormInput placeholder="Notes" multiline={false}  maxLength={40} ref={input => this.aInput = input} onChangeText={this.handleAnswer2}/>
-						<FormInput placeholder="Notes" multiline={false}  maxLength={40} ref={input => this.aInput = input} onChangeText={this.handleAnswer3}/>
-						<FormInput placeholder="Notes" multiline={false}  maxLength={40} ref={input => this.aInput = input} onChangeText={this.handleAnswer4}/>
-						<FormInput placeholder="Notes" multiline={false}  maxLength={40} ref={input => this.aInput = input} onChangeText={this.handleAnswer5}/>
+						{this.state.noteNumber.map((value, index) => {
+          return value
+        })}
 					</View>
 				</View>
+			
+				<Button onPress={()=> this.addNote()
+				}
+				title={"Add"}
+				backgroundColor="#03A9F4"
+				size={20}
+				icon={{name: 'add'}} 
+				buttonStyle={styles.add}></Button>
+			
         <Button 
         	onPress={() => this.sbmtCard(title, question, answer)}
-					title={"Add"}
+					title={"Submit"}
 					backgroundColor="#03A9F4"
 					icon={{name: 'add'}} 
+					size={20}
 					style={{marginTop: 20}}
         >
         </Button>
@@ -139,6 +153,12 @@ const styles = StyleSheet.create({
 	formView: {
 		alignItems: 'center',
 	},
+	add:{
+		borderRadius:20,
+		marginTop:20,
+		marginBottom:20,
+
+	}
 })
 
 function mapStateToProps(state) {
