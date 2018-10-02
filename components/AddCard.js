@@ -73,8 +73,7 @@ addNote=()=>{
 	  	const newCard = {
 	  		title,
 	  		question,
-		  answer:answer[0],
-		  answerArr:answer
+		answer
 	  	}
 	  	let newDeck = ''
 	  	let key = ''

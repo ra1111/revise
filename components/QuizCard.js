@@ -126,7 +126,7 @@ class QuizCard extends React.Component {
   			key={item}
   			title={`${String(index)}/${String(totalLength)}`}
   		>
-  			<View>
+  			<View style={styles.text}>
   				{this.state.flip === false 
   					? <Text style={styles.cardText}>{item.question}</Text>:
 					  item.answer.map((value, index) => {
@@ -234,11 +234,16 @@ const styles = StyleSheet.create({
 		width: SCREEN_WIDTH,
 	},
   cardText: {
-    marginBottom:10,
-    textAlign: 'center',
+	marginBottom:30,
+	textAlign: 'center',
+	marginTop:20,
+  },
+  text:{
+	  height:'68%',
   },
   cardView: {
-    marginTop: 60,
+	marginTop: 60,
+	height:'80%',
   },
   bottomView: {
   	flexDirection: 'row',

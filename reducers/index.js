@@ -27,7 +27,7 @@ function decks (state={deckData: []}, action) {
 			deckData: state.deckData.map(deck => {
 			
 				return deck.title === action.title 
-				? {title: deck.title, questions:deck.questions? deck.questions.concat({question:action.question, answer: action.answer,answerArr:action.answerArr}):{question:action.question, answer: action.answer,answerArr:action.answerArr}} 
+				? {title: deck.title, questions:deck.questions? deck.questions.concat({question:action.question, answer: action.answer}):{question:action.question, answer: action.answer}} 
 				: {...deck}
 			})
 		}
