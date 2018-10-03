@@ -62,8 +62,45 @@ class QuizCard extends React.Component {
 			this.setState({ counter: 0 });
 		}
 	}
+	componentDidMount()
+	{
+		this.animatedValue = new Animated.Value(0);
+		this.value = 0;
+		this.animatedValue.addListener(({ value }) => {
+		  this.value = value;
+		})
+		this.frontInterpolate = this.animatedValue.interpolate({
+		  inputRange: [0, 180],
+		  outputRange: ['0deg', '180deg'],
+		})
+		this.backInterpolate = this.animatedValue.interpolate({
+		  inputRange: [0, 180],
+		  outputRange: ['180deg', '360deg']
+		})
+		this.frontOpacity = this.animatedValue.interpolate({
+		  inputRange: [89, 90],
+		  outputRange: [1, 0]
+		})
+		this.backOpacity = this.animatedValue.interpolate({
+		  inputRange: [89, 90],
+		  outputRange: [0, 1]
+		})
+	}
 
   flipCard() {
+	if (this.value >= 90) {
+		Animated.spring(this.animatedValue,{
+		  toValue: 0,
+		  friction: 8,
+		  tension: 10
+		}).start();
+	  } else {
+		Animated.spring(this.animatedValue,{
+		  toValue: 180,
+		  friction: 8,
+		  tension: 10
+		}).start();
+	  }
   	return this.setState((prevState) => ({flip: !prevState.flip}));
   }
 
@@ -121,20 +158,36 @@ class QuizCard extends React.Component {
 
   renderCardContent(item, index, totalLength) {
 	  console.log(item,"this is item")
+	  const frontAnimatedStyle = {
+		transform: [
+		  { rotateY: this.frontInterpolate }
+		]
+	  }
+	  const backAnimatedStyle = {
+		transform: [
+		  { rotateY: this.backInterpolate }
+		]
+	  }
   	return (
   		<Card
   			key={item}
   			title={`${String(index)}/${String(totalLength)}`}
   		>
   			<View style={styles.text}>
-  				{this.state.flip === false 
-  					? <Text style={styles.cardText}>{item.question}</Text>:
-					  item.answer.map((value, index) => {
+			  <Animated.View style={[styles.flipCard, frontAnimatedStyle, {opacity: this.frontOpacity}]}>
+  					
+					  <Text style={styles.cardText}>{item.question}</Text>
+					  </Animated.View>
+					
+					  <Animated.View style={[styles.flipCard, styles.flipCardBack, backAnimatedStyle, {opacity: this.backOpacity}]}> { item.answer.map((value, index) => {
 						return <Text style={styles.cardText}>{value}</Text>
 					  })
-  				   
-  				}
-  			</View>
+					}
+					  </Animated.View>
+				  }
+  				    
+  				
+				</View>
   			<Button
   				onPress={() => this.flipCard() }
   				title={this.state.flip === false ? 'See Answer' : 'See Question'}
@@ -197,6 +250,7 @@ class QuizCard extends React.Component {
 	}
 
 	render() {
+		
 		return (
 			<View style={styles.container}>
 				<View style={styles.cardView}>
@@ -260,6 +314,25 @@ const styles = StyleSheet.create({
   	marginBottom: 20,
     justifyContent: 'flex-start',
   },
+  flipCard: {
+    width: 200,
+    height: 200,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'blue',
+    backfaceVisibility: 'hidden',
+  },
+  flipCardBack: {
+    backgroundColor: "red",
+    position: "absolute",
+    top: 0,
+  },
+  flipText: {
+    width: 90,
+    fontSize: 20,
+    color: 'white',
+    fontWeight: 'bold',
+  }
 })
 
 function mapStateToProps(state) {
