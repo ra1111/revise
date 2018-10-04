@@ -132,16 +132,17 @@ addNote=()=>{
 				size={20}
 				icon={{name: 'add'}} 
 				buttonStyle={styles.add}></Button>
-			
+		<View style={{width:200,borderRadius:5}}> 	
         <Button 
         	onPress={() => this.sbmtCard(title, question, answer)}
 					title={"Submit"}
 					backgroundColor="#03A9F4"
-					icon={{name: 'add'}} 
-					size={20}
+					icon={{name: 'check'}} 
+					size={40}
 					style={{marginTop: 20}}
         >
         </Button>
+		</View>
 			</View>
 		)
 	}
