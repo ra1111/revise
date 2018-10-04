@@ -60,11 +60,17 @@ console.log(this.state.answer);
 }
 addNote=()=>{
 	let noteNumber=this.state.noteNumber;
-	noteNumber.push(<FormInput placeholder="Notes" multiline={false}  maxLength={40} ref={input => this.aInput = input} onChangeText={this.handleAnswer}/>)
+	if(noteNumber.length>4)
+	{
+		alert("Maximum Limit Reached Please Submit the card");
+		
+	}else{
+	noteNumber.push(<FormInput placeholder="Notes"   underlineColorAndroid="#d8d8d8" multiline={false}  maxLength={40} ref={input => this.aInput = input} onChangeText={this.handleAnswer}/>)
 	this.setState({
 		noteNumber
 
 })
+}
 }
   sbmtCard = (title, question, answer) => {
   	if(question === '' || answer[0] === '') {
@@ -106,10 +112,10 @@ addNote=()=>{
 		const { title } = this.props.navigation.state.params.deck;
 		return (
 			<View style={styles.container}>
-				<View style={{marginTop: 40}}>
+				<View >
 					<View style={styles.formView}>
 						<FormLabel labelStyle={{fontSize:20}}>Title for the Note</FormLabel>
-						<FormInput placeholder="Title" ref={input => this.qInput = input} onChangeText={this.handleQuestion}/>
+						<FormInput   underlineColorAndroid="#d8d8d8" placeholder="Title" ref={input => this.qInput = input} onChangeText={this.handleQuestion}/>
 					</View>
 					<View style={styles.formView}>
 						<FormLabel labelStyle={{fontSize:20}}>Enter the Points</FormLabel>
