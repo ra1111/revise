@@ -31,6 +31,19 @@ class QuizCard extends React.Component {
 		super(props);
 
 		const position = new Animated.ValueXY();
+		this.animatedValue = new Animated.Value(0);
+    this.value = 0;
+    this.animatedValue.addListener(({ value }) => {
+      this.value = value;
+    })
+    this.frontInterpolate = this.animatedValue.interpolate({
+      inputRange: [0, 180],
+      outputRange: ['0deg', '180deg'],
+    })
+    this.backInterpolate = this.animatedValue.interpolate({
+      inputRange: [0, 180],
+      outputRange: ['180deg', '360deg']
+    })
 
 		const panResponder = PanResponder.create({
 			onStartShouldSetPanResponder: () => true,
@@ -62,45 +75,22 @@ class QuizCard extends React.Component {
 			this.setState({ counter: 0 });
 		}
 	}
-	componentDidMount()
-	{
-		this.animatedValue = new Animated.Value(0);
-		this.value = 0;
-		this.animatedValue.addListener(({ value }) => {
-		  this.value = value;
-		})
-		this.frontInterpolate = this.animatedValue.interpolate({
-		  inputRange: [0, 180],
-		  outputRange: ['0deg', '180deg'],
-		})
-		this.backInterpolate = this.animatedValue.interpolate({
-		  inputRange: [0, 180],
-		  outputRange: ['180deg', '360deg']
-		})
-		this.frontOpacity = this.animatedValue.interpolate({
-		  inputRange: [89, 90],
-		  outputRange: [1, 0]
-		})
-		this.backOpacity = this.animatedValue.interpolate({
-		  inputRange: [89, 90],
-		  outputRange: [0, 1]
-		})
-	}
+
 
   flipCard() {
-	if (this.value >= 90) {
-		Animated.spring(this.animatedValue,{
-		  toValue: 0,
-		  friction: 8,
-		  tension: 10
-		}).start();
-	  } else {
-		Animated.spring(this.animatedValue,{
-		  toValue: 180,
-		  friction: 8,
-		  tension: 10
-		}).start();
-	  }
+		if (this.value >= 90) {
+      Animated.spring(this.animatedValue,{
+        toValue: 0,
+        friction: 8,
+        tension: 10
+      }).start();
+    } else {
+      Animated.spring(this.animatedValue,{
+        toValue: 180,
+        friction: 8,
+        tension: 10
+      }).start();
+		}
   	return this.setState((prevState) => ({flip: !prevState.flip}));
   }
 
@@ -126,6 +116,19 @@ class QuizCard extends React.Component {
 
 	onSwipeComplete(direction) {
 		const { data } = this.props;
+		this.animatedValue = new Animated.Value(0);
+    this.value = 0;
+    this.animatedValue.addListener(({ value }) => {
+      this.value = value;
+    })
+    this.frontInterpolate = this.animatedValue.interpolate({
+      inputRange: [0, 180],
+      outputRange: ['0deg', '180deg'],
+    })
+    this.backInterpolate = this.animatedValue.interpolate({
+      inputRange: [0, 180],
+      outputRange: ['180deg', '360deg']
+    })
 
 		direction === 'right' ? this.onSwipeRight(data.title) : null;
 		this.state.position.setValue({ x: 0, y: 0});
@@ -157,43 +160,41 @@ class QuizCard extends React.Component {
 	}
 
   renderCardContent(item, index, totalLength) {
-	  console.log(item,"this is item")
-	  const frontAnimatedStyle = {
-		transform: [
-		  { rotateY: this.frontInterpolate }
-		]
-	  }
-	  const backAnimatedStyle = {
-		transform: [
-		  { rotateY: this.backInterpolate }
-		]
-	  }
+		console.log(item,"this is item")
+		const frontAnimatedStyle = {
+      transform: [
+        { rotateY: this.frontInterpolate}
+      ]
+    }
+    const backAnimatedStyle = {
+      transform: [
+        { rotateY: this.backInterpolate }
+      ]
+    }
+	
   	return (
-  		<Card
-  			key={item}
-  			title={`${String(index)}/${String(totalLength)}`}
-  		>
-  			<View style={styles.text}>
-			  <Animated.View style={[styles.flipCard, frontAnimatedStyle, {opacity: this.frontOpacity}]}>
-  					
-					  <Text style={styles.cardText}>{item.question}</Text>
-					  </Animated.View>
+			<Card
+			key={item}
+			title={`${String(index)}/${String(totalLength)}`}
+		>
+			<View>
+				{this.state.flip === false 
+					? <Animated.Text style={[styles.flipCard, frontAnimatedStyle,styles.cardText,styles.flipText]}>{item.question}</Animated.Text>
+					:  <Animated.Text style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack,styles.cardText]}> {item.answer.map((value, index) => {
+						return  <Text style={styles.flipText}>{value} {"\n"}</Text>
+						})}
 					
-					  <Animated.View style={[styles.flipCard, styles.flipCardBack, backAnimatedStyle, {opacity: this.backOpacity}]}> { item.answer.map((value, index) => {
-						return <Text style={styles.cardText}>{value}</Text>
-					  })
+						</Animated.Text>
 					}
-					  </Animated.View>
-				  }
-  				    
-  				
-				</View>
-  			<Button
-  				onPress={() => this.flipCard() }
-  				title={this.state.flip === false ? 'See Answer' : 'See Question'}
-  				backgroundColor="#03A9F4"
-  			/>
-  		</Card>
+					
+				
+			</View>
+			<Button
+				onPress={() => this.flipCard() }
+				title={this.state.flip === false ? 'See Answer' : 'See Question'}
+				backgroundColor="#03A9F4"
+			/>
+		</Card>
   	)
   }
 
@@ -218,6 +219,7 @@ class QuizCard extends React.Component {
 			const result = Math.round(this.state.noCorrect/this.props.data.questions.length * 100).toFixed(2);
 			const title = this.props.data.title;
 			const newDeck = {...this.props.data, perc:result};
+			
 			// update AsyncStorage
 			updateDeck({title, newDeck});
 			// setup new push notifications
@@ -238,12 +240,7 @@ class QuizCard extends React.Component {
 					);
 				}
 				return (
-					<Animated.View 
-						key={index} 
-						style={[styles.cardStyle, { top: 10 * (index - this.state.counter) }]}
-					>
-						{this.renderCardContent(item,this.state.counter+1, this.props.data.questions.length)}
-					</Animated.View>
+					<View/>
 				)
 			}).reverse();
 		}
@@ -287,11 +284,6 @@ const styles = StyleSheet.create({
 		position: 'absolute',
 		width: SCREEN_WIDTH,
 	},
-  cardText: {
-	marginBottom:30,
-	textAlign: 'center',
-	marginTop:20,
-  },
   text:{
 	  height:'68%',
   },
@@ -315,21 +307,32 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   flipCard: {
-    width: 200,
-    height: 200,
+    width: '100%',
+		height: '70%',
+		borderRadius:10,
+		padding:20,
+
+		backgroundColor: 'blue',
+		justifyContent: 'center',
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'blue',
     backfaceVisibility: 'hidden',
   },
   flipCardBack: {
+		width: '100%',
+		height: '70%',
+
+		justifyContent: 'center',
+    alignItems: 'center',
+		borderRadius:10,
+
+		padding:20,
+		flexDirection:'column',
+		
     backgroundColor: "red",
-    position: "absolute",
-    top: 0,
   },
   flipText: {
-    width: 90,
-    fontSize: 20,
+		fontSize: 20,
+
     color: 'white',
     fontWeight: 'bold',
   }
