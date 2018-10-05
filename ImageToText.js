@@ -19,6 +19,7 @@ import {
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import RNTesseractOcr from 'react-native-tesseract-ocr';
+import { Icon } from './node_modules/react-native-elements';
 
 const Button = (Platform.OS === 'android') ? TouchableNativeFeedback : TouchableOpacity;
 const options = {
@@ -119,6 +120,14 @@ class App extends Component {
           </View>
 </Button>
           </View>
+          <View style={styles.button}>
+          <Button onPress={()=>{this.props.navigation.navigate('MainDeck')}} 		 >
+            <View style={[styles.add, styles.imgContainer,styles.round]}>
+
+        <Icon name='add' size={30} color={'white'} />
+          </View>
+</Button>
+          </View>
       </View>
     );
   }
@@ -142,6 +151,27 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150
   },
+  add:{
+    width: 60,
+    height: 60,
+    backgroundColor:'#38b4f7',
+    shadowColor: 'rgba(0,0,0, .4)', // IOS
+    shadowOffset: { height: 1, width: 1 }, // IOS
+    shadowOpacity: 1, // IOS
+    shadowRadius: 1, //IOS
+    elevation: 2, // Android
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  button:{
+    alignSelf: 'flex-end',
+    position: 'absolute',
+    bottom: 20,
+    right:20,
+    
+  },
+
   round: {
     borderRadius: 75,
   },
