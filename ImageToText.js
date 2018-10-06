@@ -15,12 +15,14 @@ import {
   Text,
   TouchableNativeFeedback,
   TouchableOpacity,
+  ImageBackground,
   View
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import RNTesseractOcr from 'react-native-tesseract-ocr';
 import { Icon } from './node_modules/react-native-elements';
 import Swiper from 'react-native-swiper';
+import Dummy from './Assets/Images/Dummy.jpg'
 
 const Button = (Platform.OS === 'android') ? TouchableNativeFeedback : TouchableOpacity;
 const options = {
@@ -119,11 +121,24 @@ class App extends Component {
         </View>
       </Swiper>
           </View>
+          <Text> Popular on Revise</Text>
+          <View  style={styles.cardContainer}>
+            <Image
+              resizeMode='stretch' 
+              style={styles.card}
+              source={Dummy}/>
+
+            <Text style={styles.cardText}> Titile of Deck </Text>
+            <Text style={styles.cardText}>Number of Cards </Text>
+            
+           
+
+             </View>
           <View>
-    <Text> Pinned Deck</Text>
+    <Text> Your Deck</Text>
   </View>
   <View>
-    <Text> Trending</Text>
+    <Text> Trending Now</Text>
   </View>
 
           <View style={styles.button}>
@@ -145,6 +160,32 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  card:{
+height:150,
+width:130,
+elevation: 5,
+borderWidth: 1,
+borderRadius: 10,
+borderColor: '#ddd',
+borderBottomWidth: 0,
+shadowColor: '#000',
+shadowOffset: { width: 0, height: 2 },
+shadowOpacity: 0.8,
+shadowRadius: 2,
+
+  },
+  cardText:{
+    fontSize:16,
+    fontWeight:'700',
+  },
+  cardContainer:{
+   flexDirection:'column' ,
+   justifyContent:'flex-start',
+   borderRadius: 10,
+   margin:10,
+
+
   },
   imgContainer: {
     borderColor: '#9B9B9B',
