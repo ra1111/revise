@@ -1,7 +1,4 @@
 /**
- * Sample React Native Tesseract OCR App
- * https://github.com/jonathanpalma/react-native-tesseract-ocr
- * @author  Jonathan Palma <tanpalma04@gmail.com>
  * @flow
  */
 'use strict';
@@ -16,14 +13,16 @@ import {
   TouchableNativeFeedback,
   TouchableOpacity,
   ImageBackground,
-  View
+  View,
+ScrollView
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import RNTesseractOcr from 'react-native-tesseract-ocr';
 import { Icon } from './node_modules/react-native-elements';
-import Swiper from 'react-native-swiper';
 import Dummy from './Assets/Images/Dummy.jpg'
-
+import CardHome from './components/CardHome'
+import Swipers from './components/Swiper'
+const data=[{source:Dummy,title:'title of Deck',number:29},{source:Dummy,title:'title of Deck',number:29},{source:Dummy,title:'title of Deck',number:29},{source:Dummy,title:'title of Deck',number:29},{source:Dummy,title:'title of Deck',number:29}]
 const Button = (Platform.OS === 'android') ? TouchableNativeFeedback : TouchableOpacity;
 const options = {
   quality: 1.0,
@@ -36,8 +35,9 @@ const tessOptions = {
   blacklist: '1234567890\'!"#$%&/()={}[]+*-_:;<>'
 };
 
+
 class App extends Component {
-  state = { isLoading: false, imgSource: null, ocrResult: null };
+  state = { isLoading: false, imgSource: null, ocrResult: null,data:data };
 
   selectPhoto() {
     this.setState({ isLoading: true });
@@ -76,72 +76,29 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <View style={styles.container}>
-      {/* <View>
-        <Button onPress={this.selectPhoto.bind(this)} >
-          <View style={[styles.img, styles.imgContainer, this.state.imgSource === null && styles.round]}>
-            {this.state.imgSource === null ?
-              <Text>Click a snap</Text>
-              :
-              <Image style={styles.img} source={this.state.imgSource} />
-            }
-          </View>
-        </Button>
-
-        {(this.state.isLoading) ?
-          <ActivityIndicator
-            animating={this.state.isLoading}
-            size="large"
-          />
-          :
-          null
-        }
-        <Text>{this.state.ocrResult}</Text>
-
-        <Button onPress={() => { this.cancelOcr(); }} >
-          <View style={[styles.img]}>
-            <Text>Cancel recognition</Text>
-          </View>
-        </Button>
-        </View> */}
-
-        <View style={styles.border}/>
-        <View style={styles.wrapper}>
-        <Swiper  autoplay={true} autoplayTimeout={2.5}>
-        <View style={styles.slide1}>
-          <Text style={styles.text}>Hello Swiper</Text>
-        </View>
-        <View style={styles.slide2}>
-          <Text style={styles.text}>Beautiful</Text>
-        </View>
-        <View style={styles.slide3}>
-          <Text style={styles.text}>And simple</Text>
-        </View>
-      </Swiper>
-          </View>
+     
+      <Swipers text1={"Hello Swiper"} text2={"Beautiful"} text3={"And simple"} />
+      <View style={styles.contentContainer}>
+      <ScrollView >
+      <View>
           <Text> Popular on Revise</Text>
-          <View  style={styles.cardContainer}>
-            <Image
-              resizeMode='stretch' 
-              style={styles.card}
-              source={Dummy}/>
-
-            <Text style={styles.cardText}> Titile of Deck </Text>
-            <Text style={styles.cardText}>Number of Cards </Text>
-            
-           
-
-             </View>
+          <CardHome data={data}/> 
           <View>
     <Text> Your Deck</Text>
+    <CardHome data={data}/> 
   </View>
   <View>
     <Text> Trending Now</Text>
+    <CardHome data={data}/> 
+  </View>
   </View>
 
-          <View style={styles.button}>
+        
+</ScrollView>
+</View>
+<View style={styles.button}>
           <Button onPress={()=>{this.props.navigation.navigate('MainDeck')}} 		 >
             <View style={[styles.add, styles.imgContainer,styles.round]}>
 
@@ -157,8 +114,8 @@ class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
+    height:'100%',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
   card:{
@@ -174,6 +131,11 @@ shadowOffset: { width: 0, height: 2 },
 shadowOpacity: 0.8,
 shadowRadius: 2,
 
+  },
+  contentContainer: {
+marginTop:'55%',
+height:'85%',
+alignItems: 'center',
   },
   cardText:{
     fontSize:16,
@@ -226,35 +188,8 @@ shadowRadius: 2,
     width:'100%',
     height:4,
   },
-  slide1: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#9DD6EB',
-  },
-  slide2: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#97CAE5',
-  },
-  slide3: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#92BBD9',
-  },
-  text: {
-    color: '#000',
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
-  wrapper:{
-    height:'35%',
-    width:'100%',
-    position:'absolute',
-    top:0,
-  }
+  
+ 
 
 });
 
