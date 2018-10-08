@@ -37,6 +37,9 @@ const tessOptions = {
 
 
 class App extends Component {
+  static navigationOptions = {
+    header: null
+};
   state = { isLoading: false, imgSource: null, ocrResult: null,data:data };
 
   selectPhoto() {
@@ -133,8 +136,8 @@ shadowRadius: 2,
 
   },
   contentContainer: {
-marginTop:'55%',
-height:'85%',
+marginTop:'58%',
+height:'88%',
 alignItems: 'center',
   },
   cardText:{

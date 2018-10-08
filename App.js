@@ -1,11 +1,5 @@
 import React from 'react'
 import { Text, View, Platform, StatusBar } from 'react-native'
-import MainDecks from './components/MainDecks'
-import AddDeck from './components/AddDeck'
-import AddCard from './components/AddCard'
-import Quiz from './components/Quiz'
-import AddNotes from './ImageToText'
-import DeckDetail from './components/DeckDetail'
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk';
@@ -13,6 +7,13 @@ import reducer from './reducers'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import { Icon} from 'react-native-elements'
+import MainDecks from './components/MainDecks'
+import AddDeck from './components/AddDeck'
+import AddCard from './components/AddCard'
+import Quiz from './components/Quiz'
+import AddNotes from './ImageToText'
+import DeckDetail from './components/DeckDetail'
+import Search from './containers/Search'
 //import { setLocalNotification } from './utils/helpers'
 
 const store = createStore(reducer, composeWithDevTools(
@@ -65,16 +66,32 @@ const Tabs = TabNavigator({
     },
   },
 })
-
+const MainTab=TabNavigator({
+  Home:{
+    screen: AddNotes,
+    navigationOptions: {
+      tabBarLabel: 'Home',
+      tabBarIcon: <Icon name='home-outline' size={30} color={'red'} />
+    },
+  },
+  Search:{
+    screen:Search,
+    navigationOptions:{
+      tabBarLabel:'Search',
+      tabBarIcon:<Icon name='search-outline' size={30} color={'red'}/>
+    }
+  }
+});
 const MainNavigator = StackNavigator({
   Home:{
-    screen:AddNotes,
-    navigationOptions: {
-          headerTintColor: 'white',
-          headerStyle: {
-            backgroundColor: 'gray',
-          },
-        },
+    screen:MainTab,
+    
+      headerMode: 'none',
+      navigationOptions: {
+        headerVisible: false,
+      
+     }
+        
       },
         AddCard: {
           screen: AddCard,
@@ -116,9 +133,10 @@ const MainNavigator = StackNavigator({
     },
   },
 },
+
 {
   cardStyle: {
-    paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
+    paddingTop: 0,
   }
 })
 
