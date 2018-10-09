@@ -14,6 +14,7 @@ import Quiz from './components/Quiz'
 import AddNotes from './ImageToText'
 import DeckDetail from './components/DeckDetail'
 import Search from './containers/Search'
+import Account from './containers/Account'
 //import { setLocalNotification } from './utils/helpers'
 
 const store = createStore(reducer, composeWithDevTools(
@@ -71,16 +72,36 @@ const MainTab=TabNavigator({
     screen: AddNotes,
     navigationOptions: {
       tabBarLabel: 'Home',
-      tabBarIcon: <Icon name='home-outline' size={30} color={'red'} />
+      tabBarIcon: ()=><Icon name='home-outline' size={30} color={'red'} />
     },
+   
   },
   Search:{
     screen:Search,
     navigationOptions:{
       tabBarLabel:'Search',
-      tabBarIcon:<Icon name='search-outline' size={30} color={'red'}/>
-    }
-  }
+      tabBarIcon:()=><Icon name='search-outline' size={30} color={'red'}/>
+    },
+   
+  },
+  Account:{
+    screen:Account,
+    navigationOptions:{
+      tabBarLabel:'Account',
+      tabBarIcon:()=><Icon name='account-outline' size={30} color={'red'}/>
+    },
+    tabBarOptions: {
+      activeTintColor: 'red',
+      showIcon: true,
+      showLabel: true,
+      inactiveTintColor: 'gray',
+    style: {
+      backgroundColor: '#EEEEEE',
+    },
+},
+  
+  },
+
 });
 const MainNavigator = StackNavigator({
   Home:{
