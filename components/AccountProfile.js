@@ -14,7 +14,7 @@ import Dummy from '../Assets/Images/Dummy.jpg'
  const styles = StyleSheet.create({
      container:{
 width:'100%',
-height:'60%',
+height:'40%',
 justifyContent:'space-around',
 alignItems:'center',
 backgroundColor:'white',
