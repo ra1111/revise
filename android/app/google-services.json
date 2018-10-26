@@ -1,0 +1,137 @@
+{
+  "project_info": {
+    "project_number": "922830836172",
+    "firebase_url": "https://elitmus-daf04.firebaseio.com",
+    "project_id": "elitmus-daf04",
+    "storage_bucket": "elitmus-daf04.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:922830836172:android:013fb4bc5b9ad147",
+        "android_client_info": {
+          "package_name": "com.keystage1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "922830836172-d82uk1ncvnmdkkac1d5vuf15tnslge5t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.keystage1",
+            "certificate_hash": "6ff79f6be5c7be918f2f8cc53db27626cc1e3f1e"
+          }
+        },
+        {
+          "client_id": "922830836172-3tu5lp5pblepo1u3a38he1q6kmcanq0v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.keystage1",
+            "certificate_hash": "044b49b0369953b14b852a15e0e5b2a042219b87"
+          }
+        },
+        {
+          "client_id": "922830836172-bb03dq6srvp4ui1j7po3mipg7mlug7jt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.keystage1",
+            "certificate_hash": "4229f530f63266bdf17d64b44594005bc2039907"
+          }
+        },
+        {
+          "client_id": "922830836172-e0kkcsfkbh3c1al5um057ctq4olnrmvv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.keystage1",
+            "certificate_hash": "f0fcd2e4e2cb37da6aae16f7b1358e33e7e86bb1"
+          }
+        },
+        {
+          "client_id": "922830836172-7gkn82g7osq8jcjq0e0u4ble2vbsqthq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCF8vAQBPtx5fpkj7ggt_CfgyP1KysoFqc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "922830836172-7gkn82g7osq8jcjq0e0u4ble2vbsqthq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "922830836172-o3err4mm62odc7l9ncmb9n7vl2ccj3aj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.KeyStage1"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:922830836172:android:888e61185d3adb20",
+        "android_client_info": {
+          "package_name": "com.revise"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "922830836172-vqfhjk7gmbbkj4a79j5kv771af47p8a7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.revise",
+            "certificate_hash": "044b49b0369953b14b852a15e0e5b2a042219b87"
+          }
+        },
+        {
+          "client_id": "922830836172-7gkn82g7osq8jcjq0e0u4ble2vbsqthq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCF8vAQBPtx5fpkj7ggt_CfgyP1KysoFqc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "922830836172-7gkn82g7osq8jcjq0e0u4ble2vbsqthq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "922830836172-o3err4mm62odc7l9ncmb9n7vl2ccj3aj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.KeyStage1"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

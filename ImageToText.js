@@ -22,6 +22,7 @@ import { Icon } from './node_modules/react-native-elements';
 import Dummy from './Assets/Images/Dummy.jpg'
 import CardHome from './components/CardHome'
 import Swipers from './components/Swiper'
+import { connect } from 'react-redux'
 const data=[{source:Dummy,title:'title of Deck',number:29},{source:Dummy,title:'title of Deck',number:29},{source:Dummy,title:'title of Deck',number:29},{source:Dummy,title:'title of Deck',number:29},{source:Dummy,title:'title of Deck',number:29}]
 const Button = (Platform.OS === 'android') ? TouchableNativeFeedback : TouchableOpacity;
 const options = {
@@ -90,7 +91,9 @@ class App extends Component {
           <CardHome data={data}/> 
           <View>
     <Text> Your Deck</Text>
-    <CardHome data={data}/> 
+    { Object.keys(this.props.deckData).length !== 0?
+    <CardHome data={this.props.deckData}/> :<Text> Please Add Decks By Clicking on "+"</Text>}
+
   </View>
   <View>
     <Text> Trending Now</Text>
@@ -196,4 +199,11 @@ alignItems: 'center',
 
 });
 
-export default App;
+
+function mapStateToProps(state) {
+  console.log(state)
+  return {
+    deckData: state.decks.deckData
+  }
+}
+export default connect(mapStateToProps)(App)

@@ -15,6 +15,7 @@ import AddNotes from './ImageToText'
 import DeckDetail from './components/DeckDetail'
 import Search from './containers/Search'
 import Account from './containers/Account'
+import Login from './containers/Login'
 //import { setLocalNotification } from './utils/helpers'
 
 const store = createStore(reducer, composeWithDevTools(
@@ -104,6 +105,16 @@ const MainTab=TabNavigator({
 
 });
 const MainNavigator = StackNavigator({
+  Login:{
+    screen:Login,
+    
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false,
+    
+   }
+  },
+
   Home:{
     screen:MainTab,
     
