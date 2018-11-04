@@ -17,12 +17,14 @@ import {
 ScrollView
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
+import * as firebase from 'firebase';
 import RNTesseractOcr from 'react-native-tesseract-ocr';
 import { Icon } from './node_modules/react-native-elements';
 import Dummy from './Assets/Images/Dummy.jpg'
 import CardHome from './components/CardHome'
 import Swipers from './components/Swiper'
 import { connect } from 'react-redux'
+let database,Revise,Trending;
 const data=[{source:Dummy,title:'title of Deck',number:29},{source:Dummy,title:'title of Deck',number:29},{source:Dummy,title:'title of Deck',number:29},{source:Dummy,title:'title of Deck',number:29},{source:Dummy,title:'title of Deck',number:29}]
 const Button = (Platform.OS === 'android') ? TouchableNativeFeedback : TouchableOpacity;
 const options = {
@@ -41,7 +43,7 @@ class App extends Component {
   static navigationOptions = {
     header: null
 };
-  state = { isLoading: false, imgSource: null, ocrResult: null,data:data };
+  state = { isLoading: false, imgSource: null, ocrResult: null,data:data ,Trending};
 
   selectPhoto() {
     this.setState({ isLoading: true });
@@ -79,6 +81,70 @@ class App extends Component {
       .done();
   }
 
+ async componentWillMount() {
+    database = firebase.database();
+    Revise=database.ref('Revise')
+    Trending=Revise.child('Trending')
+    try{
+    await Trending .once('value').then(snapshot=>{
+   this.setState({Trending:snapshot.val()})
+    })
+    console.log(database,Revise,Trending);
+  }
+  catch(ex)
+  {
+    console.log('exception',ex);
+  }
+  this.sort()
+    
+    // currentUser = this.props.navigation.getParam('currentUser', 'some title');
+    // try {
+    //   await database
+    //     .ref('users/' + currentUser.user.uid)
+    //     .once('value')
+    //     .then(snapshot => {
+    //       this.setState({
+    //         correctAns: snapshot.val().CorrectAns,
+    //         DailyGoals: snapshot.val().DailyGoals,
+    //         DailyTotalAns: snapshot.val().DailyTotalAns,
+    //         DailyWrongAns: snapshot.val().DailyWrongAns,
+    //         TotalAns: snapshot.val().TotalAns,
+    //         WrongAns: snapshot.val().WrongAns
+    //       });
+    //       if (this.state.DailyGoals <= this.state.DailyTotalAns) {
+    //         this.setState({DailyTotalAns: 0, DailyWrongAns: 0});
+    //         database.ref('users/' + currentUser.user.uid).update({
+    //           DailyTotalAns: 0,
+    //           DailyWrongAns: 0
+    //         });
+    //       }
+    //     });
+    // } catch (ex) {
+    //   console.log('exception ', ex);
+    // }
+  }
+  sort()
+  {
+    let data=this.state.Trending;
+    var quantities = [];
+    for (var key in data) {
+      for (var key2 in data[key]) {
+        for(var key3 in data[key][key2])
+        {
+        
+    quantities.push({
+        source: Dummy,
+       title: key2,
+        number: data[key][key2].length,
+        
+    });
+
+      
+      }
+    }
+    }
+    console.log(quantities);
+  }
   render() {
     return (
       <View style={styles.container}>
