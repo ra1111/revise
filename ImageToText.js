@@ -43,7 +43,7 @@ class App extends Component {
   static navigationOptions = {
     header: null
 };
-  state = { isLoading: false, imgSource: null, ocrResult: null,data:data ,Trending};
+  state = { isLoading: false, imgSource: null, ocrResult: null,data:data ,Trending,TrendingArray:[]};
 
   selectPhoto() {
     this.setState({ isLoading: true });
@@ -88,6 +88,29 @@ class App extends Component {
     try{
     await Trending .once('value').then(snapshot=>{
    this.setState({Trending:snapshot.val()})
+   let data=this.state.Trending;
+   var quantities = [];
+   for (var key in data) {
+     for (var key2 in data[key]) {
+   
+   quantities.push({
+       source: Dummy,
+      title: key2,
+       number: data[key][key2].length,
+       deck:data[key]
+
+       
+   });
+  }
+
+   }
+   
+this.setState({
+ TrendingArray:quantities
+})
+console.log(this.state.TrendingArray)   
+
+   
     })
     console.log(database,Revise,Trending);
   }
@@ -95,55 +118,7 @@ class App extends Component {
   {
     console.log('exception',ex);
   }
-  this.sort()
-    
-    // currentUser = this.props.navigation.getParam('currentUser', 'some title');
-    // try {
-    //   await database
-    //     .ref('users/' + currentUser.user.uid)
-    //     .once('value')
-    //     .then(snapshot => {
-    //       this.setState({
-    //         correctAns: snapshot.val().CorrectAns,
-    //         DailyGoals: snapshot.val().DailyGoals,
-    //         DailyTotalAns: snapshot.val().DailyTotalAns,
-    //         DailyWrongAns: snapshot.val().DailyWrongAns,
-    //         TotalAns: snapshot.val().TotalAns,
-    //         WrongAns: snapshot.val().WrongAns
-    //       });
-    //       if (this.state.DailyGoals <= this.state.DailyTotalAns) {
-    //         this.setState({DailyTotalAns: 0, DailyWrongAns: 0});
-    //         database.ref('users/' + currentUser.user.uid).update({
-    //           DailyTotalAns: 0,
-    //           DailyWrongAns: 0
-    //         });
-    //       }
-    //     });
-    // } catch (ex) {
-    //   console.log('exception ', ex);
-    // }
-  }
-  sort()
-  {
-    let data=this.state.Trending;
-    var quantities = [];
-    for (var key in data) {
-      for (var key2 in data[key]) {
-        for(var key3 in data[key][key2])
-        {
-        
-    quantities.push({
-        source: Dummy,
-       title: key2,
-        number: data[key][key2].length,
-        
-    });
 
-      
-      }
-    }
-    }
-    console.log(quantities);
   }
   render() {
     return (
@@ -163,7 +138,7 @@ class App extends Component {
   </View>
   <View>
     <Text> Trending Now</Text>
-    <CardHome data={data}/> 
+    <CardHome data={this.state.TrendingArray}/> 
   </View>
   </View>
 
@@ -205,8 +180,8 @@ shadowRadius: 2,
 
   },
   contentContainer: {
-marginTop:'58%',
-height:'88%',
+marginTop:'50%',
+height:'80%',
 alignItems: 'center',
   },
   cardText:{
