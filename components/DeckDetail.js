@@ -16,10 +16,18 @@ class DeckDetail extends React.Component {
   }
 
   getDeck() {
+	  let deck=this.props.navigation.getParam('deck', 'example');
+	  console.log(deck)
+	  if(deck!=='example')
+	  {
+		  return deck
+	  }
+	  else{
   	let tmp = this.props.deckData.filter(deck => deck.title === this.props.navigation.state.params.deck.title)[0]
   	if(tmp) {
   		return tmp
-  	}
+	  }
+	}
   	return {title: '', questions:[]}
   }
 

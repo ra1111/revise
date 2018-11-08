@@ -7,38 +7,17 @@ import { receiveDecks } from '../actions'
 import { getDecks } from '../utils/api'
 import { Button } from 'react-native-elements'
 
-class MainDecks extends React.Component {
-
-  componentDidMount() {
-    this._loadInitialState().done();
-  }
-
-  async _loadInitialState() { 
-    try {
-      let value = await getDecks();
-      let holdArray = [];
-      if (value !== null){
-        let val = JSON.parse(value)
-        Object.keys(val).map((key) => {
-          holdArray.push(val[key]);
-        })
-        this.props.dispatch(receiveDecks(holdArray));
-      } else {
-      }
-    } catch (error) {
-      console.log("error here")
-    }
-  }
+class ExternalDeck extends React.Component {
 
 
-  renderItem = (deck) => {
-    return <Decks deck={deck.item} navProps={this.props.navigation}  key={deck.item} />
-  }
+
+
+ 
 
 	render() {
     console.ignoredYellowBox = ['VirtualizedList: missing keys for items, make sure to specify a key property on each item or provide a custom keyExtractor.'];
-    const deckData = this.props.deckData;
-    console.log(deckData,"ijdeijd")
+    let deckData = this.props.navigation.getParam('deckData', 'example');
+    console.log(deckData,"gygy")
 		return (
       <View style={styles.container}>
         <Text style={styles.title}>Mobile Flash Cards</Text>
@@ -47,10 +26,9 @@ class MainDecks extends React.Component {
             <View style={styles.container}><Text style={styles.title}>You Have No Decks</Text></View>
           )
           : (
-            <FlatList
-              style={styles.list}
-              data={deckData}
-              renderItem={this.renderItem}
+            <RenderItem
+              deck={deckData}
+              navigation={this.props.navigation}
             />
           )
         }
@@ -67,19 +45,21 @@ class MainDecks extends React.Component {
 		)
 	}
 }
-
-function Decks ({deck, navProps}) {
-  return (
-    <View style={styles.row}>
-      <TouchableOpacity onPress={() => 
-        navProps.navigate('DeckDetail',
-          {deck: deck})}>
-        <Text style={styles.rowContent}>{deck.title}</Text>
-      </TouchableOpacity>
-      <Text style={styles.deckCount}>Cards</Text>
-    </View>
-  )
+function RenderItem  ({deck,navigation})  {
+    console.log(deck,"deck")
+    return (
+        <View style={styles.row}>
+          <TouchableOpacity onPress={() => 
+            navigation.navigate('DeckDetail',
+              {deck: deck})}>
+            <Text style={styles.rowContent}>{deck.title}</Text>
+          </TouchableOpacity>
+          <Text style={styles.deckCount}>Cards</Text>
+        </View>
+    )
+  
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -122,13 +102,7 @@ const styles = StyleSheet.create({
 });
 
 
-function mapStateToProps(state) {
-  return {
-    deckData: state.decks.deckData
-  }
-}
-
-export default connect(mapStateToProps)(MainDecks)
+export default (ExternalDeck)
 
 
 

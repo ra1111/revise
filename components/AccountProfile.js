@@ -5,8 +5,9 @@ import Dummy from '../Assets/Images/Dummy.jpg'
 
     render()
     {
+        console.log(this.props);
         return(<View style={styles.container}>
-      <Image style={styles.imageContainer} source={this.props.image||Dummy}/> 
+      <Image style={styles.imageContainer} source={{uri:this.props.image||Dummy}}/> 
        <View><Text style={styles.text}>{this.props.username||"EXAMPLE TEXT"}</Text></View>
 </View>)
     }

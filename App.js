@@ -16,6 +16,7 @@ import DeckDetail from './components/DeckDetail'
 import Search from './containers/Search'
 import Account from './containers/Account'
 import Login from './containers/Login'
+import ExternalDeck from './components/ExternalDecks'
 //import { setLocalNotification } from './utils/helpers'
 
 const store = createStore(reducer, composeWithDevTools(
@@ -155,6 +156,16 @@ const MainNavigator = StackNavigator({
       }
     },
   },
+  ExternalDeck:{
+    screen: ExternalDeck,
+    navigationOptions: {
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: 'gray',
+      }
+    },
+  },
+  
   MainDeck: {
     screen: MainDecks,
     navigationOptions: {

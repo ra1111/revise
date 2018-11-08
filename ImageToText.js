@@ -129,16 +129,16 @@ console.log(this.state.TrendingArray)
       <ScrollView >
       <View>
           <Text> Popular on Revise</Text>
-          <CardHome data={data}/> 
+          <CardHome  navigation={this.props.navigation} data={data}/> 
           <View>
     <Text> Your Deck</Text>
     { Object.keys(this.props.deckData).length !== 0?
-    <CardHome data={this.props.deckData}/> :<Text> Please Add Decks By Clicking on "+"</Text>}
+    <CardHome navigation={this.props.navigation} data={this.props.deckData}/> :<Text> Please Add Decks By Clicking on "+"</Text>}
 
   </View>
   <View>
     <Text> Trending Now</Text>
-    <CardHome data={this.state.TrendingArray}/> 
+    <CardHome  navigation={this.props.navigation} data={this.state.TrendingArray}/> 
   </View>
   </View>
 

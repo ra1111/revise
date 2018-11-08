@@ -2,7 +2,39 @@ import React from 'react'
 import { StyleSheet, Text, View, FlatList,Image,TouchableOpacity } from 'react-native'
 import { Button } from '../node_modules/react-native-elements';
 import { connect } from 'react-redux'
+let questions,title;
+
  class CardHome extends React.Component {
+deck(data)
+{
+let title=data.title;
+let deck=data.deck;
+let questions=[];
+
+for (var key in deck) {
+//Multiple deck problem resolved using if
+  if(key===title)
+  {
+  for(var key1 in deck[key])
+  {
+ console.log(deck[key][key1],"HDWWHUDhu")
+ let question=deck[key][key1].question
+ //use logic to seperate into answers
+ let answer=[]
+ answer.push(deck[key][key1].answer)
+questions.push({question:question,answer:answer})
+  }
+}
+  
+
+}
+let deckData={title:title,questions:questions}
+
+this.props.navigation.navigate('ExternalDeck',
+{deckData: deckData})
+//console.log(this.props);
+
+}
     render()
     {
         return (
@@ -12,15 +44,14 @@ import { connect } from 'react-redux'
         horizontal
      data={this.props.data}
      renderItem={({ item: rowData }) => {
-       console.log(rowData,"ROW DATAT")
-       return (<TouchableOpacity  onPress={()=>{alert("YOu Pressed")}} style={styles.cardContainer}>
+       return (<TouchableOpacity  onPress={()=>{this.deck(rowData)}} style={styles.cardContainer}>
             <Image
               resizeMode={'stretch'}
               style={styles.card}
               source={rowData.source}/>
 
             <Text style={styles.cardText}> {rowData.title} </Text>
-            <Text style={styles.cardText}>{rowData.questions?rowData.questions.length:1} </Text>
+            <Text style={styles.cardText}>{rowData.number||1} </Text>
             
            
 
