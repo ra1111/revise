@@ -29,9 +29,9 @@ questions.push({question:question,answer:answer})
 
 }
 let deckData={title:title,questions:questions}
-
-this.props.navigation.navigate('ExternalDeck',
-{deckData: deckData})
+//this.props.navigation.navigate('Mcq')
+this.props.navigation.navigate('DeckDetail',
+              {deck: deckData})
 //console.log(this.props);
 
 }

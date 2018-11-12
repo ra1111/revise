@@ -14,8 +14,17 @@ import Quiz from './components/Quiz'
 import AddNotes from './ImageToText'
 import DeckDetail from './components/DeckDetail'
 import Search from './containers/Search'
+import Mcq from './components/Mcq'
 import Account from './containers/Account'
 import Login from './containers/Login'
+// symbol polyfills
+global.Symbol = require('core-js/es6/symbol');
+require('core-js/fn/symbol/iterator');
+
+// collection fn polyfills
+require('core-js/fn/map');
+require('core-js/fn/set');
+require('core-js/fn/array/find');
 import ExternalDeck from './components/ExternalDecks'
 //import { setLocalNotification } from './utils/helpers'
 
@@ -158,6 +167,15 @@ const MainNavigator = StackNavigator({
   },
   ExternalDeck:{
     screen: ExternalDeck,
+    navigationOptions: {
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: 'gray',
+      }
+    },
+  },
+  Mcq:{
+    screen: Mcq,
     navigationOptions: {
       headerTintColor: 'white',
       headerStyle: {

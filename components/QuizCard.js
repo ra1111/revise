@@ -9,11 +9,13 @@ import {
 	Dimensions,
 	LayoutAnimation,
 	UIManager,
+	TouchableOpacity
 } from 'react-native'
 import { connect } from 'react-redux'
 import { Card, Button, Icon } from 'react-native-elements'
 import { AddQuizResults } from '../actions'
 import { updateDeck } from '../utils/api'
+import Mcq from './Mcq'
 //import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -29,7 +31,6 @@ class QuizCard extends React.Component {
 
 	constructor(props) {
 		super(props);
-
 		const position = new Animated.ValueXY();
 		this.animatedValue = new Animated.Value(0);
     this.value = 0;
@@ -67,10 +68,13 @@ class QuizCard extends React.Component {
 			counter: 0, 
 			flip: false,
 			noCorrect: 0,
+			min:0,
+			mcq:true,
 		};
 	}
 
 	componentWillReceiveProps(nextProps, nextState) {
+		console.log(this.props,"DWJJDWIJDWIJDWJIWDIJIJWDIJDWJ")
 		if (nextProps.data !== this.props.data) {
 			this.setState({ counter: 0 });
 		}
@@ -133,7 +137,7 @@ class QuizCard extends React.Component {
 		direction === 'right' ? this.onSwipeRight(data.title) : null;
 		this.state.position.setValue({ x: 0, y: 0});
 		this.setState((prevState) => ({counter: prevState.counter + 1}));
-		this.setState({flip: false});
+		this.setState({flip: false,mcq:true});
 		if(this.state.counter >= this.props.data.questions.length) {
 			const result = Math.round(this.state.noCorrect/this.props.data.questions.length * 100).toFixed(2);
 			this.props.dispatch(AddQuizResults(this.props.data.title,result));
@@ -160,7 +164,6 @@ class QuizCard extends React.Component {
 	}
 
   renderCardContent(item, index, totalLength) {
-		console.log(item,"this is item")
 		const frontAnimatedStyle = {
       transform: [
         { rotateY: this.frontInterpolate}
@@ -177,7 +180,7 @@ class QuizCard extends React.Component {
 			key={item}
 			title={`${String(index)}/${String(totalLength)}`}
 		>
-			<View>
+			<TouchableOpacity 	onPress={() => this.flipCard() }>
 				{this.state.flip === false 
 					? <Animated.Text style={[styles.flipCard, frontAnimatedStyle,styles.cardText,styles.flipText]}>{item.question}</Animated.Text>
 					:  <Animated.Text style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack,styles.cardText]}> {item.answer.map((value, index) => {
@@ -188,12 +191,12 @@ class QuizCard extends React.Component {
 					}
 					
 				
-			</View>
-			<Button
+			</TouchableOpacity>
+			{/* <Button
 				onPress={() => this.flipCard() }
 				title={this.state.flip === false ? 'See Answer' : 'See Question'}
 				backgroundColor="#03A9F4"
-			/>
+			/> */}
 		</Card>
   	)
   }
@@ -205,7 +208,7 @@ class QuizCard extends React.Component {
   				{`You Scored ${result}%!`}
   			</Text>
   			<Button
-  				onPress={() => this.setState({ counter: 0, noCorrect: 0 }) }
+  				onPress={() => this.setState({ counter: 0, noCorrect: 0,min:0,mcq:true }) }
   				title='Restart Quiz'
   				backgroundColor="#03A9F4"
   				icon={{name: 'refresh'}} 
@@ -213,8 +216,12 @@ class QuizCard extends React.Component {
   		</Card>
   	)
   }
-
+correct=()=>
+{
+this.setState({mcq:false,min:this.state.counter})
+}
 	renderCards() {
+
 		if(this.state.counter >= this.props.data.questions.length) {
 			const result = Math.round(this.state.noCorrect/this.props.data.questions.length * 100).toFixed(2);
 			const title = this.props.data.title;
@@ -247,33 +254,24 @@ class QuizCard extends React.Component {
 	}
 
 	render() {
-		
+		if(this.state.counter!==0&&this.state.counter%3===0&&this.state.mcq)
+		{
+			return(
+			<Mcq deck={this.props.data.questions} min={this.state.min}   correct={()=>this.correct()}counter={this.state.counter}/>
+			)
+		}
+		else{
 		return (
 			<View style={styles.container}>
-				<View style={styles.cardView}>
+	
+			<View style={styles.cardView}>
 					{this.renderCards()}
 				</View>
-				<View style={styles.bottomView}>
-					<View style={styles.iconLeft}>
-						<Text style={styles.cardText}>Swipe Left</Text>
-						<Icon 
-							name='thumbs-o-down' 
-							type= 'font-awesome' 
-							onPress={() => alert('You Have To Swipe Left!')}
-						/>
-					</View>
-					<View style={styles.iconRight}>
-						<Text style={styles.cardText}>Swipe Right</Text>
-						<Icon 
-							name='thumbs-o-up' 
-							type= 'font-awesome' 
-							onPress={() => alert('You Have To Swipe Right!')}
-						/>
-					</View>
-				</View>
+			
 			</View>
 		)
 	}
+}
 }
 
 const styles = StyleSheet.create({
@@ -288,8 +286,7 @@ const styles = StyleSheet.create({
 	  height:'68%',
   },
   cardView: {
-	marginTop: 60,
-	height:'80%',
+	height:'100%',
   },
   bottomView: {
   	flexDirection: 'row',
@@ -308,7 +305,7 @@ const styles = StyleSheet.create({
   },
   flipCard: {
     width: '100%',
-		height: '70%',
+		height: '88%',
 		borderRadius:10,
 		padding:20,
 
@@ -319,7 +316,7 @@ const styles = StyleSheet.create({
   },
   flipCardBack: {
 		width: '100%',
-		height: '70%',
+		height: '88%',
 
 		justifyContent: 'center',
     alignItems: 'center',
@@ -332,7 +329,6 @@ const styles = StyleSheet.create({
   },
   flipText: {
 		fontSize: 20,
-
     color: 'white',
     fontWeight: 'bold',
   }

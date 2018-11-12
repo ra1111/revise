@@ -1,10 +1,17 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Image, Platform} from 'react-native';
+import {StyleSheet, Text, View, Image,Alert,ActivityIndicator, Platform} from 'react-native';
 import * as firebase from 'firebase';
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 //import Icon from '../Assets/Images/icon.png';
 export default class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        opacity: 0
+    };
+}
   signInWithGoogle = async () => {
+    this.setState({opacity:1})
     const configPlatform = {
       ...Platform.select({
         ios: {
@@ -69,7 +76,7 @@ export default class Login extends Component {
       if (error.code === 'CANCELED') {
         console.log('user cancelled');
       }
-      console.log(error);
+     Alert.alert("Some thing is not Right",error.code);
     }
   };
   componentWillMount() {
@@ -126,6 +133,7 @@ export default class Login extends Component {
       }
       // this.setState({user, error: null});
     } catch (error) {
+      this.setState({opacity:0})
       console.log(error);
     }
   }
@@ -139,6 +147,7 @@ export default class Login extends Component {
           // color={GoogleSigninButton.Color.Auto}
           onPress={() => this.signInWithGoogle()}
         />
+                  <ActivityIndicator color={"blue"} style={{opacity: this.state.opacity }} animating={true} size="large"/>
       </View>
     );
   }
