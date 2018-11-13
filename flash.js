@@ -24,21 +24,21 @@ const Tabs = TabNavigator({
     screen: DeckDetail,
     navigationOptions: {
       tabBarLabel: 'Deck',
-      tabBarIcon: <MaterialCommunityIcons name='cards-playing-outline' size={30} color={'gray'} />
+      tabBarIcon: <MaterialCommunityIcons name='cards-playing-outline' size={30} color={'#2286c3'} />
     },
   },
   AddCard: {
     screen: AddCard,
     navigationOptions: {
       tabBarLabel: 'Add Card',
-      tabBarIcon: <FontAwesome name='plus-square' size={30} color={'gray'} />
+      tabBarIcon: <FontAwesome name='plus-square' size={30} color={'#2286c3'} />
     },
   },
   Quiz: {
     screen: Quiz,
     navigationOptions: {
       tabBarLabel: 'Start Quiz',
-      tabBarIcon: <MaterialIcons name='question-answer' size={30} color={'gray'} />
+      tabBarIcon: <MaterialIcons name='question-answer' size={30} color={'#2286c3'} />
     },
   },
 }, {
@@ -71,7 +71,7 @@ const MainNavigator = StackNavigator({
     navigationOptions: {
       headerTintColor: 'white',
       headerStyle: {
-        backgroundColor: 'gray',
+        backgroundColor: '#2286c3',
       },
     },
   },
@@ -80,7 +80,7 @@ const MainNavigator = StackNavigator({
     navigationOptions: {
       headerTintColor: 'white',
       headerStyle: {
-        backgroundColor: 'gray',
+        backgroundColor: '#2286c3',
       }
     },
   },
@@ -89,7 +89,7 @@ const MainNavigator = StackNavigator({
     navigationOptions: {
       headerTintColor: 'white',
       headerStyle: {
-        backgroundColor: 'gray',
+        backgroundColor: '#2286c3',
       }
     },
   },

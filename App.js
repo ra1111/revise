@@ -38,21 +38,21 @@ const Tabs = TabNavigator({
     screen: DeckDetail,
     navigationOptions: {
       tabBarLabel: 'Deck',
-      tabBarIcon: <Icon name='cards-playing-outline' size={30} color={'gray'} />
+      tabBarIcon: <Icon name='cards-playing-outline' size={30} color={'#2286c3'} />
     },
   },
   AddCard: {
     screen: AddCard,
     navigationOptions: {
       tabBarLabel: 'Add Card',
-      tabBarIcon: <Icon name='plus-square' size={30} color={'gray'} />
+      tabBarIcon: <Icon name='plus-square' size={30} color={'#2286c3'} />
     },
   },
   Quiz: {
     screen: Quiz,
     navigationOptions: {
       tabBarLabel: 'Start Quiz',
-      tabBarIcon: <Icon name='question-answer' size={30} color={'gray'} />
+      tabBarIcon: <Icon name='question-answer' size={30} color={'#2286c3'} />
     },
   },
 }, {
@@ -60,13 +60,13 @@ const Tabs = TabNavigator({
   tabBarOptions: {
     labelStyle: {
       fontSize: 12,
-      color: 'gray',
+      color: '#2286c3',
       alignItems: 'center',
       justifyContent: 'center',
     },
     style: {
       height: 56,
-      borderColor: 'gray',
+      borderColor: '#2286c3',
       backgroundColor: 'white',
       shadowColor: 'rgba(0, 0, 0, 0.24)',
       shadowOffset: {
@@ -105,7 +105,7 @@ const MainTab=TabNavigator({
       activeTintColor: 'red',
       showIcon: true,
       showLabel: true,
-      inactiveTintColor: 'gray',
+      inactiveTintColor: '#2286c3',
     style: {
       backgroundColor: '#EEEEEE',
     },
@@ -140,7 +140,7 @@ const MainNavigator = StackNavigator({
           navigationOptions: {
             headerTintColor: 'white',
             headerStyle: {
-              backgroundColor: 'gray',
+              backgroundColor: '#2286c3',
             },
           }
         },
@@ -152,7 +152,7 @@ const MainNavigator = StackNavigator({
     navigationOptions: {
       headerTintColor: 'white',
       headerStyle: {
-        backgroundColor: 'gray',
+        backgroundColor: '#2286c3',
       }
     },
   },
@@ -161,7 +161,7 @@ const MainNavigator = StackNavigator({
     navigationOptions: {
       headerTintColor: 'white',
       headerStyle: {
-        backgroundColor: 'gray',
+        backgroundColor: '#2286c3',
       }
     },
   },
@@ -170,7 +170,7 @@ const MainNavigator = StackNavigator({
     navigationOptions: {
       headerTintColor: 'white',
       headerStyle: {
-        backgroundColor: 'gray',
+        backgroundColor: '#2286c3',
       }
     },
   },
@@ -179,7 +179,7 @@ const MainNavigator = StackNavigator({
     navigationOptions: {
       headerTintColor: 'white',
       headerStyle: {
-        backgroundColor: 'gray',
+        backgroundColor: '#2286c3',
       }
     },
   },
@@ -189,7 +189,7 @@ const MainNavigator = StackNavigator({
     navigationOptions: {
       headerTintColor: 'white',
       headerStyle: {
-        backgroundColor: 'gray',
+        backgroundColor: '#2286c3',
       }
     },
   },
