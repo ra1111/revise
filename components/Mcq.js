@@ -1,5 +1,6 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList,Image,TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, FlatList,Image,TouchableOpacity,Vibration } from 'react-native'
+import * as Animatable from 'react-native-animatable'
 import { Card, Button, Icon } from 'react-native-elements'
 export default class Mcq extends React.Component {
     constructor(props) {
@@ -51,6 +52,8 @@ correct()
 }
 wrong()
 {
+    this.refs.view.flash(900)
+    Vibration.vibrate(600)
 console.log('wrong')
 }
     render()
@@ -67,11 +70,11 @@ console.log('wrong')
                   
                 </View>
 		</Card>
-        <View style={styles.optionsContainer}>
+        <Animatable.View ref="view" style={styles.optionsContainer}>
         <TouchableOpacity style={styles.button} onPress={()=>{this.state.answer===this.state.correct?this.props.correct():this.wrong()}}><Text style={styles.options}>{this.state.answer||"first option"}</Text></TouchableOpacity> 
         <TouchableOpacity style={styles.button} onPress={()=>{this.state.option2===this.state.correct?this.props.correct():this.wrong()}}><Text  style={styles.options}>{this.state.option2||"second option"}</Text></TouchableOpacity> 
         <TouchableOpacity style={styles.button} onPress={()=>{this.state.option1===this.state.correct?this.props.correct():this.wrong()}}><Text  style={styles.options}>{this.state.option1||"third option"}</Text></TouchableOpacity> 
-        </View>
+        </Animatable.View>
         </View>
   	)
   }
