@@ -7,6 +7,15 @@ let questions,title;
  class CardHome extends React.Component {
 deck(data)
 {
+ 
+  if( this.props.home)
+  {
+      
+    this.props.navigation.navigate('MainDeck')
+  }
+
+  else
+  {
 let title=data.title;
 let deck=data.deck;
 let questions=[];
@@ -32,7 +41,7 @@ let deckData={title:title,questions:questions}
 //this.props.navigation.navigate('Mcq')
 this.props.navigation.navigate('DeckDetail',
               {deckData: deckData})
-
+  }
 }
     render()
     {
@@ -41,7 +50,7 @@ this.props.navigation.navigate('DeckDetail',
         <FlatList
        
         horizontal
-     data={this.props.data}
+     data={this.props.data?this.props.data:this.props.homedata}
      renderItem={({ item: rowData }) => {
        return (<TouchableOpacity  onPress={()=>{this.deck(rowData)}} style={styles.cardContainer}>
             <Image

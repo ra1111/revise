@@ -106,8 +106,8 @@ export default class Login extends Component {
       ...configPlatform,
 
       webClientId:
-      "922830836172-7gkn82g7osq8jcjq0e0u4ble2vbsqthq.apps.googleusercontent.com",
-
+     // "922830836172-7gkn82g7osq8jcjq0e0u4ble2vbsqthq.apps.googleusercontent.com",
+      "922830836172-nim4c6ko5p4p0bjo24rrsna18sv1ilmr.apps.googleusercontent.com",
       offlineAccess: false
     });
   }

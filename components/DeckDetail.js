@@ -18,7 +18,7 @@ class DeckDetail extends React.Component {
   getDeck() {
 
 	  let deck=this.props.navigation.getParam('deckData', 'example');
-	 
+	 console.log(deck)
 	  if(deck!=='example')
 	  {
 		  return deck
