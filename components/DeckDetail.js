@@ -11,13 +11,14 @@ class DeckDetail extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
   	return {
-  		title: navigation.state.params.deck.title,
+  		title:navigation.state.params.deck? navigation.state.params.deck.title:navigation.state.params.deckData.title
   	}
   }
 
   getDeck() {
-	  let deck=this.props.navigation.getParam('deck', 'example');
-	  console.log(deck)
+
+	  let deck=this.props.navigation.getParam('deckData', 'example');
+	 
 	  if(deck!=='example')
 	  {
 		  return deck

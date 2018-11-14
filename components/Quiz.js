@@ -13,7 +13,7 @@ class Quiz extends React.Component {
   }
   getDeck() {
 	  console.log(this.props,"PROPS");
-	  let deck=this.props.navigation.getParam('deck', 'example');
+	  let deck=this.props.navigation.getParam('deckData', 'example');
 	  console.log(deck,"DWd")
 	  if(deck!=='example')
 	  {
