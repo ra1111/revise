@@ -9,27 +9,6 @@ import { Button } from 'react-native-elements'
 
 class MainDecks extends React.Component {
 
-  componentDidMount() {
-    this._loadInitialState().done();
-  }
-
-  async _loadInitialState() { 
-    try {
-      let value = await getDecks();
-      let holdArray = [];
-      if (value !== null){
-        let val = JSON.parse(value)
-        Object.keys(val).map((key) => {
-          holdArray.push(val[key]);
-        })
-        this.props.dispatch(receiveDecks(holdArray));
-      } else {
-      }
-    } catch (error) {
-      console.log("error here")
-    }
-  }
-
 
   renderItem = (deck) => {
     return <Decks deck={deck.item} navProps={this.props.navigation}  key={deck.item} />
@@ -54,6 +33,7 @@ class MainDecks extends React.Component {
             />
           )
         }
+
       </View>
 		)
 	}

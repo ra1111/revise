@@ -36,7 +36,7 @@ class AddDeck extends React.Component {
 	  	// save to AsyncStorage
 	  	saveDeckTitle({input, newDeck});
 	  	// go back to Home
-	  	this.props.navigation.goBack();
+	  	this.props.navigation.navigate('DeckDetail',{deck:newDeck});
 	  }
   } 
 
