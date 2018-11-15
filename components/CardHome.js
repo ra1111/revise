@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList,Image,TouchableOpacity } from 'react-native'
 import { Button } from '../node_modules/react-native-elements';
+import Dummy from '../Assets/Images/Dummy.jpg'
 import { connect } from 'react-redux'
 let questions,title;
 
@@ -56,7 +57,7 @@ this.props.navigation.navigate('DeckDetail',
             <Image
               resizeMode={'stretch'}
               style={styles.card}
-              source={rowData.source}/>
+              source={rowData.source?rowData.source:Dummy}/>
 
             <Text style={styles.cardText}> {rowData.title} </Text>
             <Text style={styles.cardText}>{rowData.number||1} </Text>

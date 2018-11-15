@@ -54,15 +54,6 @@ class MainDecks extends React.Component {
             />
           )
         }
-        <View style={styles.addButton}>
-          <Button 
-            onPress={() => this.props.navigation.navigate('AddDeck')}
-            title={"New Deck"}
-            backgroundColor="#03A9F4"
-            icon={{name: 'add-to-list', type: 'entypo'}}
-          >
-          </Button>
-        </View>
       </View>
 		)
 	}

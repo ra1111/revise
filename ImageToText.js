@@ -16,71 +16,41 @@ import {
   View,
 ScrollView
 } from 'react-native';
-import ImagePicker from 'react-native-image-picker';
 import * as firebase from 'firebase';
-import RNTesseractOcr from 'react-native-tesseract-ocr';
 import { Icon } from './node_modules/react-native-elements';
 import Dummy from './Assets/Images/Dummy.jpg'
 import CardHome from './components/CardHome'
+import { receiveDecks } from './actions'
+import { getDecks } from './utils/api'
 import Swipers from './components/Swiper'
 import { connect } from 'react-redux'
-let database,Revise,Trending;
-const data=[{source:Dummy,title:'title of Deck',number:29},{source:Dummy,title:'title of Deck',number:29},{source:Dummy,title:'title of Deck',number:29},{source:Dummy,title:'title of Deck',number:29},{source:Dummy,title:'title of Deck',number:29}]
+let database,Revise,Trending,Popular;
 const Button = (Platform.OS === 'android') ? TouchableNativeFeedback : TouchableOpacity;
-const options = {
-  quality: 1.0,
-  storageOptions: {
-    skipBackup: true
-  }
-};
-const tessOptions = {
-  whitelist: null,
-  blacklist: '1234567890\'!"#$%&/()={}[]+*-_:;<>'
-};
-
-
 class App extends Component {
   static navigationOptions = {
     header: null
 };
-  state = { isLoading: false, imgSource: null, ocrResult: null,data:data ,Trending,TrendingArray:[]};
-
-  selectPhoto() {
-    this.setState({ isLoading: true });
-    ImagePicker.showImagePicker(options, (response) => {
-      if (response.didCancel || response.error) {
-        console.log(response);
-        this.setState({ isLoading: false });
+  state = { isLoading: false, imgSource: null, ocrResult: null,Trending,TrendingArray:[],Popular,PopularArray:[]};
+  async _loadInitialState() { 
+    try {
+      let value = await getDecks();
+      let holdArray = [];
+      if (value !== null){
+        let val = JSON.parse(value)
+        Object.keys(val).map((key) => {
+          holdArray.push(val[key]);
+        })
+        this.props.dispatch(receiveDecks(holdArray));
       } else {
-        let source = (Platform.OS === 'android') ? { uri: response.uri, isStatic: true } : { uri: response.uri.replace('file://', ''), isStatic: true };
-        this.setState({ imgSource: source }, this.doOcr(response.path));
       }
-    });
+    } catch (error) {
+      console.log("error here")
+    }
   }
-
-  doOcr(path) {
-    RNTesseractOcr.recognize(path, 'LANG_ENGLISH', tessOptions)
-      .then((result) => {
-        this.setState({ isLoading: false, ocrResult: result });
-        console.log('OCR Result: ', result);
-      })
-      .catch((err) => {
-        console.log('OCR Error: ', err);
-      })
-      .done();
+  componentDidMount()
+  {
+    this._loadInitialState().done();
   }
-
-  cancelOcr() {
-    RNTesseractOcr.stop()
-      .then((result) => {
-        console.log('OCR Cancellation Result: ', result);
-      })
-      .catch((err) => {
-        console.log('OCR Cancellation Error: ', err);
-      })
-      .done();
-  }
-
  async componentWillMount() {
     database = firebase.database();
     Revise=database.ref('Revise')
@@ -104,6 +74,7 @@ class App extends Component {
   }
 
    }
+
    
 this.setState({
  TrendingArray:quantities
@@ -118,6 +89,41 @@ console.log(this.state.TrendingArray)
   {
     console.log('exception',ex);
   }
+  Trending=Revise.child('Popular')
+  try{
+  await Trending .once('value').then(snapshot=>{
+ this.setState({Popular:snapshot.val()})
+ let data=this.state.Popular;
+ var quantities = [];
+ for (var key in data) {
+   for (var key2 in data[key]) {
+ 
+ quantities.push({
+     source: Dummy,
+    title: key2,
+     number: data[key][key2].length,
+     deck:data[key]
+
+     
+ });
+}
+
+ }
+
+ 
+this.setState({
+PopularArray:quantities
+})
+console.log(this.state.TrendingArray)   
+
+ 
+  })
+  console.log(database,Revise,Trending);
+}
+catch(ex)
+{
+  console.log('exception',ex);
+}
 
   }
   render() {
@@ -129,7 +135,7 @@ console.log(this.state.TrendingArray)
       <ScrollView >
       <View>
           <Text> Popular on Revise</Text>
-          <CardHome home={false}  navigation={this.props.navigation} data={data}/> 
+          <CardHome home={false}  navigation={this.props.navigation} data={this.state.PopularArray}/> 
           <View>
     <Text> Your Deck</Text>
     { Object.keys(this.props.deckData).length !== 0?
@@ -146,7 +152,7 @@ console.log(this.state.TrendingArray)
 </ScrollView>
 </View>
 <View style={styles.button}>
-          <Button onPress={()=>{this.props.navigation.navigate('MainDeck')}} 		 >
+          <Button  onPress={() => this.props.navigation.navigate('AddDeck')}	 >
             <View style={[styles.add, styles.imgContainer,styles.round]}>
 
         <Icon name='add' size={30} color={'white'} />
@@ -242,7 +248,7 @@ alignItems: 'center',
 
 
 function mapStateToProps(state) {
-  console.log(state)
+  console.log(state,"state")
   return {
     deckData: state.decks.deckData
   }

@@ -109,7 +109,7 @@ addNote=()=>{
 	render() {
 		const { question } = this.state;
 		const { answer } = this.state;
-		const { title } = this.props.navigation.state.params.deck;
+		const { title } = this.props.navigation.state.params.deck?this.props.navigation.state.params.deck:this.props.navigation.state.params.deckData.title;
 		return (
 			<View style={styles.container}>
 				<View >
