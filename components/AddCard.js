@@ -11,7 +11,8 @@ class AddCard extends React.Component {
 	state= {
 		question: '',
 answer:[],
-noteNumber:[],
+note:'',
+noteNumber:[{note:''}],
 
 	}
 
@@ -27,36 +28,13 @@ noteNumber:[],
   	})
   }
 
-handleAnswer=(answer)=>{
-	
-	let prev=answer.slice(0,-1);
-	
-
-	let ans=this.state.answer.slice();
-	if(prev=='')
-{
-	ans.push(answer)
-	console.log(ans,"first")
-
-	
-}
-else{
-
-	for(let i=0;i<ans.length;i++)
-	{
-		if (ans[i].match(prev))
-		{
-ans[i]=answer;
-console.log(ans,"match");
-		}
-	}
-	
-
-}
-	this.setState({
-		answer:ans,
-	})
-console.log(this.state.answer);
+handleAnswer=(idx) => (evt) => {
+	console.log(idx,evt,"thus the inout")
+    const newNote = this.state.noteNumber.map((shareholder, sidx) => {
+      if (idx !== sidx) return shareholder;
+      return { ...shareholder, note: evt};
+    });
+    this.setState({ noteNumber: newNote });
 }
 addNote=()=>{
 	let noteNumber=this.state.noteNumber;
@@ -65,14 +43,16 @@ addNote=()=>{
 		alert("Maximum Limit Reached Please Submit the card");
 		
 	}else{
-	noteNumber.push(<FormInput placeholder="Notes"   underlineColorAndroid="#d8d8d8" multiline={false}  maxLength={40} ref={input => this.aInput = input} onChangeText={this.handleAnswer}/>)
-	this.setState({
-		noteNumber
+		this.setState({
+			noteNumber: this.state.noteNumber.concat([{ note: '' }])
+		  });
+}
+}
+  sbmtCard = (title, question) => {
+	  let answer=[]
+	  let note=this.state.noteNumber
+	  answer=note.map(a=>a.note)
 
-})
-}
-}
-  sbmtCard = (title, question, answer) => {
   	if(question === '' || answer[0] === '') {
   		alert("Please Enter Question and Answer");
   	} else {	
@@ -119,9 +99,9 @@ addNote=()=>{
 					</View>
 					<View style={styles.formView}>
 						<FormLabel labelStyle={{fontSize:20}}>Enter the Points</FormLabel>
-						{this.state.noteNumber.map((value, index) => {
-          return value
-        })}
+						{this.state.noteNumber.map((value, index) => (
+  <FormInput placeholder="Notes"   underlineColorAndroid="#d8d8d8" multiline={false}  maxLength={40} ref={input => this.aInput = input} onChangeText={this.handleAnswer(index)}/>
+        ))}
 					</View>
 				</View>
 			
@@ -134,7 +114,7 @@ addNote=()=>{
 				buttonStyle={styles.add}></Button>
 		<View style={{width:200,borderRadius:5}}> 	
         <Button 
-        	onPress={() => this.sbmtCard(title, question, answer)}
+        	onPress={() => this.sbmtCard(title, question)}
 					title={"Submit"}
 					backgroundColor="#03A9F4"
 					icon={{name: 'check'}} 
