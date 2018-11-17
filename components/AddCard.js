@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Keyboard } from 'react-native'
+import { StyleSheet, Text, View, Keyboard,KeyboardAvoidingView,ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { AddNewCard } from '../actions'
 import { updateDeck } from '../utils/api'
@@ -99,17 +99,23 @@ addNote=()=>{
 		const { title } = this.props.navigation.state.params.deck?this.props.navigation.state.params.deck:this.props.navigation.state.params.deckData.title;
 		return (
 			<View style={styles.container}>
+				<KeyboardAvoidingView  >
+						<ScrollView contentContainerStyle={styles.container} > 
 				<View >
+			
 					<View style={styles.formView}>
+					
 						<FormLabel labelStyle={{fontSize:20}}>Title for the Note</FormLabel>
 						<FormInput   underlineColorAndroid="#d8d8d8" placeholder="Title" ref={input => this.qInput = input} onChangeText={this.handleQuestion}/>
 						{this.requiredMessage(this.qInput)}
 					</View>
 					<View style={styles.formView}>
 						<FormLabel labelStyle={{fontSize:20}}>Enter the Points</FormLabel>
+					
 						{this.state.noteNumber.map((value, index) => (
   <FormInput placeholder="Notes"   underlineColorAndroid="#d8d8d8" multiline={false}  maxLength={200}      ref={input =>this[`aInput${index}`] = input} onChangeText={this.handleAnswer(index)}/>
-        ))}
+		))}
+	
 					</View>
 				</View>
 			
@@ -131,6 +137,8 @@ addNote=()=>{
         >
         </Button>
 		</View>
+		</ScrollView>
+		</KeyboardAvoidingView>
 			</View>
 		)
 	}
@@ -148,9 +156,11 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	add:{
-		borderRadius:20,
+		borderRadius:40,
 		marginTop:20,
 		marginBottom:20,
+		
+		padding:16
 
 	}
 })
