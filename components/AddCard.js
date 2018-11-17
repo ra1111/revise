@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Keyboard } from 'react-native'
 import { connect } from 'react-redux'
 import { AddNewCard } from '../actions'
 import { updateDeck } from '../utils/api'
-import { Button, FormLabel, FormInput } from 'react-native-elements'
+import { Button, FormLabel, FormInput,FormValidationMessage } from 'react-native-elements'
 import thunk from '../node_modules/redux-thunk';
 
 class AddCard extends React.Component {
@@ -21,6 +21,10 @@ noteNumber:[{note:''}],
   		title: 'Add Card'
   	}
   }
+  requiredMessage = input => {
+    return input === '' ? <FormValidationMessage>Title is required</FormValidationMessage> : <View/>
+  };
+
 
   handleQuestion = (question) => {
   	this.setState({
@@ -49,6 +53,8 @@ addNote=()=>{
 }
 }
   sbmtCard = (title, question) => {
+	 
+
 	  let answer=[]
 	  let note=this.state.noteNumber
 	  answer=note.map(a=>a.note)
@@ -64,22 +70,23 @@ addNote=()=>{
 	  	let newDeck = ''
 	  	let key = ''
 		  this.props.deckData.map((deck,index) => {
-			  console.log(deck,index,"TITLEVXUGS")
 			if(deck.title === title) {
-				console.log(deck,"TITLEMATCHES")
+				
 				newDeck = {title: deck.title, questions: deck.questions.concat({question,answer})};
 				key = index;
 			}
 		});
-		console.log(newDeck,"NEW DECK");
 		  this.props.dispatch(AddNewCard(newCard));
-
 	  	// save to AsyncStorage
 	  	updateDeck({title, newDeck});
 	  	// reset form
-	  	this.setState({ question: '', answer: [] });
-	  	this.qInput.clearText();
-	  	this.aInput.clearText();
+	  	this.setState({ question: '', answer: [], note:'',
+		  noteNumber:[{note:''}],});
+		this.qInput.clearText();
+	for(let i=0;i<answer.length;i++)
+	{
+		this[`aInput${i}`].clearText();
+	}
 	  	// go back to Deck
 	  	Keyboard.dismiss();
 	  	this.props.navigation.goBack();
@@ -96,11 +103,12 @@ addNote=()=>{
 					<View style={styles.formView}>
 						<FormLabel labelStyle={{fontSize:20}}>Title for the Note</FormLabel>
 						<FormInput   underlineColorAndroid="#d8d8d8" placeholder="Title" ref={input => this.qInput = input} onChangeText={this.handleQuestion}/>
+						{this.requiredMessage(this.qInput)}
 					</View>
 					<View style={styles.formView}>
 						<FormLabel labelStyle={{fontSize:20}}>Enter the Points</FormLabel>
 						{this.state.noteNumber.map((value, index) => (
-  <FormInput placeholder="Notes"   underlineColorAndroid="#d8d8d8" multiline={false}  maxLength={40} ref={input => this.aInput = input} onChangeText={this.handleAnswer(index)}/>
+  <FormInput placeholder="Notes"   underlineColorAndroid="#d8d8d8" multiline={false}  maxLength={200}      ref={input =>this[`aInput${index}`] = input} onChangeText={this.handleAnswer(index)}/>
         ))}
 					</View>
 				</View>
