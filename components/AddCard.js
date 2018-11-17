@@ -81,7 +81,7 @@ addNote=()=>{
 	  	updateDeck({title, newDeck});
 	  	// reset form
 	  	this.setState({ question: '', answer: [], note:'',
-		  noteNumber:[{note:''}],});
+		  noteNumber:[{note:''}]});
 		this.qInput.clearText();
 	for(let i=0;i<answer.length;i++)
 	{
