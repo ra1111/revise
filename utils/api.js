@@ -9,7 +9,7 @@ export function saveDeckTitle ({ input, newDeck }) {
 }
 
 export function updateDeck ({ title, newDeck }) {
-  console.log(title,newDeck,"JWDJDI");
+  console.log(title,newDeck,"deck update");
   return AsyncStorage.getItem(DECK_STORAGE_KEY)
     .then((results) => {
       const data = JSON.parse(results)

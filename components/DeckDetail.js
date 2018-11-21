@@ -4,9 +4,9 @@ import { StyleSheet, Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 import { Button } from 'react-native-elements'
-import { removeDeck } from '../utils/api'
-import { DeleteDeck } from '../actions'
-
+import { removeDeck,getDecks } from '../utils/api'
+import { DeleteDeck,receiveDecks } from '../actions'
+import * as firebase from 'firebase';
 class DeckDetail extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
@@ -14,6 +14,73 @@ class DeckDetail extends React.Component {
   		title:navigation.state.params.deck? navigation.state.params.deck.title:navigation.state.params.deckData.title
   	}
   }
+
+  uploadDeck(decks)
+  //IMPRODOKDVEHIEOUEH
+  {
+	  let deckData= JSON.parse(JSON.stringify(decks))
+	  let user=firebase.auth().currentUser;
+	
+    let database = firebase.database();
+	
+	for (var key in deckData) {
+		for (var key2 in deckData[key]) {
+			let ans
+			ans=deckData[key][key2].answer
+			let ansObj=""
+			for(var key3 in ans)
+			{
+				ansObj+=ans[key3]+" $, "
+			
+
+			}
+			deckData[key][key2].answer=ansObj
+			ansObj=""
+			
+		
+		}
+	}
+	 let deckObj={}
+let title=deckData.title
+let questions=deckData.questions
+	 deckObj[title]=questions
+	console.log(deckObj,deckData,"obj")
+	 try
+ {	 
+	 database
+	.ref('users/' + user.uid)
+	.once('value')
+	.then(snapshot => {
+		let currentDeck=snapshot.val().decks;
+		console.log(currentDeck,'current')
+		if(currentDeck===0)
+		{console.log(currentDeck,"current 0")
+			
+			database.ref('users/' + user.uid).update({
+				decks:deckObj})
+				deckObj={}
+		}
+		else{
+			//update exsisiting deck
+			//avoid duplicate deck
+			//add new deck
+
+			 currentDeck[title]=questions;
+			database.ref('users/' + user.uid).update({
+				decks:currentDeck})
+				console.log(currentDeck,"current 1")
+				currentDeck={}
+		}
+	
+	})
+	deckData={}
+}
+catch(ex)
+{
+	console.log(ex,"exception")
+}	
+  }
+
 
   getDeck() {
 
@@ -71,6 +138,14 @@ class DeckDetail extends React.Component {
 							title={"Delete Deck"}
 							backgroundColor="#FF0000"
 							icon={{name: 'delete'}}
+							style={{marginTop: 20}}
+						>
+						</Button>
+						<Button 
+							onPress={() => this.uploadDeck(deck)}
+							title={"Upload Deck"}
+							backgroundColor="green"
+							icon={{name: 'file-upload'}}
 							style={{marginTop: 20}}
 						>
 						</Button>

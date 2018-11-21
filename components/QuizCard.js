@@ -254,6 +254,8 @@ this.setState({mcq:false,min:this.state.counter})
 	}
 
 	render() {
+console.log(this.props,"quiz cards")
+
 		if(this.state.counter!==0&&this.state.counter%3===0&&this.state.mcq)
 		{
 			return(

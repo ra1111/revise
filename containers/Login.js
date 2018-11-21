@@ -36,7 +36,8 @@ export default class Login extends Component {
     try {
       let database = firebase.database();
       const user = await GoogleSignin.signIn();
-      console.log(user);
+  
+      console.log(user,user.user.name,user.user.email,"wudhbgd");
 
       const credential = firebase.auth.GoogleAuthProvider.credential(
         user.idToken,
@@ -45,25 +46,20 @@ export default class Login extends Component {
       const currentUser = await firebase
         .auth()
         .signInAndRetrieveDataWithCredential(credential);
-
-      console.log(database.ref('Revise/users' ));
+        console.log(database.ref('users/' + currentUser.user.uid),"ROSDIDIID");
       database
         .ref('users/')
         .child(currentUser.user.uid)
         .once('value', function(snapshot) {
+          console.log(snapshot.val(),"value")
           var exists = snapshot.val() !== null;
           if (!exists) {
             database.ref('users/' + currentUser.user.uid).set({
-              username: user.name,
-              email: user.email,
-              profile_picture: user.photo,
-              DailyGoals: 100,
-              CorrectAns: 0,
-              WrongAns: 0,
-              TotalAns: 0,
-              DialyCorrectAns: 0,
-              DailyWrongAns: 0,
-              DailyTotalAns: 0
+              username: user.user.name,
+              email: user.user.email,
+              profile_picture: user.user.photo,
+              decks:0
+           
             });
           }
         });

@@ -30,6 +30,7 @@ return deck
 
 	render() {
 		const deck = this.getDeck();
+		console.log(deck,"quiz deck")
 		return(
 			<View style={styles.container}>
 				{deck.questions.length === 0 ? 

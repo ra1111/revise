@@ -60,6 +60,7 @@ class App extends Component {
    this.setState({Trending:snapshot.val()})
    let data=this.state.Trending;
    var quantities = [];
+   console.log(snapshot.val(),"val")
    for (var key in data) {
      for (var key2 in data[key]) {
    

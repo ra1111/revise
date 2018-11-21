@@ -22,6 +22,7 @@ noteNumber:[{note:''}],
   	}
   }
   requiredMessage = input => {
+	  console.log("input",input)
     return input === '' ? <FormValidationMessage>Title is required</FormValidationMessage> : <View/>
   };
 
@@ -53,14 +54,15 @@ addNote=()=>{
 }
 }
   sbmtCard = (title, question) => {
-	 
+	this.requiredMessage(question)
 
 	  let answer=[]
 	  let note=this.state.noteNumber
 	  answer=note.map(a=>a.note)
 
   	if(question === '' || answer[0] === '') {
-  		alert("Please Enter Question and Answer");
+		  //alert("Please Enter Question and Answer");
+		  console.log(this.qInput.value)
   	} else {	
 	  	const newCard = {
 	  		title,
@@ -107,7 +109,7 @@ addNote=()=>{
 					
 						<FormLabel labelStyle={{fontSize:20}}>Title for the Note</FormLabel>
 						<FormInput   underlineColorAndroid="#d8d8d8" placeholder="Title" ref={input => this.qInput = input} onChangeText={this.handleQuestion}/>
-						{this.requiredMessage(this.qInput)}
+						{this.requiredMessage(this.question)}
 					</View>
 					<View style={styles.formView}>
 						<FormLabel labelStyle={{fontSize:20}}>Enter the Points</FormLabel>
@@ -146,9 +148,7 @@ addNote=()=>{
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
     alignItems: 'center',
-    justifyContent: 'flex-start',
     alignContent: 'center',
     backgroundColor: 'white',
 	},
