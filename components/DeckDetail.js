@@ -44,7 +44,6 @@ class DeckDetail extends React.Component {
 let title=deckData.title
 let questions=deckData.questions
 	 deckObj[title]=questions
-	console.log(deckObj,deckData,"obj")
 	 try
  {	 
 	 database

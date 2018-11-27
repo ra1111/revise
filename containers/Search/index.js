@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, ActivityIndicator } from 'react-native';
 import { List, ListItem, SearchBar } from 'react-native-elements';
-
+import * as firebase from 'firebase';
  export default class Search extends Component {
     static navigationOptions = {
                 header: null
@@ -24,6 +24,20 @@ import { List, ListItem, SearchBar } from 'react-native-elements';
   }
 
   makeRemoteRequest = () => {
+    let user=firebase.auth().currentUser;
+	
+    let database = firebase.database();
+    database
+    .ref('users' ).orderByChild('decks').once('value',
+    (snapshot) =>{
+    console.log(snapshot.val(),"wbdudwubwbudbudwbu") 
+  snapshot.forEach((snap)=>{
+let val=snap.val()
+if(snap.hasChild('decks'))
+{
+  console.log(val,'has it')
+}
+  })})
     const url = `https://randomuser.me/api/?&results=20`;
     this.setState({ loading: true });
 
