@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { View, Text, FlatList, ActivityIndicator } from 'react-native';
 import { List, ListItem, SearchBar } from 'react-native-elements';
 import * as firebase from 'firebase';
+let deckData={}
  export default class Search extends Component {
     static navigationOptions = {
                 header: null
@@ -13,19 +14,18 @@ import * as firebase from 'firebase';
     this.state = {
       loading: false,
       data: [],
+      deckDatas:{},
       error: null,
     };
 
     this.arrayholder = [];
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.makeRemoteRequest();
   }
 
-  makeRemoteRequest = () => {
-    let user=firebase.auth().currentUser;
-	
+ makeRemoteRequest = () => {	
     let database = firebase.database();
     database
     .ref('users' ).orderByChild('decks').once('value',
@@ -35,26 +35,26 @@ import * as firebase from 'firebase';
 let val=snap.val()
 if(snap.hasChild('decks'))
 {
-  console.log(val,'has it')
-}
-  })})
-    const url = `https://randomuser.me/api/?&results=20`;
-    this.setState({ loading: true });
+ let data=val.decks
+ for(var key in data)
+ {
+   deckData[key]=data[key]
+ }
 
-    fetch(url)
-      .then(res => res.json())
-      .then(res => {
-        this.setState({
-          data: res.results,
-          error: res.error || null,
-          loading: false,
-        });
-        this.arrayholder = res.results;
-      })
-      .catch(error => {
-        this.setState({ error, loading: false });
-      });
-  };
+}
+this.setState({
+  deckDatas:deckData,
+  data:Object.keys(deckData)
+})
+this.arrayholder=Object.keys(deckData)
+  })})
+
+
+
+
+
+}
+
 
   renderSeparator = () => {
     return (
@@ -70,9 +70,9 @@ if(snap.hasChild('decks'))
   };
 
   searchFilterFunction = text => {
-    console.log(this.arrayholder);
+    console.log(this.arrayholder,"here array");
     const newData = this.arrayholder.filter(item => {
-      const itemData = `${item.name.title.toUpperCase()} ${item.name.first.toUpperCase()} ${item.name.last.toUpperCase()}`;
+      const itemData = `${item.toUpperCase()} `;
       const textData = text.toUpperCase();
       return itemData.indexOf(textData) > -1;
     });
@@ -80,7 +80,16 @@ if(snap.hasChild('decks'))
       data: newData,
     });
   };
-
+next=(item)=>{
+console.log("Ites coming here",item,this.state.deckDatas[item],this.props)
+let deck={}
+let ans=[]
+let questions
+//COmplete navigation
+// deck={title:item,questions:questions}
+// this.props.navigation.navigate('DeckDetail',
+//               {deckData: deck}) 
+}
   renderHeader = () => {
     return (
       <SearchBar
@@ -101,6 +110,7 @@ if(snap.hasChild('decks'))
   };
 
   render() {
+    console.log(this.state,"key")
     if (this.state.loading) {
       return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -109,23 +119,26 @@ if(snap.hasChild('decks'))
       );
     }
     return (
-      <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
+      
+   
+       <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
         <FlatList
           data={this.state.data}
-          renderItem={({ item }) => (
-            <ListItem
-              roundAvatar
-              title={`${item.name.first} ${item.name.last}`}
-              subtitle={item.email}
-              avatar={{ uri: item.picture.thumbnail }}
+         renderItem={({ item }) => (
+           <ListItem
+             roundAvatar
+               title={item}
+      //         subtitle={'sub'}
+      onPress={()=>{this.next(item)}}
+      //       //  avatar={{ uri: item.picture.thumbnail }}
               containerStyle={{ borderBottomWidth: 0 }}
             />
           )}
-          keyExtractor={item => item.email}
-          ItemSeparatorComponent={this.renderSeparator}
-          ListHeaderComponent={this.renderHeader}
-        />
-      </List>
+      //     keyExtractor={item => item.key}
+           ItemSeparatorComponent={this.renderSeparator}
+           ListHeaderComponent={this.renderHeader}
+         />
+       </List>
     );
   }
 }
