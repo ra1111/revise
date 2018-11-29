@@ -23,23 +23,23 @@ class DeckDetail extends React.Component {
 	
     let database = firebase.database();
 	
-	for (var key in deckData) {
-		for (var key2 in deckData[key]) {
-			let ans
-			ans=deckData[key][key2].answer
-			let ansObj=""
-			for(var key3 in ans)
-			{
-				ansObj+=ans[key3]+" $, "
+	// for (var key in deckData) {
+	// 	for (var key2 in deckData[key]) {
+	// 		let ans
+	// 		ans=deckData[key][key2].answer
+	// 		let ansObj=""
+	// 		for(var key3 in ans)
+	// 		{
+	// 			ansObj+=ans[key3]+" $, "
 			
 
-			}
-			deckData[key][key2].answer=ansObj
-			ansObj=""
+	// 		}
+	// 		deckData[key][key2].answer=ansObj
+	// 		ansObj=""
 			
 		
-		}
-	}
+	// 	}
+	// }
 	 let deckObj={}
 let title=deckData.title
 let questions=deckData.questions

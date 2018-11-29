@@ -81,14 +81,14 @@ this.arrayholder=Object.keys(deckData)
     });
   };
 next=(item)=>{
-console.log("Ites coming here",item,this.state.deckDatas[item],this.props)
+
 let deck={}
 let ans=[]
-let questions
+let questions=this.state.deckDatas[item]
 //COmplete navigation
-// deck={title:item,questions:questions}
-// this.props.navigation.navigate('DeckDetail',
-//               {deckData: deck}) 
+deck={title:item,questions:questions}
+this.props.navigation.navigate('DeckDetail',
+              {deckData: deck}) 
 }
   renderHeader = () => {
     return (
