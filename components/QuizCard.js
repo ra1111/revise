@@ -9,7 +9,8 @@ import {
 	Dimensions,
 	LayoutAnimation,
 	UIManager,
-	TouchableOpacity
+	TouchableOpacity,
+	ScrollView
 } from 'react-native'
 import { connect } from 'react-redux'
 import { Card, Button, Icon } from 'react-native-elements'
@@ -180,18 +181,21 @@ class QuizCard extends React.Component {
 			key={item}
 			title={`${String(index)}/${String(totalLength)}`}
 		>
+	
 			<TouchableOpacity 	onPress={() => this.flipCard() }>
+
 				{this.state.flip === false 
-					? <Animated.Text style={[styles.flipCard, frontAnimatedStyle,styles.cardText,styles.flipText]}>{item.question}</Animated.Text>
+					? <Animated.Text  adjustsFontSizeToFit={true} style={[styles.flipCard, frontAnimatedStyle,styles.cardText,styles.flipText]}>{item.question.toUpperCase()}</Animated.Text>
 					:  <Animated.Text style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack,styles.cardText]}> {item.answer.map((value, index) => {
-						return  <Text style={styles.flipText}>{value} {"\n"}</Text>
+						return  <Text  adjustsFontSizeToFit={true} style={styles.flipTextBack}>{index+1}{")\t"}{value.toUpperCase()} {"\n\n"}</Text>
 						})}
 					
 						</Animated.Text>
 					}
-					
+								
 				
 			</TouchableOpacity>
+
 			{/* <Button
 				onPress={() => this.flipCard() }
 				title={this.state.flip === false ? 'See Answer' : 'See Question'}
@@ -278,7 +282,8 @@ console.log(this.props,"quiz cards")
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
+	flex: 1,
+
 	},
 	cardStyle: {
 		position: 'absolute',
@@ -311,7 +316,7 @@ const styles = StyleSheet.create({
 		borderRadius:10,
 		padding:20,
 
-		backgroundColor: 'blue',
+		backgroundColor: '#fd4bc9',
 		justifyContent: 'center',
     alignItems: 'center',
     backfaceVisibility: 'hidden',
@@ -327,13 +332,25 @@ const styles = StyleSheet.create({
 		padding:20,
 		flexDirection:'column',
 		
-    backgroundColor: "red",
+    backgroundColor: "#6bb1ff",
   },
   flipText: {
 		fontSize: 20,
+		alignItems:'center',
+		textAlign:'center',
     color: 'white',
-    fontWeight: 'bold',
-  }
+		fontWeight: 'bold',
+		textAlignVertical:'center'
+	},
+	flipTextBack:{
+	
+		color: 'white',
+		textAlign:'center',
+		fontFamily:'OpenSans',
+		textAlignVertical:'center',
+		fontWeight: 'bold',		
+
+	}
 })
 
 function mapStateToProps(state) {

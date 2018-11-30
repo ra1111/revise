@@ -82,8 +82,6 @@ this.arrayholder=Object.keys(deckData)
   };
 next=(item)=>{
 
-let deck={}
-let ans=[]
 let questions=this.state.deckDatas[item]
 //COmplete navigation
 deck={title:item,questions:questions}
