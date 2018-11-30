@@ -346,9 +346,8 @@ const styles = StyleSheet.create({
 	
 		color: 'white',
 		textAlign:'center',
-		fontFamily:'OpenSans',
-		textAlignVertical:'center',
-		fontWeight: 'bold',		
+		fontFamily: 'learning_curve_bold_ot_tt',
+		textAlignVertical:'center',	
 
 	}
 })
