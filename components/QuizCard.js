@@ -182,15 +182,11 @@ class QuizCard extends React.Component {
 			title={`${String(index)}/${String(totalLength)}`}
 		>
 	
-			<TouchableOpacity 	onPress={() => this.flipCard() }>
+			<TouchableOpacity  	onPress={() => this.flipCard() }>
 
 				{this.state.flip === false 
 					? <Animated.Text  adjustsFontSizeToFit={true} style={[styles.flipCard, frontAnimatedStyle,styles.cardText,styles.flipText]}>{item.question.toUpperCase()}</Animated.Text>
-					:  <Animated.Text style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack,styles.cardText]}> {item.answer.map((value, index) => {
-						return  <Text  adjustsFontSizeToFit={true} style={styles.flipTextBack}>{index+1}{")\t"}{value.toUpperCase()} {"\n\n"}</Text>
-						})}
-					
-						</Animated.Text>
+					: <Animated.View style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack]}>{item.answer.map((value, index)=>{return<Animated.View  style={styles.textContainer}><Text adjustsFontSizeToFit={true} style={styles.flipTextBack}>{index+1}{")\t"}{value.toUpperCase()}{"\n\n"}</Text><View style={index<(item.answer.length-1)?styles.boundary:styles.noBoundary}/></Animated.View>})}</Animated.View>
 					}
 								
 				
@@ -304,17 +300,30 @@ const styles = StyleSheet.create({
   	flex: 1,
   	marginBottom: 20,
     justifyContent: 'flex-end',
-  },
+	},
+	boundary:{
+width:'100%',
+height:0.5,
+backgroundColor:'white',
+	},
+noBoundary:{
+height:0,
+},
   iconLeft: {
   	flex: 1,
   	marginBottom: 20,
     justifyContent: 'flex-start',
-  },
+	},
+	textContainer:{
+		backfaceVisibility: 'hidden',
+		width: '100%',
+	marginVertical:5,
+	},
   flipCard: {
     width: '100%',
-		height: '88%',
+		height: '91%',
 		borderRadius:10,
-		padding:20,
+		padding:5,
 
 		backgroundColor: '#fd4bc9',
 		justifyContent: 'center',
@@ -323,13 +332,13 @@ const styles = StyleSheet.create({
   },
   flipCardBack: {
 		width: '100%',
-		height: '88%',
+		height: '91%',
 
 		justifyContent: 'center',
     alignItems: 'center',
 		borderRadius:10,
 
-		padding:20,
+		padding:5,
 		flexDirection:'column',
 		
     backgroundColor: "#6bb1ff",
@@ -346,7 +355,7 @@ const styles = StyleSheet.create({
 	
 		color: 'white',
 		textAlign:'center',
-		fontFamily: 'learning_curve_bold_ot_tt',
+		fontFamily: 'Montserrat-Bold',
 		textAlignVertical:'center',	
 
 	}
