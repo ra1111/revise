@@ -115,7 +115,10 @@ addNote=()=>{
 						<FormLabel labelStyle={{fontSize:20}}>Enter the Points</FormLabel>
 					
 						{this.state.noteNumber.map((value, index) => (
+							<View>
   <FormInput placeholder="Notes"   underlineColorAndroid="#d8d8d8" multiline={false}  maxLength={200}      ref={input =>this[`aInput${index}`] = input} onChangeText={this.handleAnswer(index)}/>
+  <Text style={styles.index}>{value.note.length}/200 </Text>
+  </View>
 		))}
 	
 					</View>
@@ -162,6 +165,10 @@ const styles = StyleSheet.create({
 		
 		padding:16
 
+	},
+	index:{
+		textAlign:'right',
+		marginHorizontal:15
 	}
 })
 

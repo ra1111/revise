@@ -179,6 +179,8 @@ class QuizCard extends React.Component {
   	return (
 			<Card
 			key={item}
+			titleStyle={{color:'white'}}
+			containerStyle={{backgroundColor:'#2286c3',borderRadius:10,color:'white'}}
 			title={`${String(index)}/${String(totalLength)}`}
 		>
 	
@@ -192,11 +194,6 @@ class QuizCard extends React.Component {
 				
 			</TouchableOpacity>
 
-			{/* <Button
-				onPress={() => this.flipCard() }
-				title={this.state.flip === false ? 'See Answer' : 'See Question'}
-				backgroundColor="#03A9F4"
-			/> */}
 		</Card>
   	)
   }
@@ -279,6 +276,7 @@ console.log(this.props,"quiz cards")
 const styles = StyleSheet.create({
 	container: {
 	flex: 1,
+	backgroundColor:'#f5f5f6'
 
 	},
 	cardStyle: {
@@ -325,7 +323,7 @@ height:0,
 		borderRadius:10,
 		padding:5,
 
-		backgroundColor: '#fd4bc9',
+		backgroundColor: '#6bb1ff',
 		justifyContent: 'center',
     alignItems: 'center',
     backfaceVisibility: 'hidden',
