@@ -188,7 +188,7 @@ class QuizCard extends React.Component {
 
 				{this.state.flip === false 
 					? <Animated.Text  adjustsFontSizeToFit={true} style={[styles.flipCard, frontAnimatedStyle,styles.cardText,styles.flipText]}>{item.question.toUpperCase()}</Animated.Text>
-					: <Animated.View style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack]}>{item.answer.map((value, index)=>{return<Animated.View  style={styles.textContainer}><Text adjustsFontSizeToFit={true} style={styles.flipTextBack}>{index+1}{")\t"}{value.toUpperCase()}{"\n\n"}</Text><View style={index<(item.answer.length-1)?styles.boundary:styles.noBoundary}/></Animated.View>})}</Animated.View>
+					: <Animated.View style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack]}>{item.answer.map((value, index)=>{return<Animated.View  style={styles.textContainer}><Text style={styles.flipTextBack}>{index+1}{")\t"}{value.toUpperCase()}{"\n\n"}</Text><View style={index<(item.answer.length-1)?styles.boundary:styles.noBoundary}/></Animated.View>})}</Animated.View>
 					}
 								
 				
@@ -350,7 +350,7 @@ height:0,
 		textAlignVertical:'center'
 	},
 	flipTextBack:{
-	
+	fontSize:12,
 		color: 'white',
 		textAlign:'center',
 		fontFamily: 'Montserrat-Bold',

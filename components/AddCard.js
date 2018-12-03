@@ -116,8 +116,8 @@ addNote=()=>{
 					
 						{this.state.noteNumber.map((value, index) => (
 							<View>
-  <FormInput placeholder="Notes"   underlineColorAndroid="#d8d8d8" multiline={false}  maxLength={200}      ref={input =>this[`aInput${index}`] = input} onChangeText={this.handleAnswer(index)}/>
-  <Text style={styles.index}>{value.note.length}/200 </Text>
+  <FormInput placeholder="Notes"   underlineColorAndroid="#d8d8d8" multiline={false}  maxLength={80}      ref={input =>this[`aInput${index}`] = input} onChangeText={this.handleAnswer(index)}/>
+  <Text style={styles.index}>{value.note.length}/80 </Text>
   </View>
 		))}
 	
@@ -168,7 +168,8 @@ const styles = StyleSheet.create({
 	},
 	index:{
 		textAlign:'right',
-		marginHorizontal:15
+		marginHorizontal:15,
+		color:"#d8d8d8",
 	}
 })
 
