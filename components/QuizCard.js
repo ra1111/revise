@@ -137,7 +137,7 @@ class QuizCard extends React.Component {
 
 		direction === 'right' ? this.onSwipeRight(data.title) : null;
 		this.state.position.setValue({ x: 0, y: 0});
-		this.setState((prevState) => ({counter: prevState.counter + 1}));
+		this.setState((prevState) => ({counter:direction==='right'? prevState.counter + 1:prevState.counter!==0?prevState.counter-1:prevState.counter}));
 		this.setState({flip: false,mcq:true});
 		if(this.state.counter >= this.props.data.questions.length) {
 			const result = Math.round(this.state.noCorrect/this.props.data.questions.length * 100).toFixed(2);

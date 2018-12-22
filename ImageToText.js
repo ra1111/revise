@@ -131,7 +131,7 @@ catch(ex)
     return (
       <View style={styles.container}>
      
-      <Swipers text1={"Hello Swiper"} text2={"Beautiful"} text3={"And simple"} />
+      <Swipers  text1={"Hello Swiper"} text2={"Beautiful"} text3={"And simple"} />
       <View style={styles.contentContainer}>
       <ScrollView >
       <View>
@@ -187,10 +187,10 @@ shadowRadius: 2,
 
   },
   contentContainer: {
-marginTop:'50%',
-height:'80%',
+height:'70%',
 alignItems: 'center',
   },
+
   cardText:{
     fontSize:16,
     fontWeight:'700',

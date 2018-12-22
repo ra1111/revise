@@ -46,10 +46,9 @@ import Swiper from 'react-native-swiper';
         fontWeight: 'bold',
       },
       wrapper:{
-        height:'35%',
+        height:'65%',
         width:'100%',
         flex:1,
-        position:'absolute',
-        top:0,
+   
       }
  })
