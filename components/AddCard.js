@@ -80,10 +80,11 @@ addNote=()=>{
 	  	// reset form
 	  	this.setState({ question: '', answer: [], note:'',
 		  noteNumber:[{note:''}]});
-		this.qInput.clearText();
+		  console.log(this.qInput,this,"This")
+		this.qInput.clear();
 	for(let i=0;i<answer.length;i++)
 	{
-		this[`aInput${i}`].clearText();
+		this[`aInput${i}`].clear();
 	}
 	  	// go back to Deck
 	  	Keyboard.dismiss();
@@ -112,8 +113,8 @@ addNote=()=>{
 					
 						{this.state.noteNumber.map((value, index) => (
 							<View>
-  <Input placeholder="Notes" containerStyle={styles.input}  inputContainerStyle={styles.input}  multiline={false}  maxLength={80}      ref={input =>this[`aInput${index}`] = input} onChangeText={this.handleAnswer(index)}/>
-  <Text style={styles.index}>{value.note.length}/80 </Text>
+  <Input placeholder="Notes" containerStyle={styles.input}  inputContainerStyle={styles.input}  multiline={false}  maxLength={100}      ref={input =>this[`aInput${index}`] = input} onChangeText={this.handleAnswer(index)}/>
+  <Text style={styles.index}>{value.note.length}/100 </Text>
   </View>
 		))}
 	
@@ -134,7 +135,8 @@ addNote=()=>{
 				
 					icon={{name: 'check', color:'white'}} 
 					size={40}
-					buttonStyle={{marginTop: 20,backgroundColor:"#03A9F4"}}
+					buttonStyle={{marginTop: 20, height: 45,
+						backgroundColor:"#03A9F4"}}
         >
         </Button>
 		</View>
@@ -167,11 +169,15 @@ const styles = StyleSheet.create({
 		width:'100%'
 	},
 	add:{
-		borderRadius:40,
+
 		marginTop:20,
 		marginBottom:20,
+		borderColor:'transparent',
 		backgroundColor:"#03A9F4",
-		padding:16
+	height:70,
+	width:100,
+	borderRadius:30
+	
 
 	},
 	index:{

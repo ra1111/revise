@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 import { AddNewDeck } from '../actions'
 import { saveDeckTitle } from '../utils/api'
-import { Button, FormLabel, FormInput } from 'react-native-elements'
+import { Button, Input } from 'react-native-elements'
 
 class AddDeck extends React.Component {
   
@@ -44,8 +44,8 @@ class AddDeck extends React.Component {
 		const { input } = this.state;
 		return(
 			<View style={styles.container}>
-				<FormLabel labelStyle={{fontSize:20}}>What is the title of your new deck?</FormLabel>
-				<FormInput   placeholder="Enter the title"onChangeText={this.handleTextChange}/>
+				<Text labelStyle={{fontSize:20}}>What is the title of your new deck?</Text>
+				<Input   placeholder="Enter the title"onChangeText={this.handleTextChange}/>
         <Button 
         	onPress={() => this.sbmtDeck(input)}
 	        title={"Create Deck"}
