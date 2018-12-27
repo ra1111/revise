@@ -128,24 +128,25 @@ catch(ex)
 						<Button 
 							onPress={() => this.props.navigation.dispatch(NavigationActions.back())}
 							title={"Back To All Decks"}
-							backgroundColor="#03A9F4"
-							icon={{name: 'arrow-back'}} 
+							
+							icon={{name: 'arrow-back', color:'white'}}
+							buttonStyle={{backgroundColor:"#03A9F4"}} 
 						>
 						</Button>
 						<Button 
 							onPress={() => this.deleteDeck(deck)}
 							title={"Delete Deck"}
-							backgroundColor="#FF0000"
-							icon={{name: 'delete'}}
-							style={{marginTop: 20}}
+							
+							icon={{name: 'delete', color:'white'}}
+							buttonStyle={{marginTop: 20,backgroundColor:"#FF0000"}}
 						>
 						</Button>
 						<Button 
 							onPress={() => this.uploadDeck(deck)}
 							title={"Upload Deck"}
-							backgroundColor="green"
-							icon={{name: 'file-upload'}}
-							style={{marginTop: 20}}
+							
+							icon={{name: 'file-upload', color:'white'}}
+							buttonStyle={{marginTop: 20,backgroundColor:"green"}}
 						>
 						</Button>
 						<Text style={styles.quizText}>{this.getQuizResults(deck)}</Text>

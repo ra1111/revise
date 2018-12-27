@@ -45,7 +45,7 @@ class AddDeck extends React.Component {
 		return(
 			<View style={styles.container}>
 				<FormLabel labelStyle={{fontSize:20}}>What is the title of your new deck?</FormLabel>
-				<FormInput onChangeText={this.handleTextChange}/>
+				<FormInput   placeholder="Enter the title"onChangeText={this.handleTextChange}/>
         <Button 
         	onPress={() => this.sbmtDeck(input)}
 	        title={"Create Deck"}

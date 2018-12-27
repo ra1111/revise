@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Keyboard,KeyboardAvoidingView,ScrollView } from
 import { connect } from 'react-redux'
 import { AddNewCard } from '../actions'
 import { updateDeck } from '../utils/api'
-import { Button, FormLabel, FormInput,FormValidationMessage } from 'react-native-elements'
+import { Button, Input} from 'react-native-elements'
 import thunk from '../node_modules/redux-thunk';
 
 class AddCard extends React.Component {
@@ -21,10 +21,7 @@ noteNumber:[{note:''}],
   		title: 'Add Card'
   	}
   }
-  requiredMessage = input => {
-	  console.log("input",input)
-    return input === '' ? <FormValidationMessage>Title is required</FormValidationMessage> : <View/>
-  };
+
 
 
   handleQuestion = (question) => {
@@ -54,7 +51,6 @@ addNote=()=>{
 }
 }
   sbmtCard = (title, question) => {
-	this.requiredMessage(question)
 
 	  let answer=[]
 	  let note=this.state.noteNumber
@@ -100,23 +96,23 @@ addNote=()=>{
 		const { answer } = this.state;
 		const { title } = this.props.navigation.state.params.deck?this.props.navigation.state.params.deck:this.props.navigation.state.params.deckData.title;
 		return (
-			<View style={styles.container}>
-				<KeyboardAvoidingView  >
+			
+				<View style={styles.containerMain}>
 						<ScrollView contentContainerStyle={styles.container} > 
-				<View >
+				<View style={styles.formView} >
 			
 					<View style={styles.formView}>
+					<Text style={styles.label}>Title For The Note</Text>
+							<Input containerStyle={styles.input}  inputContainerStyle={styles.input} style={styles.input}  placeholder="Title" ref={input => this.qInput = input} onChangeText={this.handleQuestion}/>
 					
-						<FormLabel labelStyle={{fontSize:20}}>Title for the Note</FormLabel>
-						<FormInput   underlineColorAndroid="#d8d8d8" placeholder="Title" ref={input => this.qInput = input} onChangeText={this.handleQuestion}/>
-						{this.requiredMessage(this.question)}
 					</View>
 					<View style={styles.formView}>
-						<FormLabel labelStyle={{fontSize:20}}>Enter the Points</FormLabel>
+					<Text style={styles.label}>Enter the points</Text>
+					
 					
 						{this.state.noteNumber.map((value, index) => (
 							<View>
-  <FormInput placeholder="Notes"   underlineColorAndroid="#d8d8d8" multiline={false}  maxLength={80}      ref={input =>this[`aInput${index}`] = input} onChangeText={this.handleAnswer(index)}/>
+  <Input placeholder="Notes" containerStyle={styles.input}  inputContainerStyle={styles.input}  multiline={false}  maxLength={80}      ref={input =>this[`aInput${index}`] = input} onChangeText={this.handleAnswer(index)}/>
   <Text style={styles.index}>{value.note.length}/80 </Text>
   </View>
 		))}
@@ -127,24 +123,25 @@ addNote=()=>{
 				<Button onPress={()=> this.addNote()
 				}
 				title={"Add"}
-				backgroundColor="#03A9F4"
+				
 				size={20}
-				icon={{name: 'add'}} 
+				icon={{name: 'add', color:'white'}} 
 				buttonStyle={styles.add}></Button>
 		<View style={{width:200,borderRadius:5}}> 	
         <Button 
         	onPress={() => this.sbmtCard(title, question)}
 					title={"Submit"}
-					backgroundColor="#03A9F4"
-					icon={{name: 'check'}} 
+				
+					icon={{name: 'check', color:'white'}} 
 					size={40}
-					style={{marginTop: 20}}
+					buttonStyle={{marginTop: 20,backgroundColor:"#03A9F4"}}
         >
         </Button>
 		</View>
 		</ScrollView>
-		</KeyboardAvoidingView>
-			</View>
+		</View>
+	
+			
 		)
 	}
 }
@@ -153,16 +150,27 @@ const styles = StyleSheet.create({
 	container: {
     alignItems: 'center',
     alignContent: 'center',
-    backgroundColor: 'white',
+	backgroundColor: 'white',
+	width:'100%'
+
 	},
+	containerMain:{
+		alignItems: 'center',
+		alignContent: 'center',
+		backgroundColor: 'white',
+		height:'100%',
+		width:'100%'
+	},
+
 	formView: {
 		alignItems: 'center',
+		width:'100%'
 	},
 	add:{
 		borderRadius:40,
 		marginTop:20,
 		marginBottom:20,
-		
+		backgroundColor:"#03A9F4",
 		padding:16
 
 	},
@@ -170,6 +178,14 @@ const styles = StyleSheet.create({
 		textAlign:'right',
 		marginHorizontal:15,
 		color:"#d8d8d8",
+	},
+	input:{
+width:'100%',
+
+		
+	},
+	label:{
+		fontSize:20
 	}
 })
 

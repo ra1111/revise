@@ -23,10 +23,12 @@ let deckData={}
 
   componentWillMount() {
     this.makeRemoteRequest();
+    this.setState({loading:true})
   }
 
  makeRemoteRequest = () => {	
     let database = firebase.database();
+    try{
     database
     .ref('users' ).orderByChild('decks').once('value',
     (snapshot) =>{
@@ -44,14 +46,21 @@ if(snap.hasChild('decks'))
 }
 this.setState({
   deckDatas:deckData,
-  data:Object.keys(deckData)
+  data:Object.keys(deckData),
+  loading:false
 })
+console.log(this.state,'state')
 this.arrayholder=Object.keys(deckData)
-  })})
+  })}).catch(err=>{
+console.log(err,'error')
+  });
 
 
 
-
+    }
+    catch(ex){
+      console.log(ex,'excepwtion')
+    }
 
 }
 
@@ -91,10 +100,10 @@ this.props.navigation.navigate('DeckDetail',
   renderHeader = () => {
     return (
       <SearchBar
-        showLoading
                   round
                   autoCorrect={false}  
                   lightTheme
+                  icon={{ type: 'font-awesome', name: 'search' }}
                   cancelButtonTitle="Cancel"
                   ref={search => this.search = search}
                   platform="android"
@@ -102,7 +111,6 @@ this.props.navigation.navigate('DeckDetail',
                   inputStyle={{color: 'black',backgroundColor:'white'}}
                 placeholder='Type Here...'
         onChangeText={text => this.searchFilterFunction(text)}
-        autoCorrect={false}
       />
     );
   };
@@ -116,10 +124,10 @@ this.props.navigation.navigate('DeckDetail',
         </View>
       );
     }
+
     return (
-      
    
-       <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
+       
         <FlatList
           data={this.state.data}
          renderItem={({ item }) => (
@@ -132,11 +140,10 @@ this.props.navigation.navigate('DeckDetail',
               containerStyle={{ borderBottomWidth: 0 }}
             />
           )}
-      //     keyExtractor={item => item.key}
+          keyExtractor={item => item.key}
            ItemSeparatorComponent={this.renderSeparator}
            ListHeaderComponent={this.renderHeader}
          />
-       </List>
     );
   }
 }

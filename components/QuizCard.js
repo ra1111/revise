@@ -144,7 +144,29 @@ class QuizCard extends React.Component {
 			this.props.dispatch(AddQuizResults(this.props.data.title,result));
 		}
 	}
+	titleElement(index,totalLength)
+	{
+		return(
+			<View style={styles.containerEl} >
+			<View style={styles.titleEl}>
+				<Icon 
+							name='arrow-back' 		
+							color='white'		
+							onPress={() => this.onSwipeComplete('left')}
+						/>
+				<Text style={styles.textTitle}>{`${String(index)}/${String(totalLength)}`||0/0}</Text>
+				<Icon 
+							name='arrow-forward' 
+							onPress={() =>this.onSwipeComplete('right')}
+							color='white'		
+						/>
 
+					</View>
+					<View style={styles.boundaryEl}/>
+					</View>
+		)
+
+	}
 	resetPosition() {
 		Animated.spring(this.state.position, {
 			toValue: { x: 0, y: 0 }
@@ -174,17 +196,18 @@ class QuizCard extends React.Component {
       transform: [
         { rotateY: this.backInterpolate }
       ]
-    }
+		}
+
 	
   	return (
 			<Card
 			key={item}
 			titleStyle={{color:'white'}}
 			containerStyle={{backgroundColor:'#2286c3',borderRadius:10,color:'white'}}
-			title={`${String(index)}/${String(totalLength)}`}
+			title={this.titleElement(index,totalLength)}
 		>
 	
-			<TouchableOpacity  	onPress={() => this.flipCard() }>
+			<TouchableOpacity style={styles.cardText}  	onPress={() => this.flipCard() }>
 
 				{this.state.flip === false 
 					? <Animated.Text  adjustsFontSizeToFit={true} style={[styles.flipCard, frontAnimatedStyle,styles.cardText,styles.flipText]}>{item.question.toUpperCase()}</Animated.Text>
@@ -279,6 +302,10 @@ const styles = StyleSheet.create({
 	backgroundColor:'#f5f5f6'
 
 	},
+	containerEl:{
+justifyContent:'center',
+
+	},
 	cardStyle: {
 		position: 'absolute',
 		width: SCREEN_WIDTH,
@@ -312,14 +339,31 @@ height:0,
   	marginBottom: 20,
     justifyContent: 'flex-start',
 	},
+	titleEl:{
+flexDirection:'row',
+alignItems:'center',
+justifyContent:'space-between',
+marginHorizontal:10,
+
+color:'white'
+	},
+	boundaryEl:{
+		width:'95%',
+		height:.7,
+		backgroundColor:'white',
+		marginBottom:'3%',
+	},
 	textContainer:{
 		backfaceVisibility: 'hidden',
 		width: '100%',
 	marginVertical:5,
 	},
+	cardText:{
+height:'94%'
+	},
   flipCard: {
     width: '100%',
-		height: '91%',
+		height: '94%',
 		borderRadius:10,
 		padding:5,
 
@@ -330,7 +374,7 @@ height:0,
   },
   flipCardBack: {
 		width: '100%',
-		height: '91%',
+		height: '94%',
 
 		justifyContent: 'center',
     alignItems: 'center',
@@ -340,7 +384,10 @@ height:0,
 		flexDirection:'column',
 		
     backgroundColor: "#6bb1ff",
-  },
+	},
+	textTitle:{
+color:'white',
+	},
   flipText: {
 		fontSize: 20,
 		alignItems:'center',
