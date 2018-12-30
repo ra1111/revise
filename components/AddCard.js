@@ -58,9 +58,10 @@ addNote=()=>{
 	  answer=note.map(a=>a.note)
 
   	if(question === '' || answer[0] === '') {
-		  //alert("Please Enter Question and Answer");
+		  //console.log("Please Enter Question and Answer");
 		  console.log(this.qInput.value)
-  	} else {	
+  	} else {
+		  try{	
 	  	const newCard = {
 	  		title,
 	  		question,
@@ -75,22 +76,35 @@ addNote=()=>{
 				key = index;
 			}
 		});
+		console.log("CLICKED 1")
 		  this.props.dispatch(AddNewCard(newCard));
+		  console.log("CLICKED Z")
 	  	// save to AsyncStorage
-	  	updateDeck({title, newDeck});
+		  updateDeck({title, newDeck});
+		  console.log("CLICKED Z3")
 	  	// reset form
 	  	this.setState({ question: '', answer: [], note:'',
 		  noteNumber:[{note:''}]});
-		  console.log(this.qInput,this,"This")
+		  console.log("CLICKED ZCD")
+
 		this.qInput.clear();
+		console.log("CLICKED ZCDDa")
 	for(let i=0;i<answer.length;i++)
 	{
 		this[`aInput${i}`].clear();
 	}
-	  	// go back to Deck
-	  	Keyboard.dismiss();
+	// console.log("CLICKED ZCDDsw")
+	//   	// go back to Deck
+	// 	  Keyboard.dismiss();
+		  console.log("CLICKED ZCDDwdwda")
 	  	this.props.navigation.goBack();
 	  }
+	  catch(exception)
+	  {
+		  console.log(exception)
+	  }
+	}
+
   } 
 
 	render() {
