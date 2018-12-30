@@ -135,16 +135,16 @@ catch(ex)
       <View style={styles.contentContainer}>
       <ScrollView >
       <View>
-          <Text> Popular on Revise</Text>
+          <Text style={styles.title}> Popular on Revise</Text>
           <CardHome home={false}  navigation={this.props.navigation} data={this.state.PopularArray}/> 
           <View>
-    <Text> Your Deck</Text>
+    <Text style={styles.title}> Your Deck</Text>
     { Object.keys(this.props.deckData).length !== 0?
-    <CardHome navigation={this.props.navigation} home={true} data={this.props.deckData}/> :<Text> Please Add Decks By Clicking on "+"</Text>}
+    <CardHome navigation={this.props.navigation} home={true} data={this.props.deckData}/> :<View style={styles.textContainer}><Text style={styles.titleOption}>Please Add Decks By Clicking on</Text><Text style={styles.Plus}>+</Text></View>}
 
   </View>
   <View>
-    <Text> Trending Now</Text>
+    <Text style={styles.title}> Trending Now</Text>
     <CardHome  navigation={this.props.navigation} home={false} data={this.state.TrendingArray}/> 
   </View>
   </View>
@@ -172,6 +172,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  title:{
+    fontFamily: 'Montserrat-Bold',
+    fontSize:16,
+    color:'#38b4f7',
+    backgroundColor:'#f8f8ff'
+
+  },
   card:{
 height:150,
 width:130,
@@ -188,7 +195,7 @@ shadowRadius: 2,
   },
   contentContainer: {
 height:'70%',
-alignItems: 'center',
+width:'100%',
   },
 
   cardText:{
@@ -242,8 +249,28 @@ alignItems: 'center',
     width:'100%',
     height:4,
   },
+  textContainer:{
+    flexDirection:'row',
+    backgroundColor:'#38b4f7',
+    borderColor: 'white',
+    justifyContent:'center',
+    alignItems:'center',
+    borderWidth: .5,
+    textAlign:'center'
+
+  },
+  titleOption:{
+    fontFamily: 'Montserrat-Bold',
+    fontSize:16,
+    color:'#fff',
   
- 
+  },
+ Plus:{
+  fontFamily: 'Montserrat-Bold',
+   fontSize:28,
+   color:'white',
+  
+ }
 
 });
 

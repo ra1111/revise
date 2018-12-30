@@ -10,12 +10,12 @@ import Swiper from 'react-native-swiper';
             <View style={styles.slide1}>
               <Text style={styles.text}>{this.props.text1}</Text>
             </View>
-            <View style={styles.slide2}>
+            {/* <View style={styles.slide2}>
               <Text style={styles.text}>{this.props.text2}</Text>
             </View>
             <View style={styles.slide3}>
               <Text style={styles.text}>{this.props.text3}</Text>
-            </View>
+            </View> */}
           </Swiper>
               </View>
          )

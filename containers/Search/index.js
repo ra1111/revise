@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import { View, Text, FlatList, ActivityIndicator } from 'react-native';
-import { List, ListItem, SearchBar } from 'react-native-elements';
+import { List, ListItem, SearchBar, Icon } from 'react-native-elements';
 import * as firebase from 'firebase';
 let deckData={}
  export default class Search extends Component {
@@ -100,18 +100,17 @@ this.props.navigation.navigate('DeckDetail',
   renderHeader = () => {
     return (
       <SearchBar
-                  round
-                  autoCorrect={false}  
-                  lightTheme
-                  icon={{ type: 'font-awesome', name: 'search' }}
-                  cancelButtonTitle="Cancel"
-                  ref={search => this.search = search}
-                  platform="android"
-                  containerStyle={{backgroundColor: '#f1f1f1'}}
-                  inputStyle={{color: 'black',backgroundColor:'white'}}
-                placeholder='Type Here...'
-        onChangeText={text => this.searchFilterFunction(text)}
-      />
+      inputStyle={{backgroundColor: 'white'}}
+    containerStyle={{backgroundColor: 'white', borderWidth: .5, borderRadius: 5}}
+    placeholderTextColor={'#g5g5g5'}
+    platform="android"
+    cancelIcon={<Icon name="cancel"/>}
+    placeholder={'Type Here...'}
+   
+    rightIconContainerStyle={{backgroundColor:'#38b4f7',display:'none'}}
+    onChangeText={text => this.searchFilterFunction(text)}
+    ref={search => this.search = search}/>
+ 
     );
   };
 
