@@ -103,6 +103,7 @@ justifyContent:'space-around'
           },
           cardImage:{
             height:115,
+            backgroundColor:'#38b4f7',
             width:90,
           },
           row:{
