@@ -8,7 +8,7 @@ class Quiz extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
   	return {
-  		title: 'Start Quiz'
+  		title: 'Notes'
   	}
   }
   getDeck() {

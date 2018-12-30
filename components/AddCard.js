@@ -39,6 +39,7 @@ handleAnswer=(idx) => (evt) => {
     this.setState({ noteNumber: newNote });
 }
 addNote=()=>{
+	console.log("CLICKED ZCDD")
 	let noteNumber=this.state.noteNumber;
 	if(noteNumber.length>4)
 	{
@@ -51,7 +52,7 @@ addNote=()=>{
 }
 }
   sbmtCard = (title, question) => {
-
+	console.log("CLICKED ZCDD")
 	  let answer=[]
 	  let note=this.state.noteNumber
 	  answer=note.map(a=>a.note)
@@ -99,7 +100,7 @@ addNote=()=>{
 		return (
 			
 				<View style={styles.containerMain}>
-						<ScrollView contentContainerStyle={styles.container} > 
+						<ScrollView contentContainerStyle={styles.container}    keyboardShouldPersistTaps={"always"}> 
 				<View style={styles.formView} >
 			
 					<View style={styles.formView}>
@@ -121,21 +122,21 @@ addNote=()=>{
 					</View>
 				</View>
 			
-				<Button onPress={()=> this.addNote()
-				}
+				<Button onPress={()=> this.addNote()}
 				title={"Add"}
 				
 				size={20}
 				icon={{name: 'add', color:'white'}} 
 				buttonStyle={styles.add}></Button>
-		<View style={{width:200,borderRadius:5}}> 	
-        <Button 
+		<View style={{width:200,height:50,borderRadius:5,marginTop: 20,alignItems:'center'}} elevation={3}> 	
+		<Button 
         	onPress={() => this.sbmtCard(title, question)}
 					title={"Submit"}
 				
 					icon={{name: 'check', color:'white'}} 
 					size={40}
-					buttonStyle={{marginTop: 20, height: 45,
+					buttonStyle={{ height: 45,
+						width:190, 
 						backgroundColor:"#03A9F4"}}
         >
         </Button>
@@ -169,14 +170,14 @@ const styles = StyleSheet.create({
 		width:'100%'
 	},
 	add:{
+		elevation:3,
 
 		marginTop:20,
 		marginBottom:20,
-		borderColor:'transparent',
 		backgroundColor:"#03A9F4",
 	height:70,
 	width:100,
-	borderRadius:30
+	borderRadius:40
 	
 
 	},

@@ -37,7 +37,7 @@ const Tabs = TabNavigator({
   Quiz: {
     screen: Quiz,
     navigationOptions: {
-      tabBarLabel: 'Start Quiz',
+      tabBarLabel: 'Notes',
       tabBarIcon: <MaterialIcons name='question-answer' size={30} color={'#2286c3'} />
     },
   },
