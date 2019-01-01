@@ -94,7 +94,7 @@ next=(item)=>{
 let questions=this.state.deckDatas[item]
 //COmplete navigation
 deck={title:item,questions:questions}
-this.props.navigation.navigate('DeckDetail',
+this.props.navigation.navigate('ExtQuiz',
               {deckData: deck}) 
 }
   renderHeader = () => {
@@ -118,7 +118,7 @@ this.props.navigation.navigate('DeckDetail',
     console.log(this.state,"key")
     if (this.state.loading) {
       return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ flex: 1,backgroundColor:'#f8f8ff', alignItems: 'center', justifyContent: 'center' }}>
           <ActivityIndicator />
         </View>
       );
@@ -128,6 +128,7 @@ this.props.navigation.navigate('DeckDetail',
    
        
         <FlatList
+        style={{flex: 1,backgroundColor:'#f8f8ff'}}
           data={this.state.data}
          renderItem={({ item }) => (
            <ListItem

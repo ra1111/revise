@@ -73,10 +73,12 @@ let questions=deckData.questions
 	
 	})
 	deckData={}
+	alert("Upload Sucessful")
 }
 catch(ex)
 {
 	console.log(ex,"exception")
+	alert("Upload Failed Something Went Wrong")
 }	
   }
 

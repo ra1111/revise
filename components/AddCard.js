@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Keyboard,KeyboardAvoidingView,ScrollView } from 'react-native'
+import { StyleSheet, Text,TextInput, View, Keyboard,KeyboardAvoidingView,ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { AddNewCard } from '../actions'
 import { updateDeck } from '../utils/api'
@@ -12,7 +12,8 @@ class AddCard extends React.Component {
 		question: '',
 answer:[],
 note:'',
-noteNumber:[{note:''}],
+noteNumber:[],
+para:[],
 
 	}
 
@@ -38,6 +39,20 @@ handleAnswer=(idx) => (evt) => {
     });
     this.setState({ noteNumber: newNote });
 }
+handlePara=(idx) => (evt) => {
+	console.log(idx,evt,"thus the inout")
+    const newNote = this.state.para.map((shareholder, sidx) => {
+      if (idx !== sidx) return shareholder;
+      return { ...shareholder, note: evt};
+    });
+    this.setState({ para: newNote });
+}
+addPara=()=>{
+	console.log("clicked")
+	this.setState({
+		para: this.state.para.concat([{ note: '' }])
+	  });
+}
 addNote=()=>{
 	console.log("CLICKED ZCDD")
 	let noteNumber=this.state.noteNumber;
@@ -55,9 +70,16 @@ addNote=()=>{
 	console.log("CLICKED ZCDD")
 	  let answer=[]
 	  let note=this.state.noteNumber
+	  let para=this.state.para
+	  if(this.state.para.length==0)
+	  {
 	  answer=note.map(a=>a.note)
+	  }else if
+		  (this.state.note.length===0){
+			  answer=para.map(a=>a.note)}
+			  else{console.log('some error')}
 
-  	if(question === '' || answer[0] === '') {
+  	if(question === '' || (answer[0] === '')) {
 		  //console.log("Please Enter Question and Answer");
 		  console.log(this.qInput.value)
   	} else {
@@ -68,11 +90,12 @@ addNote=()=>{
 		answer
 	  	}
 	  	let newDeck = ''
-	  	let key = ''
+		  let key = ''
+		  console.log(this.props.deckData,'deckdata')
 		  this.props.deckData.map((deck,index) => {
 			if(deck.title === title) {
-				
-				newDeck = {title: deck.title, questions: deck.questions.concat({question,answer})};
+				console.log(deck,'deck')
+			newDeck = {title: deck.title, questions: deck.questions.concat({question,answer})};
 				key = index;
 			}
 		});
@@ -84,7 +107,7 @@ addNote=()=>{
 		  console.log("CLICKED Z3")
 	  	// reset form
 	  	this.setState({ question: '', answer: [], note:'',
-		  noteNumber:[{note:''}]});
+		  noteNumber:[],para:[]});
 		  console.log("CLICKED ZCD")
 
 		this.qInput.clear();
@@ -132,16 +155,36 @@ addNote=()=>{
   <Text style={styles.index}>{value.note.length}/100 </Text>
   </View>
 		))}
+							{this.state.para.map((value, index) => (
+							
+							<View style={styles.container}>
+								<View style={styles.textAreaContainer} >
+								
+  <TextInput placeholder="Para" style={styles.textArea} numberOfLines = {6} multiline={true}  maxLength={500}      ref={input =>this[`aInput${index}`] = input} onChangeText={this.handlePara(index)}/>
+  </View>
+  <Text style={styles.index}>{value.note.length}/500 </Text>
+  </View>
+		))}
 	
 					</View>
 				</View>
-			
+		
+			{this.state.para.length==0&&
+				<View style={{justifyContent:"space-between",flexDirection:'row'}}>
 				<Button onPress={()=> this.addNote()}
-				title={"Add"}
+				title={" Points"}
 				
 				size={20}
 				icon={{name: 'add', color:'white'}} 
-				buttonStyle={styles.add}></Button>
+				buttonStyle={styles.add}/>
+				
+				<Button onPress={()=>this.addPara()}
+				title={" Paragraph"}
+				size={20}
+				icon={{name: 'add', color:'white'}} 
+				buttonStyle={styles.add}/>
+						</View>}
+		
 		<View style={{width:200,height:50,borderRadius:5,marginTop: 20,alignItems:'center'}} elevation={3}> 	
 		<Button 
         	onPress={() => this.sbmtCard(title, question)}
@@ -171,6 +214,17 @@ const styles = StyleSheet.create({
 	width:'100%'
 
 	},
+	textAreaContainer: {
+		width:'100%',
+		
+		borderWidth: 1,
+		padding: 5
+	  },
+	  textArea: {
+		height: 250,
+		width:300,
+		justifyContent: "flex-start"
+	  },
 	containerMain:{
 		alignItems: 'center',
 		alignContent: 'center',
@@ -185,12 +239,12 @@ const styles = StyleSheet.create({
 	},
 	add:{
 		elevation:3,
-
+marginHorizontal:10,
 		marginTop:20,
 		marginBottom:20,
 		backgroundColor:"#03A9F4",
 	height:70,
-	width:100,
+	width:120,
 	borderRadius:40
 	
 
