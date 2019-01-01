@@ -11,8 +11,17 @@ deck(data)
  
   if( this.props.home)
   {
-      
-    this.props.navigation.navigate('MainDeck')
+    this.props.deckData.map((deck) => {
+    if(deck.title===data.title)
+    {
+      console.log(deck)
+      this.props.navigation.navigate('DeckDetail',
+      {deckData: deck})
+
+    }
+  });
+  
+   
   }
 
   else
@@ -40,7 +49,7 @@ questions.push({question:question,answer:answer})
 }
 let deckData={title:title,questions:questions}
 //this.props.navigation.navigate('Mcq')
-this.props.navigation.navigate('DeckDetail',
+this.props.navigation.navigate('ExtQuiz',
               {deckData: deckData})
   }
 }

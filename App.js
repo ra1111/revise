@@ -11,6 +11,7 @@ import MainDecks from './components/MainDecks'
 import AddDeck from './components/AddDeck'
 import AddCard from './components/AddCard'
 import Quiz from './components/Quiz'
+import ExtQuiz from './components/ExtQuiz/ExtQuiz'
 import AddNotes from './ImageToText'
 import DeckDetail from './components/DeckDetail'
 import Search from './containers/Search'
@@ -26,6 +27,7 @@ require('core-js/fn/map');
 require('core-js/fn/set');
 require('core-js/fn/array/find');
 import ExternalDeck from './components/ExternalDecks'
+import ExternalDecks from './components/ExternalDecks';
 //import { setLocalNotification } from './utils/helpers'
 
 const store = createStore(reducer, composeWithDevTools(
@@ -176,6 +178,15 @@ const MainNavigator = StackNavigator({
   },
   Mcq:{
     screen: Mcq,
+    navigationOptions: {
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: '#2286c3',
+      }
+    },
+  },
+  ExtQuiz:{
+    screen: ExtQuiz,
     navigationOptions: {
       headerTintColor: 'white',
       headerStyle: {

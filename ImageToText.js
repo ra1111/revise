@@ -52,6 +52,7 @@ class App extends Component {
     this._loadInitialState().done();
   }
  async componentWillMount() {
+  
     database = firebase.database();
     Revise=database.ref('Revise')
     Trending=Revise.child('Trending')

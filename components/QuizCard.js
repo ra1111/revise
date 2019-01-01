@@ -151,12 +151,14 @@ class QuizCard extends React.Component {
 			<View style={styles.titleEl}>
 				<Icon 
 							name='arrow-back' 		
-							color='white'		
+							color='white'	
+							size={30}	
 							onPress={() => this.onSwipeComplete('left')}
 						/>
 				<Text style={styles.textTitle}>{`${String(index)}/${String(totalLength)}`||0/0}</Text>
 				<Icon 
 							name='arrow-forward' 
+							size={30}	
 							onPress={() =>this.onSwipeComplete('right')}
 							color='white'		
 						/>
@@ -351,7 +353,7 @@ color:'white'
 		width:'95%',
 		height:.7,
 		backgroundColor:'white',
-		marginBottom:'3%',
+		marginBottom:'1.2%',
 	},
 	textContainer:{
 		backfaceVisibility: 'hidden',
@@ -387,6 +389,7 @@ height:'94%'
 	},
 	textTitle:{
 color:'white',
+fontSize:17
 	},
   flipText: {
 		fontSize: 20,

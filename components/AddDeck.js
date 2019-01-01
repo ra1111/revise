@@ -44,16 +44,15 @@ class AddDeck extends React.Component {
 		const { input } = this.state;
 		return(
 			<View style={styles.container}>
-				<Text labelStyle={{fontSize:20}}>What is the title of your new deck?</Text>
-				<Input   placeholder="Enter the title"onChangeText={this.handleTextChange}/>
+				<Text style={{fontSize:28,marginVertical:15,color:"#03A9F4"}}>Enter the Deck title</Text>
+				<Input  style={styles.textInput}  placeholderTextColor="#03A9F4" placeholder="Enter the title"onChangeText={this.handleTextChange}/>
         <Button 
         	onPress={() => this.sbmtDeck(input)}
 	        title={"Create Deck"}
-	        style={{marginTop: 20}}
-	        backgroundColor="#03A9F4"
-	        icon={{name: 'create'}}
-        >
-        </Button>
+	        buttonStyle={{marginTop: 20, backgroundColor:"#03A9F4"}}    
+	        icon={{name: 'create',color:'white'}}
+        />
+        
 			</View>
 		)
 	}
@@ -62,26 +61,26 @@ class AddDeck extends React.Component {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    alignContent: 'center',
-    backgroundColor: 'white',
-    paddingTop: 60,
+		alignItems: 'center',
+		alignContent: 'center',
+		backgroundColor: 'white',
+		flex:1,
+		justifyContent:'space-around'
 	},
 	text: {
 		fontSize: 36,
 		flexWrap: 'wrap',
 		textAlign: 'center',
-		marginTop: 30,
+
 	},
 	textInput: {
 		width: 200,
 		height: 40,
 		padding: 8,
+		color:'#03A9F4',
 		borderWidth: 1,
-		margin: 50,
-		borderColor: 'gray',
+	
+		borderColor: '#03A9F4',
 	},
 })
 
