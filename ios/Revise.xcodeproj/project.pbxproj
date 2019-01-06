@@ -54,6 +54,19 @@
 		63A2D19634EA49D3A77B63D0 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1606B6501CA74C7AB4BA0989 /* Octicons.ttf */; };
 		9D719B2247354BA98D331555 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B8718FDFD9A34D2BBA9AD33A /* SimpleLineIcons.ttf */; };
 		CAA331D71A7B422A8AE66554 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7674F92ADD604DC3A8E78F6C /* Zocial.ttf */; };
+		D49569D8BB244C3E8D521691 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA165EC6EC184F218C797C1A /* libRNFetchBlob.a */; };
+		EB916943626D4DA9A22C2148 /* learning_curve_bold_ot_ps.otf in Resources */ = {isa = PBXBuildFile; fileRef = 59540B13642F4148BD251B81 /* learning_curve_bold_ot_ps.otf */; };
+		22B01AC1C1D14025BFBFE98F /* learning_curve_bold_ot_tt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA307234A42F43569DF5F4C4 /* learning_curve_bold_ot_tt.ttf */; };
+		C740092991214FF685C32B35 /* learning_curve_dashed_ot_ps.otf in Resources */ = {isa = PBXBuildFile; fileRef = D9FEB31D84C14850A1FC28E8 /* learning_curve_dashed_ot_ps.otf */; };
+		9E70FEC3C31842A9AC968ADD /* learning_curve_dashed_ot_tt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EE42B25824642E99735FF6E /* learning_curve_dashed_ot_tt.ttf */; };
+		B7F5B256C7D5410E9F7384FF /* learning_curve_dings_ot_ps.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0581EB12AB8C482E908888C8 /* learning_curve_dings_ot_ps.otf */; };
+		9181E4D6F25C4E59B96F02C0 /* learning_curve_dings_ot_tt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B9FEDD9610EC43CEAEFB3783 /* learning_curve_dings_ot_tt.ttf */; };
+		0AB80AEB12CD4E99A837155F /* learning_curve_regular_ot_ps.otf in Resources */ = {isa = PBXBuildFile; fileRef = D600D05406314F3081900627 /* learning_curve_regular_ot_ps.otf */; };
+		BD74466012E54B939255D206 /* learning_curve_regular_ot_tt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3717C29B09064FB594848AA0 /* learning_curve_regular_ot_tt.ttf */; };
+		3E97ACF4E95D4D67A01B17C3 /* OpenSans-CondBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 71F12D49912048CB86086ADE /* OpenSans-CondBold.ttf */; };
+		5697748EAEAF4D2A9260C952 /* OpenSans-CondLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 060574B2F2F94322BC14859F /* OpenSans-CondLight.ttf */; };
+		AA69DAA93C2B45028D52C7B3 /* OpenSans-CondLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8941E55DEBA0462C889B6C8D /* OpenSans-CondLightItalic.ttf */; };
+		E8A6D0CAA250410290B21E30 /* libRCTPdf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 88C7064388AA488BA10FA5A8 /* libRCTPdf.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -379,6 +392,21 @@
 		1606B6501CA74C7AB4BA0989 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		B8718FDFD9A34D2BBA9AD33A /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		7674F92ADD604DC3A8E78F6C /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CDCD2AE8141C45BE94CC7DDD /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; name = "RNFetchBlob.xcodeproj"; path = "../node_modules/rn-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		FA165EC6EC184F218C797C1A /* libRNFetchBlob.a */ = {isa = PBXFileReference; name = "libRNFetchBlob.a"; path = "libRNFetchBlob.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		59540B13642F4148BD251B81 /* learning_curve_bold_ot_ps.otf */ = {isa = PBXFileReference; name = "learning_curve_bold_ot_ps.otf"; path = "../Assets/Fonts/learning_curve_bold_ot_ps.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EA307234A42F43569DF5F4C4 /* learning_curve_bold_ot_tt.ttf */ = {isa = PBXFileReference; name = "learning_curve_bold_ot_tt.ttf"; path = "../Assets/Fonts/learning_curve_bold_ot_tt.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D9FEB31D84C14850A1FC28E8 /* learning_curve_dashed_ot_ps.otf */ = {isa = PBXFileReference; name = "learning_curve_dashed_ot_ps.otf"; path = "../Assets/Fonts/learning_curve_dashed_ot_ps.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6EE42B25824642E99735FF6E /* learning_curve_dashed_ot_tt.ttf */ = {isa = PBXFileReference; name = "learning_curve_dashed_ot_tt.ttf"; path = "../Assets/Fonts/learning_curve_dashed_ot_tt.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0581EB12AB8C482E908888C8 /* learning_curve_dings_ot_ps.otf */ = {isa = PBXFileReference; name = "learning_curve_dings_ot_ps.otf"; path = "../Assets/Fonts/learning_curve_dings_ot_ps.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B9FEDD9610EC43CEAEFB3783 /* learning_curve_dings_ot_tt.ttf */ = {isa = PBXFileReference; name = "learning_curve_dings_ot_tt.ttf"; path = "../Assets/Fonts/learning_curve_dings_ot_tt.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D600D05406314F3081900627 /* learning_curve_regular_ot_ps.otf */ = {isa = PBXFileReference; name = "learning_curve_regular_ot_ps.otf"; path = "../Assets/Fonts/learning_curve_regular_ot_ps.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3717C29B09064FB594848AA0 /* learning_curve_regular_ot_tt.ttf */ = {isa = PBXFileReference; name = "learning_curve_regular_ot_tt.ttf"; path = "../Assets/Fonts/learning_curve_regular_ot_tt.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		71F12D49912048CB86086ADE /* OpenSans-CondBold.ttf */ = {isa = PBXFileReference; name = "OpenSans-CondBold.ttf"; path = "../Assets/Fonts/OpenSans-CondBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		060574B2F2F94322BC14859F /* OpenSans-CondLight.ttf */ = {isa = PBXFileReference; name = "OpenSans-CondLight.ttf"; path = "../Assets/Fonts/OpenSans-CondLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8941E55DEBA0462C889B6C8D /* OpenSans-CondLightItalic.ttf */ = {isa = PBXFileReference; name = "OpenSans-CondLightItalic.ttf"; path = "../Assets/Fonts/OpenSans-CondLightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3BD83848D6B84F84A506C169 /* RCTPdf.xcodeproj */ = {isa = PBXFileReference; name = "RCTPdf.xcodeproj"; path = "../node_modules/react-native-pdf/ios/RCTPdf.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		88C7064388AA488BA10FA5A8 /* libRCTPdf.a */ = {isa = PBXFileReference; name = "libRCTPdf.a"; path = "libRCTPdf.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -410,6 +438,8 @@
 				A1C3001BB34D424BB1831AAE /* libRNImagePicker.a in Frameworks */,
 				6EC56437B7E847F7BBA8B2E8 /* libRNTesseractOcr.a in Frameworks */,
 				10381AD635C546F3A4028F86 /* libRNVectorIcons.a in Frameworks */,
+				D49569D8BB244C3E8D521691 /* libRNFetchBlob.a in Frameworks */,
+				E8A6D0CAA250410290B21E30 /* libRCTPdf.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,6 +629,8 @@
 				A2C16FFE46614AAAADEFACA6 /* RNImagePicker.xcodeproj */,
 				E368DFAADE0E44018DCDC07D /* RNTesseractOcr.xcodeproj */,
 				686A01EA92FA459C95935A26 /* RNVectorIcons.xcodeproj */,
+				CDCD2AE8141C45BE94CC7DDD /* RNFetchBlob.xcodeproj */,
+				3BD83848D6B84F84A506C169 /* RCTPdf.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -664,6 +696,17 @@
 				1606B6501CA74C7AB4BA0989 /* Octicons.ttf */,
 				B8718FDFD9A34D2BBA9AD33A /* SimpleLineIcons.ttf */,
 				7674F92ADD604DC3A8E78F6C /* Zocial.ttf */,
+				59540B13642F4148BD251B81 /* learning_curve_bold_ot_ps.otf */,
+				EA307234A42F43569DF5F4C4 /* learning_curve_bold_ot_tt.ttf */,
+				D9FEB31D84C14850A1FC28E8 /* learning_curve_dashed_ot_ps.otf */,
+				6EE42B25824642E99735FF6E /* learning_curve_dashed_ot_tt.ttf */,
+				0581EB12AB8C482E908888C8 /* learning_curve_dings_ot_ps.otf */,
+				B9FEDD9610EC43CEAEFB3783 /* learning_curve_dings_ot_tt.ttf */,
+				D600D05406314F3081900627 /* learning_curve_regular_ot_ps.otf */,
+				3717C29B09064FB594848AA0 /* learning_curve_regular_ot_tt.ttf */,
+				71F12D49912048CB86086ADE /* OpenSans-CondBold.ttf */,
+				060574B2F2F94322BC14859F /* OpenSans-CondLight.ttf */,
+				8941E55DEBA0462C889B6C8D /* OpenSans-CondLightItalic.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1129,6 +1172,17 @@
 				63A2D19634EA49D3A77B63D0 /* Octicons.ttf in Resources */,
 				9D719B2247354BA98D331555 /* SimpleLineIcons.ttf in Resources */,
 				CAA331D71A7B422A8AE66554 /* Zocial.ttf in Resources */,
+				EB916943626D4DA9A22C2148 /* learning_curve_bold_ot_ps.otf in Resources */,
+				22B01AC1C1D14025BFBFE98F /* learning_curve_bold_ot_tt.ttf in Resources */,
+				C740092991214FF685C32B35 /* learning_curve_dashed_ot_ps.otf in Resources */,
+				9E70FEC3C31842A9AC968ADD /* learning_curve_dashed_ot_tt.ttf in Resources */,
+				B7F5B256C7D5410E9F7384FF /* learning_curve_dings_ot_ps.otf in Resources */,
+				9181E4D6F25C4E59B96F02C0 /* learning_curve_dings_ot_tt.ttf in Resources */,
+				0AB80AEB12CD4E99A837155F /* learning_curve_regular_ot_ps.otf in Resources */,
+				BD74466012E54B939255D206 /* learning_curve_regular_ot_tt.ttf in Resources */,
+				3E97ACF4E95D4D67A01B17C3 /* OpenSans-CondBold.ttf in Resources */,
+				5697748EAEAF4D2A9260C952 /* OpenSans-CondLight.ttf in Resources */,
+				AA69DAA93C2B45028D52C7B3 /* OpenSans-CondLightItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1265,12 +1319,16 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-tesseract-ocr/ios",
 					"$(SRCROOT)/../node_modules/@expo/vector-icons/vendor/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-pdf/ios/RCTPdf/**",
 				);
 			};
 			name = Debug;
@@ -1294,12 +1352,16 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-tesseract-ocr/ios",
 					"$(SRCROOT)/../node_modules/@expo/vector-icons/vendor/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-pdf/ios/RCTPdf/**",
 				);
 			};
 			name = Release;
@@ -1324,6 +1386,8 @@
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-tesseract-ocr/ios",
 					"$(SRCROOT)/../node_modules/@expo/vector-icons/vendor/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-pdf/ios/RCTPdf/**",
 				);
 			};
 			name = Debug;
@@ -1347,6 +1411,8 @@
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-tesseract-ocr/ios",
 					"$(SRCROOT)/../node_modules/@expo/vector-icons/vendor/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-pdf/ios/RCTPdf/**",
 				);
 			};
 			name = Release;
@@ -1379,12 +1445,16 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-tesseract-ocr/ios",
 					"$(SRCROOT)/../node_modules/@expo/vector-icons/vendor/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-pdf/ios/RCTPdf/**",
 				);
 			};
 			name = Debug;
@@ -1417,12 +1487,16 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-tesseract-ocr/ios",
 					"$(SRCROOT)/../node_modules/@expo/vector-icons/vendor/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-pdf/ios/RCTPdf/**",
 				);
 			};
 			name = Release;
@@ -1454,12 +1528,16 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-tesseract-ocr/ios",
 					"$(SRCROOT)/../node_modules/@expo/vector-icons/vendor/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-pdf/ios/RCTPdf/**",
 				);
 			};
 			name = Debug;
@@ -1491,12 +1569,16 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-tesseract-ocr/ios",
 					"$(SRCROOT)/../node_modules/@expo/vector-icons/vendor/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-pdf/ios/RCTPdf/**",
 				);
 			};
 			name = Release;

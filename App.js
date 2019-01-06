@@ -1,12 +1,11 @@
 import React from 'react'
-import { Text, View, Platform, StatusBar } from 'react-native'
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk';
 import reducer from './reducers'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { TabNavigator, StackNavigator } from 'react-navigation'
-import { Icon} from 'react-native-elements'
+import {Icon} from './node_modules/react-native-elements';
 import MainDecks from './components/MainDecks'
 import AddDeck from './components/AddDeck'
 import AddCard from './components/AddCard'
@@ -18,7 +17,9 @@ import Search from './containers/Search'
 import Mcq from './components/Mcq'
 import Account from './containers/Account'
 import Login from './containers/Login'
-// symbol polyfills
+import Mock from './containers//Mock'
+import Chat from './containers/Chat'
+// symbol polyfills for yellow box error
 global.Symbol = require('core-js/es6/symbol');
 require('core-js/fn/symbol/iterator');
 
@@ -27,7 +28,6 @@ require('core-js/fn/map');
 require('core-js/fn/set');
 require('core-js/fn/array/find');
 import ExternalDeck from './components/ExternalDecks'
-import ExternalDecks from './components/ExternalDecks';
 //import { setLocalNotification } from './utils/helpers'
 
 const store = createStore(reducer, composeWithDevTools(
@@ -84,29 +84,46 @@ const MainTab=TabNavigator({
   Home:{
     screen: AddNotes,
     navigationOptions: {
-      tabBarLabel: 'Home',
-      tabBarIcon: ()=><Icon name='home-outline' size={30} color={'red'} />
+      tabBarLabel : ({ tintColor }) => (
+        <Icon name="home" color="white" type="material-community"/>
+      )
     },
    
   },
   Search:{
     screen:Search,
     navigationOptions:{
-      tabBarLabel:'Search',
-      tabBarIcon:()=><Icon name='search-outline' size={30} color={'red'}/>
+      tabBarLabel : ({ tintColor }) => (
+        <Icon name="ios-search" color="white" type='ionicon'/>
+      )
     },
    
   },
+  Mock:{
+    screen:Mock,
+    navigationOptions:{
+      tabBarLabel:()=><Icon name='md-paper'  type='ionicon' color="white"/>
+    },
+  },
+  Chat:{
+screen:Chat,
+navigationOptions:{
+tabBarLabel:()=><Icon name='chat' type='entypo' color="white"/>
+  },
+},
+
+
+
   Account:{
     screen:Account,
     navigationOptions:{
-      tabBarLabel:'Account',
-      tabBarIcon:()=><Icon name='account-outline' size={30} color={'red'}/>
+     
+      tabBarLabel:()=><Icon name='account-circle' color="white" type="material-community"/>
     },
     tabBarOptions: {
       activeTintColor: 'red',
       showIcon: true,
-      showLabel: true,
+      showLabel: false,
       inactiveTintColor: '#2286c3',
     style: {
       backgroundColor: '#EEEEEE',

@@ -19,6 +19,12 @@ buildscript {
     }
 }
 
+
+ext {
+  googlePlayServicesVersion   = "15.0.1"
+}
+
+
 allprojects {
     repositories {
         mavenLocal()
@@ -33,6 +39,13 @@ allprojects {
         }
         jcenter()
     }
+     configurations.all {
+        resolutionStrategy {
+            force "com.google.android.gms:play-services-basement:$googlePlayServicesVersion"
+             force "com.google.android.gms:play-services-base:$googlePlayServicesVersion"
+            force "com.google.android.gms:play-services-tasks:$googlePlayServicesVersion"
+        }
+      }
 }
 subprojects {
     afterEvaluate {project ->

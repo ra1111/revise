@@ -67,6 +67,17 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>learning_curve_bold_ot_ps.otf</string>
+		<string>learning_curve_bold_ot_tt.ttf</string>
+		<string>learning_curve_dashed_ot_ps.otf</string>
+		<string>learning_curve_dashed_ot_tt.ttf</string>
+		<string>learning_curve_dings_ot_ps.otf</string>
+		<string>learning_curve_dings_ot_tt.ttf</string>
+		<string>learning_curve_regular_ot_ps.otf</string>
+		<string>learning_curve_regular_ot_tt.ttf</string>
+		<string>OpenSans-CondBold.ttf</string>
+		<string>OpenSans-CondLight.ttf</string>
+		<string>OpenSans-CondLightItalic.ttf</string>
 	</array>
 </dict>
 </plist>

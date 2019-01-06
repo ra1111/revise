@@ -1,6 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList,Image } from 'react-native'
-import Dummy from '../Assets/Images/Dummy.jpg'
+import { StyleSheet, Text, View, } from 'react-native'
 export default  class Rate extends React.Component{
 render()
 {

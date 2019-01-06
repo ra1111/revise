@@ -1,18 +1,18 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList,Image } from 'react-native'
-import Dummy from '../Assets/Images/Dummy.jpg'
+import { StyleSheet, Text, View,  } from 'react-native'
+import PropTypes from 'prop-types'
  export default class Email  extends React.Component {
      render()
      {
          return(<View style={styles.container}>
          <View style={styles.group}>
-         <Text> Email</Text>
-<Text>{this.props.email ||"XYZ@GMAIL.com"}</Text>
+         <Text style={styles.subText}> Email</Text>
+<Text style={styles.subText}>{this.props.email ||"XYZ@GMAIL.com"}</Text>
 
 </View>
 <View style={styles.group}>
-         <Text> UserName</Text>
-<Text>{this.props.username ||"Example Text"}</Text>
+         <Text style={styles.subText}> UserName</Text>
+<Text style={styles.subText}>{this.props.username ||"Example Text"}</Text>
 
 </View>
          </View>)
@@ -32,8 +32,19 @@ backgroundColor:'white',
         color:'black'
     },
     group :{
-        justifyContent  :'space-around',
+        justifyContent  :'center',
         width:'100%',
         flexDirection:'row',
-    }
+        
+    },
+    subText:{
+marginHorizontal:10,
+fontFamily: 'Montserrat-Bold',
+fontSize: 16,
+color: '#38b4f7',
+    },
 })
+Email.propTypes={
+    email:PropTypes.string,
+    username:PropTypes.string
+}

@@ -1,9 +1,11 @@
 
 import React, { Component } from 'react';
-import { View, Text, FlatList, ActivityIndicator } from 'react-native';
-import { List, ListItem, SearchBar, Icon } from 'react-native-elements';
+import { View, FlatList, ActivityIndicator,Alert } from 'react-native';
+import {  ListItem, SearchBar, Icon } from 'react-native-elements';
+import PropTypes from 'prop-types';
 import * as firebase from 'firebase';
-let deckData={}
+let deckData={};
+let deck
  export default class Search extends Component {
     static navigationOptions = {
                 header: null
@@ -21,7 +23,7 @@ let deckData={}
     this.arrayholder = [];
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.makeRemoteRequest();
     this.setState({loading:true})
   }
@@ -32,7 +34,6 @@ let deckData={}
     database
     .ref('users' ).orderByChild('decks').once('value',
     (snapshot) =>{
-    console.log(snapshot.val(),"wbdudwubwbudbudwbu") 
   snapshot.forEach((snap)=>{
 let val=snap.val()
 if(snap.hasChild('decks'))
@@ -49,9 +50,9 @@ this.setState({
   data:Object.keys(deckData),
   loading:false
 })
-console.log(this.state,'state')
 this.arrayholder=Object.keys(deckData)
   })}).catch(err=>{
+  // eslint-disable-next-line
 console.log(err,'error')
   });
 
@@ -59,6 +60,7 @@ console.log(err,'error')
 
     }
     catch(ex){
+        // eslint-disable-next-line
       console.log(ex,'excepwtion')
     }
 
@@ -79,15 +81,19 @@ console.log(err,'error')
   };
 
   searchFilterFunction = text => {
-    console.log(this.arrayholder,"here array");
     const newData = this.arrayholder.filter(item => {
       const itemData = `${item.toUpperCase()} `;
       const textData = text.toUpperCase();
       return itemData.indexOf(textData) > -1;
     });
+    if(newData.length!==0)
+    {
     this.setState({
       data: newData,
     });
+  }else{
+    Alert.alert('Deck Not Available')
+  }
   };
 next=(item)=>{
 
@@ -115,7 +121,6 @@ this.props.navigation.navigate('ExtQuiz',
   };
 
   render() {
-    console.log(this.state,"key")
     if (this.state.loading) {
       return (
         <View style={{ flex: 1,backgroundColor:'#f8f8ff', alignItems: 'center', justifyContent: 'center' }}>
@@ -147,4 +152,6 @@ this.props.navigation.navigate('ExtQuiz',
     );
   }
 }
-
+Search.propTypes={
+navigation:PropTypes.func,
+}

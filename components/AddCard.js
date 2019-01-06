@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { AddNewCard } from '../actions'
 import { updateDeck } from '../utils/api'
 import { Button, Input} from 'react-native-elements'
-import thunk from '../node_modules/redux-thunk';
 
 class AddCard extends React.Component {
 
