@@ -1,19 +1,40 @@
 import React from 'react'
-import { StyleSheet, View,  } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { Button, Input,Icon} from 'react-native-elements'
 import Question from '../../components/Question'
+import Modal from '../../components/QuestionModal'
 export default class Chat extends React.Component {
     static navigationOptions = {
         header: null
     };
+    constructor(props)
+    { super(props)
+        this.hideModal=this.hideModal.bind(this)
+    this.state = {
+        modalVisible: false,
+      };
+    }
+    
+      setModalVisible(visible) {
+        this.setState({modalVisible: visible});
+      }
+      hideModal()
+      {
+        this.setState({modalVisible: false});
+      }
+
     render()
-    {
+    { console.log(this.state,"changing?")
         return(
             <View style={styles.container}>
             <View/>
             <Question/>
+            {this.state.modalVisible&&
+            <Modal modalVisible={this.state.modalVisible} hide={this.hideModal}/>
+            }
             <View>
 <Button
+onPress={()=>this.setModalVisible(true)}
 title="ASK A QUESTION"
  icon={
     <Icon
