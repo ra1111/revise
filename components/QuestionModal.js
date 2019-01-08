@@ -3,7 +3,19 @@ import {Modal, Text, View, StyleSheet,Alert} from 'react-native';
 import { Button ,Input,Icon} from '../node_modules/react-native-elements';
 
  export default class ModalExample extends Component {
+     state={
+         query:''
+     }
+handleQuery=(query)=>
+{
+this.setState({
+    query:query
+})
 
+}
+submitQuery(){
+Alert.alert(this.state.query)
+}
 
   render() {
     return (
@@ -21,6 +33,7 @@ import { Button ,Input,Icon} from '../node_modules/react-native-elements';
   raised
   containerStyle={styles.close}
   name='close'
+  size={19}
   type='font-awesome'
   color='#38b4f7'
   onPress={()=>{Alert.alert('Discard question?',"Discarded questions can't be recovered.",
@@ -33,13 +46,15 @@ placeholderTextColor="white"
 selectionColor="white"
 containerStyle={styles.input}
 inputContainerStyle={styles.input}
+onChangeText={this.handleQuery}
 inputStyle={styles.question}/>
               <Button
               title="Post Now"
-              style={styles.ask}
+              buttonStyle={styles.ask}
               icon={{name:"send", type:"material-community",color:"white"}}
               iconRight={true}
-                onPress={this.props.hide}/>
+              onPressIn={this.props.hide}
+                onPress={()=>{this.submitQuery()}}/>
                 
   </View>
            
@@ -61,9 +76,10 @@ inputStyle={styles.question}/>
     ask:{
        
    
-        backgroundColor: '#38b4f7',
+        backgroundColor: 'green',
         width: 300,
-        height: 125,
+        height:50,
+        margin:10,
         borderColor: "transparent",
         borderWidth: 0,
         borderRadius: 5
