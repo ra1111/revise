@@ -10,7 +10,7 @@ import {
         LayoutAnimation,
         UIManager
     } from 'react-native';
-
+    import {connect} from 'react-redux';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.40;
 const SWIPE_OUT_DURATION = 250;
@@ -139,6 +139,9 @@ const styles = StyleSheet.create({
         width: SCREEN_WIDTH-20
     },
 });
-
+function mapStateToProps(state) {
+    return {answer:state.chat.answer};
+}
 //make this component available to the app
-export default CardsContainer;
+
+export default connect(mapStateToProps)(CardsContainer);

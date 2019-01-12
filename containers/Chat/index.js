@@ -1,9 +1,10 @@
 import React from 'react'
+import {connect} from 'react-redux';
 import { StyleSheet, View } from 'react-native'
 import { Button, Input,Icon} from 'react-native-elements'
 import Question from '../../components/Question'
 import Modal from '../../components/QuestionModal'
-export default class Chat extends React.Component {
+ class Chat extends React.Component {
     static navigationOptions = {
         header: null
     };
@@ -32,7 +33,7 @@ export default class Chat extends React.Component {
             {this.state.modalVisible&&
             <Modal modalVisible={this.state.modalVisible} hide={this.hideModal}/>
             }
-            <View>
+ {!this.props.answer&&           <View>
 <Button
 onPress={()=>this.setModalVisible(true)}
 title="ASK A QUESTION"
@@ -46,21 +47,22 @@ title="ASK A QUESTION"
   }
   iconRight
   buttonStyle={styles.ask}/>
+  
                 </View>
+ }
             </View>
         )
     }
 }
 const styles = StyleSheet.create({
     container: {
-        backgroundColor:'#f8f8f8',
+        backgroundColor:'#38b4f7',
         flex: 1,
      
-      margin:10,
     },
     ask:{
         alignSelf: 'center',
-        backgroundColor: '#38b4f7',
+        backgroundColor: '#00dec2',
         width: 300,
         height: 45,
         borderColor: "transparent",
@@ -69,3 +71,9 @@ const styles = StyleSheet.create({
     },
 
 });
+function mapStateToProps(state) {
+    return {answer:state.chat.answer};
+}
+//make this component available to the app
+
+export default connect(mapStateToProps)(Chat);

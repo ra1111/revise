@@ -3,6 +3,7 @@ export const ADD_QUIZ='ADD_QUIZ';
 export const ADD_DECK='ADD_DECK';
 export const ADD_CARD='ADD_CARD';
 export const DELETE_DECK='DELETE_DECK';
+export const ADD_ANSWER='ADD_ANSWER';
 
 export function receiveDecks(decks) {
 	return {
@@ -30,6 +31,13 @@ export function DeleteDeck(title) {
 	return {
 		type: DELETE_DECK,
 		title,
+	}
+}
+export function AddAnswer(answer)
+{
+	return{
+		type:ADD_ANSWER,
+		answer
 	}
 }
 
