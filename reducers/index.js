@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {RECEIVE_DECKS, ADD_QUIZ, ADD_DECK, ADD_CARD, DELETE_DECK,ADD_ANSWER} from '../actions';
+import {RECEIVE_DECKS, ADD_QUIZ, ADD_DECK, ADD_CARD, DELETE_DECK,ADD_ANSWER, SHOW_ANSWER} from '../actions';
 
 
 function decks(state = {
@@ -91,7 +91,7 @@ function quizArray(results, action) {
     }
     return newArray
 }
-function chat(state={answer:false}, action) {
+function chat(state={answer:false,showAnswer:false}, action) {
     switch (action.type) {
         case ADD_ANSWER:
    
@@ -99,6 +99,11 @@ function chat(state={answer:false}, action) {
                 ...state,
                 answer: action.answer
             }
+        case SHOW_ANSWER:
+        return{
+            ...state,
+            showAnswer:action.show
+        }
             default:
             return state
     }

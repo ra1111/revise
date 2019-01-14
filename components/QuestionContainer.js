@@ -80,7 +80,7 @@ class CardsContainer extends Component {
             transform: [{ rotate }]
         }
     }
-    
+
     renderCards() {
         console.log(this.props,"data")
         if (this.state.index >= this.props.data.length) {
@@ -93,7 +93,41 @@ class CardsContainer extends Component {
             )
         }
 
+if(this.props.showAnswer)
+{
+    return this.props.data.map((item, index) => {
+        if (index < this.state.index)
+            return null;
+            
+        //Add animation only to the card on top
+        if (index === this.state.index) {
+            return (
+                <View 
+                style={styles.viewStyle}
+ 
+                    key={item.index}
+                >
+                    {this.props.renderCard(item)}
+                </View>
+            );
+        }
 
+        return (
+            
+            <View 
+            key={item.id}
+            style={styles.viewStyle}
+               
+            >
+            
+                {this.props.renderCard(item)}
+            </View>
+            
+        );
+    }).reverse();
+}
+
+else{
         return this.props.data.map((item, index) => {
             if (index < this.state.index)
                 return null;
@@ -127,6 +161,7 @@ class CardsContainer extends Component {
             );
         }).reverse();
     }
+}
 
     render() {
         return (
@@ -145,10 +180,17 @@ const styles = StyleSheet.create({
         width: SCREEN_WIDTH-20,
      
     },
+    viewStyle:{
+      width:SCREEN_WIDTH,
+      
+        //backgroundColor:'white',
+
+    }
   
 });
 function mapStateToProps(state) {
-    return {answer:state.chat.answer};
+    return {answer:state.chat.answer,
+        showAnswer:state.chat.showAnswer};
 }
 //make this component available to the app
 

@@ -62,7 +62,7 @@ let database,
             {this.state.modalVisible&&
             <Modal modalVisible={this.state.modalVisible} hide={this.hideModal}/>
             }
- {!this.props.answer&&           <View>
+ {!this.props.answer&&!this.props.showAnswer&&           <View>
 <Button
 onPress={()=>this.setModalVisible(true)}
 title="ASK A QUESTION"
@@ -101,7 +101,8 @@ const styles = StyleSheet.create({
 
 });
 function mapStateToProps(state) {
-    return {answer:state.chat.answer};
+    return {answer:state.chat.answer,
+    showAnswer:state.chat.showAnswer};
 }
 //make this component available to the app
 
