@@ -6,6 +6,7 @@ import {
         StyleSheet, 
         Dimensions,
         Animated,
+        TouchableOpacity,
         PanResponder,
         LayoutAnimation,
         UIManager
@@ -81,6 +82,7 @@ class CardsContainer extends Component {
     }
     
     renderCards() {
+        console.log(this.props,"data")
         if (this.state.index >= this.props.data.length) {
             return (
                 <View>
@@ -105,7 +107,7 @@ class CardsContainer extends Component {
                             this.getCardStyle()
                         ]}
                         {...this.state.panResponder.panHandlers}
-                        key={item.id}
+                        key={item.index}
                     >
                         {this.props.renderCard(item)}
                     </Animated.View>
@@ -113,12 +115,15 @@ class CardsContainer extends Component {
             }
 
             return (
+                
                 <Animated.View 
-                    key={item.id}
+                key={item.id}
                     style={[styles.cardStyle, {transform: [{ rotate: '0deg'}]}, { top: 10 * (index - this.state.index) }]}
                 >
+                
                     {this.props.renderCard(item)}
                 </Animated.View>
+                
             );
         }).reverse();
     }
@@ -136,8 +141,11 @@ class CardsContainer extends Component {
 const styles = StyleSheet.create({
     cardStyle: {
         position: 'absolute',
-        width: SCREEN_WIDTH-20
+        marginTop:20,
+        width: SCREEN_WIDTH-20,
+     
     },
+  
 });
 function mapStateToProps(state) {
     return {answer:state.chat.answer};

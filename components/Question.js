@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet, View, Text} from 'react-native'
+import {StyleSheet, View, Text,TouchableOpacity} from 'react-native'
 import {connect} from 'react-redux';
 import {Card, Button} from 'react-native-elements'
 import CardsContainer from './QuestionContainer'
@@ -58,6 +58,7 @@ const DATA = [
                 '500&q=60'
     }
 ];
+
  class Qeustion extends React.Component {
  
    showAnswer()
@@ -65,13 +66,18 @@ const DATA = [
        this.props.dispatch(AddAnswer(true))
    }
     renderCard(item) {
- 
+ console.log(item,"item")
         return (
-            <Card key={item.id} containerStyle={styles.card}>
+            <View style={styles.cardsContainer}  >
+                <TouchableOpacity   style={styles.answerNumber}>
+                    <Text style={{color:"#38b4f7"}}>{item.answer.length}{"answers"}</Text>
+                    </TouchableOpacity>
+            <Card key={item.index} containerStyle={styles.card}>
+            <View style={styles.cardWrapper}>
                 <Text style={styles.questionText}>
-                    {item.text}
+                    {item.question.title}
                 </Text>
-                
+                <View>
                 <Profile/>
                 {!this.props.answer?
                 <Button
@@ -92,14 +98,17 @@ const DATA = [
                 }}/>:
                 <Answer/>
             }
+            </View>
+            </View>
             </Card>
+            </View>
         );
     }
     render() {
         console.log(this.props)
         return (
             <View style={styles.container}>
-                <CardsContainer data={DATA} props={this.props} renderCard={this.renderCard}/>
+                <CardsContainer data={this.props.questions} props={this.props} renderCard={this.renderCard}/>
             </View>
         );
     }
@@ -108,7 +117,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginTop: 20,
-        justifyContent:'space-between'
+      
     },
     answer: {
         backgroundColor: '#ff8354',
@@ -121,11 +130,33 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#38b4f7'
     },
+    cardWrapper:{
+        justifyContent:'space-between',
+       flex:1,
+       minHeight:275,
+  
+    },
+
     card: {
-        
-      //  backgroundColor: '#2286c3',
         borderRadius: 10,
+        flex:1,
+        marginTop:30
  
+    },
+    cardsContainer:{
+flex:1,
+justifyContent:'space-between'
+    },
+    answerNumber:{
+        alignSelf:'center',
+        alignItems: 'center',
+        backgroundColor: '#DDDDDD',
+        padding: 10,
+        borderRadius:10,
+        width:150,
+        position: 'absolute',
+      
+       
     }
 });
 function mapStateToProps(state) {

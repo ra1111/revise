@@ -2,8 +2,12 @@ import React from 'react'
 import {connect} from 'react-redux';
 import { StyleSheet, View } from 'react-native'
 import { Button, Input,Icon} from 'react-native-elements'
+import * as firebase from 'firebase';
 import Question from '../../components/Question'
 import Modal from '../../components/QuestionModal'
+let database,
+    Revise,
+    Chats;
  class Chat extends React.Component {
     static navigationOptions = {
         header: null
@@ -13,7 +17,31 @@ import Modal from '../../components/QuestionModal'
         this.hideModal=this.hideModal.bind(this)
     this.state = {
         modalVisible: false,
+        Chats:[],
       };
+    }
+    async UNSAFE_componentWillMount() {
+
+        database = firebase.database();
+        Revise = database.ref('Revise')
+        Chats = Revise.child('Chat')
+        console.log(Chats,"Chat")
+        try {
+            await Chats
+                .once('value')
+                .then(snapshot => {
+                    this.setState({
+                        Chats: snapshot.val()
+                    })
+
+                })
+   
+            
+            }
+            catch(ex)
+            {
+                console.log(ex,"exception")
+            }
     }
     
       setModalVisible(visible) {
@@ -25,11 +53,12 @@ import Modal from '../../components/QuestionModal'
       }
 
     render()
-    { console.log(this.state,"changing?")
+    {
         return(
             <View style={styles.container}>
-          
-            <Question/>
+       
+              
+            <Question questions={this.state.Chats}/>
             {this.state.modalVisible&&
             <Modal modalVisible={this.state.modalVisible} hide={this.hideModal}/>
             }
