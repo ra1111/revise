@@ -10,6 +10,9 @@ export default class Login extends Component {
         opacity: 0
     };
 }
+static navigationOptions = {
+  header: null
+};
   signInWithGoogle = async () => {
     this.setState({opacity:1})
     const configPlatform = {

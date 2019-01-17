@@ -1,10 +1,16 @@
 import React, {Component} from 'react';
 import {Modal, Text, View, StyleSheet,Alert} from 'react-native';
-import { Button ,Input,Icon} from '../node_modules/react-native-elements';
-
+import { Button ,Input,Icon, Tile} from '../node_modules/react-native-elements';
+import * as firebase from 'firebase';
+import Chat from '../containers/Chat';
+let database,
+    Revise,
+    Chats;
+    let OldChat=[]
  export default class ModalExample extends Component {
      state={
-         query:''
+         query:'',
+         Chats:[]
      }
 handleQuery=(query)=>
 {
@@ -13,8 +19,46 @@ this.setState({
 })
 
 }
-submitQuery(){
+//ONly 1 array getting 
+ async submitQuery(){
+    const user = firebase
+    .auth()
+    .currentUser;
+    let currentUser={image:user.photoURL,name:user.displayName}
+    console.log(currentUser,"Current User")
+database = firebase.database();
+  Revise = database.ref('Revise')
+   Chats = Revise.child('Chat')
+
+try{
+  await  Chats
+    .once('value')
+    .then(snapshot => {
+
+          (snapshot.val()).forEach(element => {
+              
+              OldChat.push(element)
+          });
+        
+
+    })
+   
+    
+  let  newQuestion={title:this.state.query,user:currentUser}
+    let newChat={answer:[],question:newQuestion}
+    console.log(OldChat,"CHAT")
+OldChat.push(newChat)
+
+firebase.database().ref('Revise').child('Chat').set(OldChat)
+console.log(OldChat,"CHAT")
+
+}
+catch(ex)
+{
+    console.log(ex,'exception')
+}
 Alert.alert(this.state.query)
+
 }
 
   render() {

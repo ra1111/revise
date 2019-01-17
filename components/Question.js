@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet, View, Text,TouchableOpacity,FlatList,ScrollView} from 'react-native'
+import {StyleSheet, View, Text,TouchableOpacity,FlatList,ScrollView,KeyboardAvoidingView} from 'react-native'
 import {connect} from 'react-redux';
 import {Card, Button,ListItem, Icon} from 'react-native-elements'
 import CardsContainer from './QuestionContainer'
@@ -42,7 +42,7 @@ if(this.props.showAnswer)
                     {item.question.title}
                 </Text>
             
-                <Profile/>
+                <Profile name={item.question.user.name} image={item.question.user.image}/>
                 <ScrollView keyboardShouldPersistTap={"always"}
 >
                 <FlatList
@@ -61,32 +61,14 @@ if(this.props.showAnswer)
            <ListItem
              roundAvatar
                title={item.title}
-               leftAvatar={{ source: { uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg' } }}
-               subtitle={item.user}
+               leftAvatar={{ source: { uri: item.user.image||'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg' } }}
+               subtitle={item.user.name}
              
                keyExtractor={item => item.key}
                />
          )}/>
          </ScrollView>
-         {!this.props.answer?
-                <Button
-                onPress={()=>{this.props.dispatch(AddAnswer(true))}}
-                    buttonStyle={styles.answer}
-                    iconContainerStyle={{
-                    transform: [
-                        {
-                            rotateY: '180deg'
-                        }
-                    ]
-                }}
-                    title="Answer"
-                    icon={{
-                    name: "chat-bubble",
-                    type: ",material-icons",
-                    color: 'white'
-                }}/>:
-                <Answer/>
-            }
+        
 
         </View>)
 
@@ -95,17 +77,22 @@ if(this.props.showAnswer)
 else{
         return (
             <View style={styles.cardsContainer}  >
+            
+            {item.answer&&
                 <TouchableOpacity onPress={()=>{this.props.dispatch(showAnswer(true))}}  style={styles.answerNumber}>
                     <Text style={{color:"#38b4f7"}}>{item.answer.length}{"answers"}</Text>
                     </TouchableOpacity>
+            }
             <Card key={item.index} containerStyle={styles.card}>
-            <View style={styles.cardWrapper}>
-                <Text style={styles.questionText}>
-                    {item.question.title}
-                </Text>
-                <View>
-                <Profile/>
+  
                 {!this.props.answer?
+                          <View style={styles.cardWrapper}>
+                          <Text           minimumFontScale={.5}  allowFontScaling
+            style={styles.questionText}>
+                              {item.question.title}
+                          </Text>
+                          <View>
+                          <Profile name={item.question.user.name} image={item.question.user.image}/>
                 <Button
                 onPress={()=>{this.props.dispatch(AddAnswer(true))}}
                     buttonStyle={styles.answer}
@@ -121,11 +108,15 @@ else{
                     name: "chat-bubble",
                     type: ",material-icons",
                     color: 'white'
-                }}/>:
-                <Answer/>
+                }}/>
+                      </View>
+                        </View>:
+                        <View style={styles.answerWrapper}>
+                <Answer  question={item.question.title} />
+                </View>
             }
-            </View>
-            </View>
+      
+          
             </Card>
             </View>
         );
@@ -148,8 +139,9 @@ const styles = StyleSheet.create({
     },
     viewContainer:{
 flex:1,
-alignSelf:'center',
+//alignSelf:'center',
 minHeight:450,
+minWidth:350,
 backgroundColor:'white',
 justifyContent:'space-between'
 
@@ -161,21 +153,29 @@ justifyContent:'space-between'
     },
     questionText: {
         margin: 10,
-        fontSize: 39,
+        height:150,
+        fontSize:25,
         textAlign: 'center',
         color: '#38b4f7'
     },
+    answerWrapper:{
+minHeight:150,
+justifyContent:'center'
+    },
+
     cardWrapper:{
         justifyContent:'space-between',
        flex:1,
        minHeight:275,
+       maxHeight:300,
   
     },
 
     card: {
         borderRadius: 10,
         flex:1,
-        marginTop:30
+        marginTop:30,
+       
  
     },
     cardsContainer:{

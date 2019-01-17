@@ -41,7 +41,7 @@ class CardsContainer extends Component {
         this.state = { panResponder, position, index: 0 };
     }
 
-    componentWillUpdate() {
+    UNSAFE_componentWillUpdate() {
         UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
         LayoutAnimation.spring();
     }
