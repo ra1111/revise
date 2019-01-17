@@ -26,8 +26,9 @@ export default class Account extends React.Component {
 
 const styles = StyleSheet.create({
     container:{
-        justifyContent:'space-around',
+        justifyContent:'space-evenly',
         flex:1,
+        backgroundColor:'white'
     },
  
 

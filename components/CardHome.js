@@ -111,7 +111,9 @@ justifyContent:'space-around'
    flex:1,
           },
           cardImage:{
-            height:115,
+            marginTop:4,
+            alignSelf:'center',
+            height:110,
             backgroundColor:'#38b4f7',
             width:90,
           },

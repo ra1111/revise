@@ -137,11 +137,6 @@ const MainNavigator = StackNavigator({
   Login:{
     screen:Login,
     
-    headerMode: 'none',
-    navigationOptions: {
-      headerVisible: false,
-    
-   }
   },
 
   Home:{
@@ -222,6 +217,12 @@ const MainNavigator = StackNavigator({
     },
   },
 },
+{
+headerMode: 'none',
+    navigationOptions: {
+        headerVisible: false,
+    }
+  },
 
 {
   cardStyle: {

@@ -4,15 +4,18 @@ import * as firebase from 'firebase';
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 //import Icon from '../Assets/Images/icon.png';
 export default class Login extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+       header: null
+    }
+ }
   constructor(props) {
     super(props);
     this.state = {
         opacity: 0
     };
 }
-static navigationOptions = {
-  header: null
-};
+
   signInWithGoogle = async () => {
     this.setState({opacity:1})
     const configPlatform = {

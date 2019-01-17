@@ -4,7 +4,7 @@ export default  class Rate extends React.Component{
 render()
 {
 return(<View style={styles.container}>
-    <Text>Rate us!</Text>
+    <Text style={styles.name}>Rate us!</Text>
     </View>)
 }
 
@@ -15,5 +15,10 @@ width:'100%',
 height:'10%',
 justifyContent:'space-around',
 alignItems:'center',
-backgroundColor:'white',
-    },})
+backgroundColor:'#38b4f7',
+    },
+    name:{
+        color:'white',
+        fontWeight:'500',
+        fontSize:17
+    }})

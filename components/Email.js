@@ -24,12 +24,12 @@ width:'100%',
 height:'30%',
 justifyContent:'space-around',
 alignItems:'center',
-backgroundColor:'white',
+backgroundColor:'#38b4f7',
     },
     text:{
         fontSize:30,
         fontWeight:'bold',
-        color:'black'
+        color:'white'
     },
     group :{
         justifyContent  :'center',
@@ -41,7 +41,7 @@ backgroundColor:'white',
 marginHorizontal:10,
 fontFamily: 'Montserrat-Bold',
 fontSize: 16,
-color: '#38b4f7',
+color: 'white',
     },
 })
 Email.propTypes={

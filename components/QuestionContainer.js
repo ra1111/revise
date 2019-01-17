@@ -11,6 +11,7 @@ import {
         LayoutAnimation,
         UIManager
     } from 'react-native';
+    import { Card, Button,  } from 'react-native-elements'
     import {connect} from 'react-redux';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.40;
@@ -85,11 +86,16 @@ class CardsContainer extends Component {
         console.log(this.props,"data")
         if (this.state.index >= this.props.data.length) {
             return (
-                <View>
-                    <Text>
-                        No more cards!
+          
+                    <Card   containerStyle={styles.card}>
+                    <Text style={styles.text}>
+                      Finished with the question?Take a nap!
                     </Text>
-                </View>
+                    <Button   title={"Revisit the questions"}
+                    buttonStyle={{marginTop: 80, backgroundColor:"#03A9F4"}}     onPress={()=>{this.setState({index:0})}}/>
+
+                    </Card>
+       
             )
         }
 
@@ -185,7 +191,18 @@ const styles = StyleSheet.create({
       
         //backgroundColor:'white',
 
-    }
+    },
+    card:{
+        borderRadius:20,
+        alignItems:'center',
+height:270,
+justifyContent:'space-evenly'
+    },
+    text:{
+color:'#38b4f7',
+fontSize:24,
+
+    },
   
 });
 function mapStateToProps(state) {

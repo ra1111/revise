@@ -10,6 +10,7 @@ import {
     Text,
     TouchableNativeFeedback,
     TouchableOpacity,
+    ActivityIndicator,
     View,
     ScrollView
 } from 'react-native';
@@ -132,10 +133,18 @@ class App extends Component {
 
     }
     render() {
+        if(this.state.TrendingArray.length===0)
+        {
+            return(
+                <View style={styles.container}>
+                <ActivityIndicator/>
+                </View>
+            )
+        }
         return (
             <View style={styles.container}>
 
-                <Swipers text1={"Hello Swiper"} text2={"Beautiful"} text3={"And simple"}/>
+                <Swipers text1={" Write Notes"} text2={"Discuss Doubts"} text3={"Website coming soon"}/>
                 <View style={styles.contentContainer}>
                     <ScrollView >
                         <View>
@@ -190,13 +199,15 @@ const styles = StyleSheet.create({
     container: {
         height: '100%',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor:'white'
     },
     title: {
         fontFamily: 'Montserrat-Bold',
         fontSize: 16,
-        color: '#38b4f7',
-        backgroundColor: '#f8f8ff'
+        color: 'white',
+        marginVertical:3,
+        backgroundColor: '#38b4f7'
 
     },
     card: {
@@ -273,7 +284,7 @@ const styles = StyleSheet.create({
     },
     textContainer: {
         flexDirection: 'row',
-        backgroundColor: '#38b4f7',
+        backgroundColor: 'white',
         borderColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
@@ -284,12 +295,12 @@ const styles = StyleSheet.create({
     titleOption: {
         fontFamily: 'Montserrat-Bold',
         fontSize: 16,
-        color: '#fff'
+        color: '#38b4f7'
     },
     Plus: {
         fontFamily: 'Montserrat-Bold',
         fontSize: 28,
-        color: 'white'
+        color: '#38b4f7'
     }
 
 });

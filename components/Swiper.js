@@ -10,12 +10,12 @@ import Swiper from 'react-native-swiper';
             <View style={styles.slide1}>
               <Text style={styles.text}>{this.props.text1}</Text>
             </View>
-            {/* <View style={styles.slide2}>
+            <View style={styles.slide2}>
               <Text style={styles.text}>{this.props.text2}</Text>
             </View>
             <View style={styles.slide3}>
               <Text style={styles.text}>{this.props.text3}</Text>
-            </View> */}
+            </View>
           </Swiper>
               </View>
          )
@@ -26,24 +26,24 @@ import Swiper from 'react-native-swiper';
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#9DD6EB',
+        backgroundColor: '#38b4f7',
       },
       slide2: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#97CAE5',
+        backgroundColor: '#38b4f7',
       },
       slide3: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#92BBD9',
+        backgroundColor: '#38b4f7',
       },
       text: {
-        color: '#000',
+        color: 'white',
         fontSize: 30,
-        fontWeight: 'bold',
+        fontFamily:'Montserrat-Bold',
       },
       wrapper:{
         height:'65%',

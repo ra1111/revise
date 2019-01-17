@@ -18,7 +18,7 @@ width:'100%',
 height:'40%',
 justifyContent:'space-around',
 alignItems:'center',
-backgroundColor:'white',
+backgroundColor:'#38b4f7',
      },
      imageContainer:{
       width:90,
@@ -29,7 +29,7 @@ backgroundColor:'white',
      text:{
          fontSize:30,
          fontWeight:'bold',
-         color:'black'
+         color:'white'
      }
 
  })

@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux';
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View ,ActivityIndicator} from 'react-native'
 import { Button, Input,Icon} from 'react-native-elements'
 import * as firebase from 'firebase';
 import Question from '../../components/Question'
@@ -54,9 +54,12 @@ let database,
 
     render()
     {
+        if(this.state.Chats.length===0)
+        {
+            return <ActivityIndicator/>
+        }
         return(
             <View style={styles.container}>
-       
               
             <Question questions={this.state.Chats}/>
             {this.state.modalVisible&&
