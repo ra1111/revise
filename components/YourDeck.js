@@ -200,17 +200,25 @@ class YourDeck extends React.Component {
 
   renderNoMoreCards(result) {
   	return (
-  		<Card title="Finished Quiz!">
-  			<Text style={styles.cardText}>
-  				{`You Scored ${result}%!`}
-  			</Text>
-  			<Button
-  				onPress={() => this.setState({ counter: 0, noCorrect: 0 }) }
-  				title='Restart Quiz'
-  				backgroundColor="#03A9F4"
-  				icon={{name: 'refresh'}} 
-  			/>
-  		</Card>
+  	  <View style={{height:300,marginTop:'30%',alignSelf:"stretch"}}>
+            <Card title="Finished Revision!" titleStyle={{color:"#38b4f7"}} containerStyle={{position: 'absolute',
+            right:0,
+            height:200,
+      width: SCREEN_WIDTH-30}}>
+                <Text style={styles.revisionCardText}>
+                    {`You Revised ${result}%!`}
+                </Text>
+                <Button
+                buttonStyle={{backgroundColor:"#38b4f7"}}
+                    onPress={() => this.setState({counter: 0, noCorrect: 0, min: 0, mcq: true})}
+                    title='See the Notes Again'
+                 
+                    icon={{
+                    name: 'refresh',
+                    color:'white'
+                }}/>
+            </Card>
+            </View>
   	)
   }
 
@@ -305,7 +313,14 @@ const styles = StyleSheet.create({
   	flex: 1,
   	marginBottom: 20,
     justifyContent: 'flex-start',
-  },
+	},
+	revisionCardText:{
+		marginBottom:40,
+		color:"#38b4f7",
+		alignSelf:'center',
+		fontWeight:'500',
+		fontSize:18
+				},
   flipCard: {
     width: '100%',
 		height: '70%',

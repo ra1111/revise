@@ -250,8 +250,8 @@ class AddCard extends React.Component {
                             color: 'white'
                         }}
                             buttonStyle={styles.add}/>
-
-                        <Button
+{/* ADD para is todo */}
+                        {/* <Button
                             onPress={() => this.addPara()}
                             title={" Paragraph"}
                             size={20}
@@ -259,7 +259,7 @@ class AddCard extends React.Component {
                             name: 'add',
                             color: 'white'
                         }}
-                            buttonStyle={styles.add}/>
+                            buttonStyle={styles.add}/> */}
                     </View>}
 
                     <View
@@ -329,8 +329,8 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 20,
         backgroundColor: "#03A9F4",
-        height: 70,
-        width: 120,
+        height: 60,
+        width: 90,
         borderRadius: 40
 
     },

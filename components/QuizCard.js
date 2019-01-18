@@ -305,18 +305,25 @@ class QuizCard extends React.Component {
 
     renderNoMoreCards(result) {
         return (
-            <Card title="Finished Quiz!">
-                <Text style={styles.cardText}>
-                    {`You Scored ${result}%!`}
+            <View style={{height:300,marginTop:'30%',alignSelf:"stretch"}}>
+            <Card title="Finished Revision!" titleStyle={{color:"#38b4f7"}} containerStyle={{position: 'absolute',
+            right:0,
+            height:200,
+      width: SCREEN_WIDTH-30}}>
+                <Text style={styles.revisionCardText}>
+                    {`You Revised ${result}%!`}
                 </Text>
                 <Button
+                buttonStyle={{backgroundColor:"#38b4f7"}}
                     onPress={() => this.setState({counter: 0, noCorrect: 0, min: 0, mcq: true})}
-                    title='Restart Quiz'
-                    backgroundColor="#03A9F4"
+                    title='See the Notes Again'
+                 
                     icon={{
-                    name: 'refresh'
+                    name: 'refresh',
+                    color:'white'
                 }}/>
             </Card>
+            </View>
         )
     }
     correct = () => {
@@ -367,13 +374,13 @@ class QuizCard extends React.Component {
 
     render() {
         console.log(this.props, "quiz cards")
-
-        if (this.state.counter !== 0 && this.state.counter % 3 === 0 && this.state.mcq) {
-            return (<Mcq
-                deck={this.props.data.questions}
-                min={this.state.min}
-                correct={() => this.correct()}counter={this.state.counter}/>)
-        } else {
+//MCQ DO IT AGAIN
+        // if (this.state.counter !== 0 && this.state.counter % 3 === 0 && this.state.mcq) {
+        //     return (<Mcq
+        //         deck={this.props.data.questions}
+        //         min={this.state.min}
+        //         correct={() => this.correct()}counter={this.state.counter}/>)
+        // } else {
             return (
                 <View style={styles.container}>
 
@@ -384,7 +391,7 @@ class QuizCard extends React.Component {
                 </View>
             )
         }
-    }
+   // }
 }
 
 const styles = StyleSheet.create({
@@ -447,6 +454,13 @@ const styles = StyleSheet.create({
         backfaceVisibility: 'hidden',
         width: '100%',
         marginVertical: 5
+    },
+    revisionCardText:{
+marginBottom:40,
+color:"#38b4f7",
+alignSelf:'center',
+fontWeight:'500',
+fontSize:18
     },
     cardText: {
         height: '94%'

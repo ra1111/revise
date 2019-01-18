@@ -90,6 +90,12 @@ const MainTab=TabNavigator({
     },
    
   },
+  Mock:{
+    screen:Mock,
+    navigationOptions:{
+      tabBarLabel:()=><Icon name='md-paper'  type='ionicon' color="white"/>
+    },
+  },
   Search:{
     screen:Search,
     navigationOptions:{
@@ -99,12 +105,7 @@ const MainTab=TabNavigator({
     },
    
   },
-  Mock:{
-    screen:Mock,
-    navigationOptions:{
-      tabBarLabel:()=><Icon name='md-paper'  type='ionicon' color="white"/>
-    },
-  },
+
   Chat:{
 screen:Chat,
 navigationOptions:{
@@ -113,24 +114,24 @@ tabBarLabel:()=><Icon name='chat' type='entypo' color="white"/>
 },
 
 
-
-  Account:{
-    screen:Account,
-    navigationOptions:{
+//ACCOUNT NEEDS TO BE DOne
+//   Account:{
+//     screen:Account,
+//     navigationOptions:{
      
-      tabBarLabel:()=><Icon name='account-circle' color="white" type="material-community"/>
-    },
-    tabBarOptions: {
-      activeTintColor: 'red',
-      showIcon: true,
-      showLabel: false,
-      inactiveTintColor: '#2286c3',
-    style: {
-      backgroundColor: '#EEEEEE',
-    },
-},
+//       tabBarLabel:()=><Icon name='account-circle' color="white" type="material-community"/>
+//     },
+//     tabBarOptions: {
+//       activeTintColor: 'red',
+//       showIcon: true,
+//       showLabel: false,
+//       inactiveTintColor: '#2286c3',
+//     style: {
+//       backgroundColor: '#EEEEEE',
+//     },
+// },
   
-  },
+//   },
 
 });
 const MainNavigator = StackNavigator({

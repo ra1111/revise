@@ -35,7 +35,7 @@ return deck
 			<View style={styles.container}>
 				{deck.questions.length === 0 ? 
 					(	<View style={styles.altContainer}>
-							<Text style={styles.mainText}>You need to add at least one card to start the quiz!</Text>
+							<Text style={styles.mainText}>Please Create Notes by Going to Add Card</Text>
 						</View>)
 				: (
 					<QuizCard
