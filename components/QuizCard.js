@@ -84,7 +84,7 @@ class QuizCard extends React.Component {
             flip: false,
             noCorrect: 0,
             min: 0,
-            mcq: true
+         //   mcq: true
         };
     }
 
@@ -184,7 +184,7 @@ class QuizCard extends React.Component {
                     ? prevState.counter - 1
                     : prevState.counter
         }));
-        this.setState({flip: false, mcq: true});
+        this.setState({flip: false}) //mcq: true});
         if (this.state.counter >= this.props.data.questions.length) {
             const result = Math
                 .round(this.state.noCorrect / this.props.data.questions.length * 100)
@@ -289,7 +289,7 @@ class QuizCard extends React.Component {
                             style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack]}>{item
                                 .answer
                                 .map((value, index) => {
-                                    return <Animated.View style={styles.textContainer}>
+                                    return <Animated.View key={index} style={styles.textContainer}>
                                         <Text style={styles.flipTextBack}>{index + 1}{")\t"}{value.toUpperCase()}{"\n\n"}</Text><View
                                             style={index < (item.answer.length - 1)
                                         ? styles.boundary
@@ -315,7 +315,7 @@ class QuizCard extends React.Component {
                 </Text>
                 <Button
                 buttonStyle={{backgroundColor:"#38b4f7"}}
-                    onPress={() => this.setState({counter: 0, noCorrect: 0, min: 0, mcq: true})}
+                    onPress={() => this.setState({counter: 0, noCorrect: 0, min: 0 /*mcq: true*/})}
                     title='See the Notes Again'
                  
                     icon={{
@@ -327,7 +327,7 @@ class QuizCard extends React.Component {
         )
     }
     correct = () => {
-        this.setState({mcq: false, min: this.state.counter})
+        this.setState({/*mcq: false,*/ min: this.state.counter})
     }
     renderCards() {
 

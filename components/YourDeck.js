@@ -210,7 +210,7 @@ class YourDeck extends React.Component {
                 </Text>
                 <Button
                 buttonStyle={{backgroundColor:"#38b4f7"}}
-                    onPress={() => this.setState({counter: 0, noCorrect: 0, min: 0, mcq: true})}
+                    onPress={() => this.setState({counter: 0, noCorrect: 0, min: 0,/* mcq: true*/})}
                     title='See the Notes Again'
                  
                     icon={{

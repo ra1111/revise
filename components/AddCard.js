@@ -192,14 +192,15 @@ class AddCard extends React.Component {
 
                         </View>
                         <View style={styles.formView}>
-                            <Text style={styles.label}>Enter the points</Text>
+                            <Text style={styles.label}>Click on Notes to enter the points</Text>
 
                             {this
                                 .state
                                 .noteNumber
                                 .map((value, index) => (
-                                    <View>
+                                    <View key={index}>
                                         <Input
+                                        
                                             placeholder="Notes"
                                             containerStyle={styles.input}
                                             inputContainerStyle={styles.input}
@@ -211,7 +212,7 @@ class AddCard extends React.Component {
                                         </Text>
                                     </View>
                                 ))}
-                            {this
+                            {/* {this
                                 .state
                                 .para
                                 .map((value, index) => (
@@ -231,7 +232,7 @@ class AddCard extends React.Component {
                                         <Text style={styles.index}>{value.note.length}/500
                                         </Text>
                                     </View>
-                                ))}
+                                ))} */}
 
                         </View>
                     </View>

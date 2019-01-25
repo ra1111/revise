@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList,Image,BackgroundImage,TouchableOpacity } from 'react-native'
 import { Button, Icon } from '../node_modules/react-native-elements';
-import Dummy from '../Assets/Images/Dummy.jpg'
+import All from '../Assets/Images/Dummy.jpg'
 import { connect } from 'react-redux'
 let questions,title;
 
@@ -39,8 +39,8 @@ for (var key in deck) {
  console.log(deck[key][key1],"HDWWHUDhu")
  let question=deck[key][key1].question
  //use logic to seperate into answers
- let answer=[]
- answer.push(deck[key][key1].answer)
+ let answer=deck[key][key1].answer
+
 questions.push({question:question,answer:answer})
   }
 }
@@ -48,7 +48,6 @@ questions.push({question:question,answer:answer})
 
 }
 let deckData={title:title,questions:questions}
-//this.props.navigation.navigate('Mcq')
 this.props.navigation.navigate('ExtQuiz',
               {deckData: deckData})
   }
@@ -66,9 +65,9 @@ this.props.navigation.navigate('ExtQuiz',
        return (<TouchableOpacity  onPress={()=>{this.deck(rowData)}} style={styles.cardContainer}>
        <View style={styles.card} elevation={3}>
             <Image
-              resizeMode={'contain'}
+              resizeMode={'stretch'}
               style={styles.cardImage}
-              source={rowData.source?rowData.source:Dummy}/>
+              source={rowData.source?rowData.source:All}/>
 </View>
             <Text style={styles.cardText}> {rowData.title} </Text>
             <View style={styles.deckNumber}>

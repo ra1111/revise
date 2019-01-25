@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import * as firebase from 'firebase';
 import {Icon} from './node_modules/react-native-elements';
-import Dummy from './Assets/Images/Dummy.jpg'
+import All from './Assets/Images/elitmus.png'
 import CardHome from './components/CardHome'
 import {receiveDecks} from './actions'
 import {getDecks} from './utils/api'
@@ -89,7 +89,7 @@ class App extends Component {
                     for (var key in data) {
                         for (var key2 in data[key]) {
 
-                            quantities.push({source: Dummy, title: key2, number: data[key][key2].length,
+                            quantities.push({source: All, title: key2, number: data[key][key2].length,
                                 deck: data[key]
 
                             });
@@ -116,7 +116,7 @@ class App extends Component {
                     for (var key in data) {
                         for (var key2 in data[key]) {
 
-                            quantities.push({source: Dummy, title: key2, number: data[key][key2].length,
+                            quantities.push({source: All, title: key2, number: data[key][key2].length,
                                 deck: data[key]
 
                             });

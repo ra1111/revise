@@ -189,15 +189,15 @@ const MainNavigator = StackNavigator({
       }
     },
   },
-  Mcq:{
-    screen: Mcq,
-    navigationOptions: {
-      headerTintColor: 'white',
-      headerStyle: {
-        backgroundColor: '#2286c3',
-      }
-    },
-  },
+  // Mcq:{
+  //   screen: Mcq,
+  //   navigationOptions: {
+  //     headerTintColor: 'white',
+  //     headerStyle: {
+  //       backgroundColor: '#2286c3',
+  //     }
+  //   },
+  // },
   ExtQuiz:{
     screen: ExtQuiz,
     navigationOptions: {
