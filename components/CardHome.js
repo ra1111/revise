@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList,Image,BackgroundImage,TouchableOpacity } from 'react-native'
 import { Button, Icon } from '../node_modules/react-native-elements';
-import All from '../Assets/Images/Dummy.jpg'
+import All from '../Assets/Images/elitmus.png'
 import { connect } from 'react-redux'
 let questions,title;
 

@@ -290,7 +290,7 @@ class QuizCard extends React.Component {
                                 .answer
                                 .map((value, index) => {
                                     return <Animated.View key={index} style={styles.textContainer}>
-                                        <Text style={styles.flipTextBack}>{index + 1}{")\t"}{value.toUpperCase()}{"\n\n"}</Text><View
+                                        <Text style={styles.flipTextBack}>{index + 1}{")\t"}{value.toString().toUpperCase()}{"\n\n"}</Text><View
                                             style={index < (item.answer.length - 1)
                                         ? styles.boundary
                                         : styles.noBoundary}/></Animated.View>

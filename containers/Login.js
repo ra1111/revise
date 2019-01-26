@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Image,Alert,ActivityIndicator, Platform} from 'react-native';
 import * as firebase from 'firebase';
+import Dummy from '../Assets/Images/open.png'
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 //import Icon from '../Assets/Images/icon.png';
 export default class Login extends Component {
@@ -143,8 +144,13 @@ export default class Login extends Component {
   render() {
     return (
       <View style={styles.container}>
+     
+      <Image style={styles.imageContainer} resizeMode={'stretch'} source={Dummy}/> 
+      <Text style={styles.text}>REVISE</Text>
+      <Text style={styles.subtext}>Learn Share Excel</Text>
         <GoogleSigninButton
           style={{width: 212, height: 48,marginBottom:120}}
+        
           //size={GoogleSigninButton.Size.Standard}
           // color={GoogleSigninButton.Color.Auto}
           onPress={() => this.signInWithGoogle()}
@@ -156,17 +162,35 @@ export default class Login extends Component {
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1,  
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#38b4f7'
   },
   title: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 10
-  }
-  ,
+    margin: 10,
+    color: 'white',
+  },
+  imageContainer:{
+    width:90,
+    height:100,
+    marginTop:30
+       
+   },
+   subtext:{
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 19,
+    fontFamily: 'Montserrat-Bold',
+   },
+   text:{
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 25,
+    fontFamily: 'Montserrat-Bold',
+   },
   icon:{
     width:200,
     height:200,
