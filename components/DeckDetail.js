@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, Alert} from 'react-native';
+import {StyleSheet, Text, View, Alert,Platform } from 'react-native';
 import {connect} from 'react-redux';
 import {NavigationActions} from 'react-navigation';
 import {Button} from 'react-native-elements';
@@ -7,7 +7,15 @@ import PropTypes from 'prop-types';
 import {removeDeck} from '../utils/api';
 import {DeleteDeck} from '../actions';
 import * as firebase from 'firebase';
-
+import * as RNIap from 'react-native-iap';
+const itemSkus = Platform.select({
+    ios: [
+      'com.cooni.point1000', 'com.cooni.point5000', // dooboolab
+    ],
+    android: [
+      'revise', // subscription
+    ],
+  });
 /**
  *  Class to Check Deck Detail.
      *
@@ -24,6 +32,81 @@ class DeckDetail extends React.Component {
                 : navigation.state.params.deckData.title
         };
     }
+
+    constructor(props)
+    { super(props)
+        
+    this.state = {
+        modalVisible: false,
+        Chats:[],
+        numberOfPages: 0,
+        productList: [],
+        receipt: '',
+        availableItemsMessage: '',
+        purchased:false,
+      };
+    }
+    buyItem = async(sku) => {
+        try {
+          console.log('buyItem: ' + sku);
+          // const purchase = await RNIap.buyProduct(sku);
+          // const products = await RNIap.buySubscription(sku);
+          const purchase = await RNIap.buyProductWithoutFinishTransaction(sku);
+          this.setState({purchased:true})
+          console.log(purchase);
+        } catch (err) {
+            this.setState({purchased:false})
+          console.log(err.code, err.message,"error ocuured");
+
+        }
+      }
+      async componentDidMount() {
+       
+        console.log(itemSkus);
+        try {
+        console.log(RNIap,"rniap")
+        await RNIap.prepare() // the app hangs here and nothing happnes on Android
+        this.getItems(); // never get called
+        }
+        catch (err) {
+          console.warn(err.code, err.message);
+        }
+      }
+      componentWillUnmount() {
+       
+      RNIap.endConnection();
+      }
+      
+      getAvailablePurchases = async() => {
+      try {
+      
+        console.info('Get available purchases (non-consumable or unconsumed consumable)');
+        const purchases = await RNIap.getAvailablePurchases();
+        console.info('Available purchases :: ', purchases,purchases.length);
+        if (purchases && purchases.length > 0) {
+          this.setState({
+            availableItemsMessage: `Got ${purchases.length} items.`,
+            receipt: purchases[0].transactionReceipt,
+            purchased:true,
+          });
+        }
+      
+      } catch (err) {
+        console.warn(err.code, err.message);
+      }
+      
+      }
+      getItems = async() => {
+      try {
+        const products = await RNIap.getProducts(itemSkus);
+        // const products = await RNIap.getSubscriptions(itemSkus);
+        console.log('Products', products);
+        this.setState({ productList: products });
+        this.getAvailablePurchases()
+      } catch (err) {
+        console.warn(err.code, err.message);
+      }
+      }
     /**
 *UPloads on Firebase.
      *
@@ -160,7 +243,7 @@ class DeckDetail extends React.Component {
                         Cards</Text>
                     <View style={styles.btnView}>
                         <Button
-                            onPress={() => this.props.navigation.dispatch(NavigationActions.back())}
+                            onPress={() =>this.state.purchased? this.props.navigation.dispatch(NavigationActions.back()): this.buyItem('revise')}
                             title={'Back To All Decks'}
                             icon={{
                             name: 'arrow-back',
@@ -170,7 +253,7 @@ class DeckDetail extends React.Component {
                             backgroundColor: '#03A9F4'
                         }}></Button>
                         <Button
-                            onPress={() => this.deleteDeck(deck)}
+                            onPress={() => this.state.purchased?this.deleteDeck(deck):this.buyItem('revise')}
                             title={'Delete Deck'}
                             icon={{
                             name: 'delete',
@@ -181,7 +264,7 @@ class DeckDetail extends React.Component {
                             backgroundColor: '#FF0000'
                         }}></Button>
                         <Button
-                            onPress={() => this.uploadDeck(deck)}
+                            onPress={() =>this.state.purchased? this.uploadDeck(deck):this.buyItem('revise')}
                             title={'Upload Deck'}
                             icon={{
                             name: 'file-upload',

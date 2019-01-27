@@ -4,16 +4,24 @@ import {
     TouchableHighlight,
     Dimensions,
     View,
+    Platform,
     Text
 } from 'react-native';
 
 import Pdf from 'react-native-pdf';
 import Orientation from 'react-native-orientation-locker';
-
+import * as RNIap from 'react-native-iap';
 const WIN_WIDTH = Dimensions.get('window').width;
 const WIN_HEIGHT = Dimensions.get('window').height;
 
-
+const itemSkus = Platform.select({
+    ios: [
+      'com.cooni.point1000', 'com.cooni.point5000', // dooboolab
+    ],
+    android: [
+      'revise', // subscription
+    ],
+  });
 export default class PDFExample extends React.Component {
     constructor(props) {
         super(props);
@@ -21,11 +29,76 @@ export default class PDFExample extends React.Component {
             page: 1,
             scale: 1,
             numberOfPages: 0,
+            productList: [],
+            receipt: '',
+            availableItemsMessage: '',
+            purchased:false,
             horizontal: false,
             width: WIN_WIDTH
         };
         this.pdf = null;
     }
+    buyItem = async(sku) => {
+        try {
+          console.log('buyItem: ' + sku);
+          // const purchase = await RNIap.buyProduct(sku);
+          // const products = await RNIap.buySubscription(sku);
+          const purchase = await RNIap.buyProductWithoutFinishTransaction(sku);
+          this.setState({purchased:true})
+          console.log(purchase);
+        } catch (err) {
+            this.setState({purchased:false})
+          console.log(err.code, err.message,"error ocuured");
+
+        }
+      }
+      async componentDidMount() {
+        Orientation.addOrientationListener(this._onOrientationDidChange);
+        console.log(itemSkus);
+        try {
+        console.log(RNIap,"rniap")
+        await RNIap.prepare() // the app hangs here and nothing happnes on Android
+        this.getItems(); // never get called
+        }
+        catch (err) {
+          console.warn(err.code, err.message);
+        }
+      }
+      componentWillUnmount() {
+        Orientation.removeOrientationListener(this._onOrientationDidChange);
+      RNIap.endConnection();
+      }
+      
+      getAvailablePurchases = async() => {
+      try {
+      
+        console.info('Get available purchases (non-consumable or unconsumed consumable)');
+        const purchases = await RNIap.getAvailablePurchases();
+        console.info('Available purchases :: ', purchases,purchases.length);
+        if (purchases && purchases.length > 0) {
+          this.setState({
+            availableItemsMessage: `Got ${purchases.length} items.`,
+            receipt: purchases[0].transactionReceipt,
+            purchased:true,
+          });
+        }
+      
+      } catch (err) {
+        console.warn(err.code, err.message);
+      }
+      
+      }
+      getItems = async() => {
+      try {
+        const products = await RNIap.getProducts(itemSkus);
+        // const products = await RNIap.getSubscriptions(itemSkus);
+        console.log('Products', products);
+        this.setState({ productList: products });
+        this.getAvailablePurchases()
+      } catch (err) {
+        console.warn(err.code, err.message);
+      }
+      }
 
     _onOrientationDidChange = (orientation) => {
         if (orientation == 'LANDSCAPE-LEFT'||orientation == 'LANDSCAPE-RIGHT') {
@@ -35,13 +108,7 @@ export default class PDFExample extends React.Component {
         }
     };
 
-    componentDidMount() {
-        Orientation.addOrientationListener(this._onOrientationDidChange);
-    }
 
-    componentWillUnmount() {
-        Orientation.removeOrientationListener(this._onOrientationDidChange);
-    }
 
     prePage = () => {
         let prePage = this.state.page > 1 ? this.state.page - 1 : 1;
@@ -126,8 +193,16 @@ export default class PDFExample extends React.Component {
                              console.log(tableContents);
                          }}
                          onPageChanged={(page, numberOfPages) => {
-                             this.state.page = page; //do not use setState, it will cause re-render
-                             console.log(`current page: ${page}`);
+                             if(page
+                           >1&&!this.state.purchased)
+                           {
+                               this.buyItem('revise');
+                               this.state.page = 2;
+                           }
+                           else{
+                            this.state.page = page;
+                            } //do not use setState, it will cause re-render
+                            console.log(`current page: ${page}`);        
                          }}
                          onError={(error) => {
                              console.log(error);
