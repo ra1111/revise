@@ -90,6 +90,12 @@ const MainTab=TabNavigator({
     },
    
   },
+  Chat:{
+    screen:Chat,
+    navigationOptions:{
+    tabBarLabel:()=><Icon name='chat' type='entypo' color="white"/>
+      },
+    },
   Mock:{
     screen:Mock,
     navigationOptions:{
@@ -106,12 +112,7 @@ const MainTab=TabNavigator({
    
   },
 
-  Chat:{
-screen:Chat,
-navigationOptions:{
-tabBarLabel:()=><Icon name='chat' type='entypo' color="white"/>
-  },
-},
+
 
 
 //ACCOUNT NEEDS TO BE DOne

@@ -5,9 +5,10 @@ import {
     Dimensions,
     View,
     Platform,
+    TouchableOpacity,
     Text
 } from 'react-native';
-
+import Overlay from 'react-native-modal-overlay';
 import Pdf from 'react-native-pdf';
 import Orientation from 'react-native-orientation-locker';
 import * as RNIap from 'react-native-iap';
@@ -31,6 +32,8 @@ export default class PDFExample extends React.Component {
             numberOfPages: 0,
             productList: [],
             receipt: '',
+            modalVisible: false, 
+
             availableItemsMessage: '',
             purchased:false,
             horizontal: false,
@@ -38,7 +41,10 @@ export default class PDFExample extends React.Component {
         };
         this.pdf = null;
     }
+    onClose = () => this.setState({ modalVisible: false});
+
     buyItem = async(sku) => {
+        console.log('coming here')
         try {
           console.log('buyItem: ' + sku);
           // const purchase = await RNIap.buyProduct(sku);
@@ -48,6 +54,10 @@ export default class PDFExample extends React.Component {
           console.log(purchase);
         } catch (err) {
             this.setState({purchased:false})
+            if(err.code==="E_ALREADY_OWNED")
+            {
+          this.setState({isVisible:false})
+            }
           console.log(err.code, err.message,"error ocuured");
 
         }
@@ -67,6 +77,7 @@ export default class PDFExample extends React.Component {
       componentWillUnmount() {
         Orientation.removeOrientationListener(this._onOrientationDidChange);
       RNIap.endConnection();
+      this.setState({isVisible:false})
       }
       
       getAvailablePurchases = async() => {
@@ -138,24 +149,44 @@ export default class PDFExample extends React.Component {
     switchHorizontal = () => {
         this.setState({horizontal: !this.state.horizontal, page: this.state.page});
     };
+    onPageChanged = (currentPageShow) => {
+		console.log('******** page change: ' + currentPageShow)
+this.state.page=currentPageShow
+if(!this.state.purchased&&currentPageShow>3)
+{
+    this.setState({isVisible:true})
+}
+    }
+    back()
+    {
+        this.setState({isVisible:false});
+        this.props.navigation.navigate('Home')
+    }
+    onClose = () => this.setState({ modalVisible: false});
 
     render() {
+      
         const source = {uri:'https://firebasestorage.googleapis.com/v0/b/elitmus-daf04.appspot.com/o/Elitmus.pdf?alt=media&token=e63c9ecd-64c8-4759-94bb-2eec525ba8ba',cache:true};
-        //const source = require('./test.pdf');  // ios only
-        //const source = {uri:'bundle-assets://test.pdf'};
- 
-        //const source = {uri:'file:///sdcard/test.pdf'};
-        //const source = {uri:"data:application/pdf;base64,..."};
  
         return (
             <View style={styles.container}>
-                <View style={{flexDirection: 'row',justifyContent:'space-between'}}>
+                             <Overlay containerStyle={styles.Overlay} visible={this.state.isVisible} onClose={this.onClose} >
+
+
+                    <TouchableOpacity style={styles.button}  onPress={()=>this.buyItem('revise')}>
+                    <Text style={{color:'white',fontSize:18,fontWeight:"500"}}> Unlock Full Mock</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button1}  onPress={()=>this.back()}>
+                    <Text style={{color:'white',fontSize:18,fontWeight:"500"}}> Go Back</Text>
+                    </TouchableOpacity>
+</Overlay>
+                <View style={{flexDirection: 'row',backgroundColor:"#38b4f7",justifyContent:'space-between'}}>
                     <TouchableHighlight disabled={this.state.page === 1}
                                         style={this.state.page === 1 ? styles.btnDisable : styles.btn}
                                         onPress={() => this.prePage()}>
                         <Text style={styles.btnText}>{'-'}</Text>
                     </TouchableHighlight>
-                    <View style={styles.btnText}><Text style={styles.subText}>Page</Text></View>
+                    <View style={styles.btnText}><Text style={styles.subText}>{this.state.page}</Text></View>
                     <TouchableHighlight disabled={this.state.page === this.state.numberOfPages}
                                         style={this.state.page === this.state.numberOfPages ? styles.btnDisable : styles.btn}
                                         onPress={() => this.nextPage()}>
@@ -179,10 +210,15 @@ export default class PDFExample extends React.Component {
                     </TouchableHighlight>
 
                 </View>
-                <View style={{flex:1,width: this.state.width,backgroundColor:"#38b4f7"}}>
+                <View style={{flex:1,width: this.state.width}}>
+
+               
+                
                     <Pdf ref={(pdf) => {
                         this.pdf = pdf;
                     }}
+                    enablePaging={true}
+                    spacing={10}
                          source={source}
                          page={this.state.page}
                          scale={this.state.scale}
@@ -192,24 +228,16 @@ export default class PDFExample extends React.Component {
                              console.log(`total page count: ${numberOfPages}`);
                              console.log(tableContents);
                          }}
-                         onPageChanged={(page, numberOfPages) => {
-                             if(page
-                           >1&&!this.state.purchased)
-                           {
-                               this.buyItem('revise');
-                               this.state.page = 2;
-                           }
-                           else{
-                            this.state.page = page;
-                            } //do not use setState, it will cause re-render
-                            console.log(`current page: ${page}`);        
-                         }}
+                         onPageChanged= {this.onPageChanged}
+                        
                          onError={(error) => {
                              console.log(error);
                          }}
                          style={{flex:1}}
                          />
+                        
                 </View>
+                        
             </View>
         )
     }
@@ -218,7 +246,7 @@ export default class PDFExample extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor:"#38b4f7",
+      //  backgroundColor:"#38b4f7",
         justifyContent: 'flex-start',
         alignItems: 'center',
         marginTop: 5,
@@ -228,6 +256,37 @@ const styles = StyleSheet.create({
         padding: 1,
         backgroundColor: "white",
     },
+    button: {
+        borderWidth: .5,
+     padding:20,
+     width:330,
+     marginVertical:20,
+     backgroundColor:'green',
+     borderRadius:10,
+     alignItems:'center',
+
+justifyContent:'center',
+
+        borderColor: '#38b4f7'
+     },
+     Overlay:{
+justifyContent:'center',
+alignItems:'center',
+flex:1,
+     },
+     button1: {
+        borderWidth: .5,
+     padding:20,
+     width:330,
+     marginVertical:20,
+     backgroundColor:'red',
+     borderRadius:10,
+     alignItems:'center',
+
+justifyContent:'center',
+
+        borderColor: '#38b4f7'
+     },
     btnDisable: {
         margin: 3,
         padding: 1,
