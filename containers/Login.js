@@ -79,7 +79,7 @@ export default class Login extends Component {
       if (error.code === 'CANCELED') {
         console.log('user cancelled');
       }
-     Alert.alert("Some thing is not Right",error.code);
+     Alert.alert("Some thing is not Right","Click Login or Wait for few Seconds");
     }
   };
   componentWillMount() {

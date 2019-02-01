@@ -144,7 +144,7 @@ class App extends Component {
         return (
             <View style={styles.container}>
 
-                <Swipers text1={" Write Notes"} text2={"Discuss Doubts"} text3={"Website coming soon"}/>
+                <Swipers text1={" Write Notes"} text2={"Discuss Doubts"} text3={"Unleash The Full Potential Buy Now"}/>
                 <View style={styles.contentContainer}>
                     <ScrollView >
                         <View>

@@ -50,7 +50,7 @@ export default class PDFExample extends React.Component {
           // const purchase = await RNIap.buyProduct(sku);
           // const products = await RNIap.buySubscription(sku);
           const purchase = await RNIap.buyProductWithoutFinishTransaction(sku);
-          this.setState({purchased:true})
+          this.setState({purchased:true,isVisible:false})
           console.log(purchase);
         } catch (err) {
             this.setState({purchased:false})
@@ -63,6 +63,7 @@ export default class PDFExample extends React.Component {
         }
       }
       async componentDidMount() {
+
         Orientation.addOrientationListener(this._onOrientationDidChange);
         console.log(itemSkus);
         try {
@@ -170,7 +171,7 @@ if(!this.state.purchased&&currentPageShow>3)
  
         return (
             <View style={styles.container}>
-                             <Overlay containerStyle={styles.Overlay} visible={this.state.isVisible} onClose={this.onClose} >
+                             <Overlay   childrenWrapperStyle={{backgroundColor:"#38b4f7"}}	 containerStyle={styles.Overlay} visible={this.state.isVisible} onClose={this.onClose} >
 
 
                     <TouchableOpacity style={styles.button}  onPress={()=>this.buyItem('revise')}>
@@ -180,7 +181,7 @@ if(!this.state.purchased&&currentPageShow>3)
                     <Text style={{color:'white',fontSize:18,fontWeight:"500"}}> Go Back</Text>
                     </TouchableOpacity>
 </Overlay>
-                <View style={{flexDirection: 'row',backgroundColor:"#38b4f7",justifyContent:'space-between'}}>
+                <View style={{flexDirection: 'row', width:'100%',paddingHorizontal:4,backgroundColor:"#38b4f7",justifyContent:'space-between'}}>
                     <TouchableHighlight disabled={this.state.page === 1}
                                         style={this.state.page === 1 ? styles.btnDisable : styles.btn}
                                         onPress={() => this.prePage()}>
@@ -205,8 +206,8 @@ if(!this.state.purchased&&currentPageShow>3)
                     </TouchableHighlight>
                     <View style={styles.subText}><Text style={styles.subText}>{'Horizontal:'}</Text></View>
                     <TouchableHighlight style={styles.btn} onPress={() => this.switchHorizontal()}>
-                        {!this.state.horizontal ? (<Text style={styles.btnText}>{'False'}</Text>) : (
-                            <Text style={styles.btnText}>{'True'}</Text>)}
+                        {!this.state.horizontal ? (<Text style={styles.btnText}>{'No'}</Text>) : (
+                            <Text style={styles.btnText}>{'Yes'}</Text>)}
                     </TouchableHighlight>
 
                 </View>
