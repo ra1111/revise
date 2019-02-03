@@ -172,10 +172,15 @@ if(!this.state.purchased&&currentPageShow>3)
         return (
             <View style={styles.container}>
                              <Overlay   childrenWrapperStyle={{backgroundColor:"#38b4f7"}}	 containerStyle={styles.Overlay} visible={this.state.isVisible} onClose={this.onClose} >
-
+                             <Text style={styles.mainText}> Unlock Your 99% Now</Text>
+                <View style={{justifyContent:'space-evenly',flex:1,alignItems:'center'}}>
+                <Text style={styles.subText}> 1) Get Mocks  </Text>
+                <Text style={styles.subText}> 2) Ask Doubts</Text>
+                 <Text  style={styles.subText}> 3) Unlock All Tips and Questions</Text>
+                 </View>
 
                     <TouchableOpacity style={styles.button}  onPress={()=>this.buyItem('revise')}>
-                    <Text style={{color:'white',fontSize:18,fontWeight:"500"}}> Unlock Full Mock</Text>
+                    <Text style={{color:'white',fontSize:18,fontWeight:"500"}}> Unlock All the Features Now!</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button1}  onPress={()=>this.back()}>
                     <Text style={{color:'white',fontSize:18,fontWeight:"500"}}> Go Back</Text>
@@ -271,7 +276,7 @@ justifyContent:'center',
         borderColor: '#38b4f7'
      },
      Overlay:{
-justifyContent:'center',
+justifyContent:'space-around',
 alignItems:'center',
 flex:1,
      },
@@ -288,6 +293,17 @@ justifyContent:'center',
 
         borderColor: '#38b4f7'
      },
+     subText:{
+        textAlign: 'center',
+        fontSize: 18,
+        color:'white',
+        marginVertical:5
+    },
+    mainText: {
+		textAlign: 'center',
+        fontSize: 32,
+        color:'white'
+	},
     btnDisable: {
         margin: 3,
         padding: 1,

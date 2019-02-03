@@ -11,16 +11,25 @@ import {
     LayoutAnimation,
     UIManager,
     TouchableOpacity,
+    Platform,
     ScrollView
 } from 'react-native'
 import {connect} from 'react-redux'
+import * as RNIap from 'react-native-iap';
 import {Card, Button, Icon} from 'react-native-elements'
 import {AddQuizResults} from '../actions'
 import {updateDeck} from '../utils/api'
 import Mcq from './Mcq'
 // import { clearLocalNotification, setLocalNotification } from
 // '../utils/helpers'
-
+const itemSkus = Platform.select({
+    ios: [
+      'com.cooni.point1000', 'com.cooni.point5000', // dooboolab
+    ],
+    android: [
+      'revise', // subscription
+    ],
+  });
 const SCREEN_WIDTH = Dimensions
     .get('window')
     .width;
@@ -36,6 +45,15 @@ class QuizCard extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state={
+            modalVisible: false,
+            Chats:[],
+            numberOfPages: 0,
+            productList: [],
+            receipt: '',
+            availableItemsMessage: '',
+            purchased:false,
+        }
         const position = new Animated.ValueXY();
         this.animatedValue = new Animated.Value(0);
         this.value = 0;
@@ -87,6 +105,68 @@ class QuizCard extends React.Component {
          //   mcq: true
         };
     }
+    buyItem = async(sku) => {
+        try {
+          console.log('buyItem: ' + sku);
+          // const purchase = await RNIap.buyProduct(sku);
+          // const products = await RNIap.buySubscription(sku);
+          const purchase = await RNIap.buyProductWithoutFinishTransaction(sku);
+          this.setState({purchased:true})
+          console.log(purchase);
+        } catch (err) {
+            this.setState({purchased:false})
+          console.log(err.code, err.message,"error ocuured");
+
+        }
+      }
+      async componentDidMount() {
+          //Remove now
+
+        console.log(itemSkus);
+        try {
+        console.log(RNIap,"rniap")
+        await RNIap.prepare() // the app hangs here and nothing happnes on Android
+        this.getItems(); // never get called
+        }
+        catch (err) {
+          console.warn(err.code, err.message);
+        }
+      }
+      componentWillUnmount() {
+       
+      RNIap.endConnection();
+      }
+      
+      getAvailablePurchases = async() => {
+      try {
+      
+        console.info('Get available purchases (non-consumable or unconsumed consumable)');
+        const purchases = await RNIap.getAvailablePurchases();
+        console.info('Available purchases :: ', purchases,purchases.length);
+        if (purchases && purchases.length > 0) {
+          this.setState({
+            availableItemsMessage: `Got ${purchases.length} items.`,
+            receipt: purchases[0].transactionReceipt,
+            purchased:true,
+          });
+        }
+      
+      } catch (err) {
+        console.warn(err.code, err.message);
+      }
+      
+      }
+      getItems = async() => {
+      try {
+        const products = await RNIap.getProducts(itemSkus);
+        // const products = await RNIap.getSubscriptions(itemSkus);
+        console.log('Products', products);
+        this.setState({ productList: products });
+        this.getAvailablePurchases()
+      } catch (err) {
+        console.warn(err.code, err.message);
+      }
+      }
 
     componentWillReceiveProps(nextProps, nextState) {
         console.log(this.props, "DWJJDWIJDWIJDWJIWDIJIJWDIJDWJ")
@@ -347,6 +427,43 @@ class QuizCard extends React.Component {
             // 	clearLocalNotification().then(setLocalNotification)
             return this.renderNoMoreCards(result);
         } else if (this.state.counter < this.props.data.questions.length) {
+            if(this.props.ext===true&&this.state.counter>2&& !this.state.purchased)
+            {
+                return(
+                <Animated.View
+               // key={index}
+                style={[
+                this.getCardStyle(),
+                styles.getCardStyle
+            ]}
+                {...this.state.panResponder.panHandlers}>
+                 <Card
+                //key={item}
+                titleStyle={{
+                color: 'white'
+            }}
+                containerStyle={{
+                backgroundColor: '#2286c3',
+                borderRadius: 10,
+                color: 'white',
+    
+            }}
+            wrapperStyle={{justifyContent:'space-between',height:'95%'}}
+                title={this.titleElement(this.state.counter , this.props.data.questions.length)}>
+                <Text style={styles.mainText}> Unlock Your 99% Now</Text>
+                <View style={{justifyContent:'space-evenly',alignItems:'center'}}>
+                <Text style={styles.subText}> 1) Get Mocks  </Text>
+                <Text style={styles.subText}> 2) Ask Doubts</Text>
+                 <Text  style={styles.subText}> 3) Unlock All Tips and Questions</Text>
+                 </View>
+                <TouchableOpacity  style={styles.button}  onPress={()=>this.buyItem('revise')}>
+                <Text style={{color:'blue'}}> Unlock All the Features Now!</Text>
+                </TouchableOpacity>
+                </Card>
+            </Animated.View>)
+               
+            }
+            else{
             return this
                 .props
                 .data
@@ -366,9 +483,11 @@ class QuizCard extends React.Component {
                             </Animated.View>
                         );
                     }
+                    
                     return (<View/>)
                 })
                 .reverse();
+            }
         }
     }
 
@@ -418,6 +537,25 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'flex-end'
     },
+    button:{
+        borderWidth: .5,
+        padding:20,
+        width:"100%",
+        borderRadius:10,
+        alignItems:'center',
+
+justifyContent:'center',
+        backgroundColor:'#90ee90',
+
+           borderColor: '#38b4f7'
+
+    },
+    subText:{
+        textAlign: 'center',
+        fontSize: 18,
+        color:'white',
+        marginVertical:5
+    },
     iconRight: {
         flex: 1,
         marginBottom: 20,
@@ -444,6 +582,11 @@ const styles = StyleSheet.create({
 
         color: 'white'
     },
+    mainText: {
+		textAlign: 'center',
+        fontSize: 32,
+        color:'white'
+	},
     boundaryEl: {
         width: '95%',
         height: .7,

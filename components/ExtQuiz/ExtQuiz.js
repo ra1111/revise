@@ -39,6 +39,7 @@ return deck
 						</View>)
 				: (
 					<QuizCard
+					ext={true}
 						data={deck}
 						style={styles.cardView}
 					/>
