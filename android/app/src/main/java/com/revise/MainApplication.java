@@ -3,6 +3,7 @@ package com.revise;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.sbugert.rnadmob.RNAdMobPackage;
 import org.wonday.orientation.OrientationPackage;
 import com.dooboolab.RNIap.RNIapPackage;
 import org.wonday.pdf.RCTPdfView;
@@ -29,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNAdMobPackage(),
             new OrientationPackage(),
             new RNIapPackage(),
             new RCTPdfView(),

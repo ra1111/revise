@@ -171,7 +171,7 @@ if(!this.state.purchased&&currentPageShow>3)
  
         return (
             <View style={styles.container}>
-                             <Overlay   childrenWrapperStyle={{backgroundColor:"#38b4f7"}}	 containerStyle={styles.Overlay} visible={this.state.isVisible} onClose={this.onClose} >
+                             {/* <Overlay   childrenWrapperStyle={{backgroundColor:"#38b4f7"}}	 containerStyle={styles.Overlay} visible={this.state.isVisible} onClose={this.onClose} >
                              <Text style={styles.mainText}> Unlock Your 99% Now</Text>
                 <View style={{justifyContent:'space-evenly',flex:1,alignItems:'center'}}>
                 <Text style={styles.subText}> 1) Get Mocks  </Text>
@@ -185,7 +185,7 @@ if(!this.state.purchased&&currentPageShow>3)
                     <TouchableOpacity style={styles.button1}  onPress={()=>this.back()}>
                     <Text style={{color:'white',fontSize:18,fontWeight:"500"}}> Go Back</Text>
                     </TouchableOpacity>
-</Overlay>
+</Overlay> */}
                 <View style={{flexDirection: 'row', width:'100%',paddingHorizontal:4,backgroundColor:"#38b4f7",justifyContent:'space-between'}}>
                     <TouchableHighlight disabled={this.state.page === 1}
                                         style={this.state.page === 1 ? styles.btnDisable : styles.btn}

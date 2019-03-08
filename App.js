@@ -90,27 +90,27 @@ const MainTab=TabNavigator({
     },
    
   },
-  Chat:{
-    screen:Chat,
-    navigationOptions:{
-    tabBarLabel:()=><Icon name='chat' type='entypo' color="white"/>
-      },
-    },
+  // Chat:{
+  //   screen:Chat,
+  //   navigationOptions:{
+  //   tabBarLabel:()=><Icon name='chat' type='entypo' color="white"/>
+  //     },
+  //   },
   Mock:{
     screen:Mock,
     navigationOptions:{
       tabBarLabel:()=><Icon name='md-paper'  type='ionicon' color="white"/>
     },
   },
-  Search:{
-    screen:Search,
-    navigationOptions:{
-      tabBarLabel : ({ tintColor }) => (
-        <Icon name="ios-search" color="white" type='ionicon'/>
-      )
-    },
+  // Search:{
+  //   screen:Search,
+  //   navigationOptions:{
+  //     tabBarLabel : ({ tintColor }) => (
+  //       <Icon name="ios-search" color="white" type='ionicon'/>
+  //     )
+  //   },
    
-  },
+  // },
 
 
 

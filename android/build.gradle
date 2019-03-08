@@ -44,6 +44,7 @@ allprojects {
             force "com.google.android.gms:play-services-basement:$googlePlayServicesVersion"
              force "com.google.android.gms:play-services-base:$googlePlayServicesVersion"
             force "com.google.android.gms:play-services-tasks:$googlePlayServicesVersion"
+            force "com.google.android.gms:play-services-ads:$googlePlayServicesVersion"
         }
       }
 }

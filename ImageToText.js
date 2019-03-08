@@ -14,6 +14,13 @@ import {
     View,
     ScrollView
 } from 'react-native';
+import { 
+    AdMobBanner, 
+    AdMobInterstitial, 
+    PublisherBanner,
+    AdMobRewarded
+  } from 'react-native-admob'
+  const bannerWidths = [200, 250, 320];
 import * as firebase from 'firebase';
 import {Icon} from './node_modules/react-native-elements';
 import All from './Assets/Images/elitmus.png'
@@ -71,7 +78,73 @@ class App extends Component {
         this
             ._loadInitialState()
             .done();
+            AdMobRewarded.setTestDevices([AdMobRewarded.simulatorId]);
+    AdMobRewarded.setAdUnitID('ca-app-pub-3940256099942544/5224354917');
+
+    AdMobRewarded.addEventListener('rewarded',
+      (reward) => console.log('AdMobRewarded => rewarded', reward)
+    );
+    AdMobRewarded.addEventListener('adLoaded',
+      () => console.log('AdMobRewarded => adLoaded')
+    );
+    AdMobRewarded.addEventListener('adFailedToLoad',
+      (error) => console.warn(error)
+    );
+    AdMobRewarded.addEventListener('adOpened',
+      () => console.log('AdMobRewarded => adOpened')
+    );
+    AdMobRewarded.addEventListener('videoStarted',
+      () => console.log('AdMobRewarded => videoStarted')
+    );
+    AdMobRewarded.addEventListener('adClosed',
+      () => {
+        console.log('AdMobRewarded => adClosed');
+        AdMobRewarded.requestAd().catch(error => console.warn(error));
+      }
+    );
+    AdMobRewarded.addEventListener('adLeftApplication',
+      () => console.log('AdMobRewarded => adLeftApplication')
+    );
+
+    AdMobRewarded.requestAd().catch(error => console.warn(error));
+
+    AdMobInterstitial.setTestDevices([AdMobInterstitial.simulatorId]);
+    AdMobInterstitial.setAdUnitID('ca-app-pub-3940256099942544/1033173712');
+
+    AdMobInterstitial.addEventListener('adLoaded',
+      () => console.log('AdMobInterstitial adLoaded')
+    );
+    AdMobInterstitial.addEventListener('adFailedToLoad',
+      (error) => console.warn(error)
+    );
+    AdMobInterstitial.addEventListener('adOpened',
+      () => console.log('AdMobInterstitial => adOpened')
+    );
+    AdMobInterstitial.addEventListener('adClosed',
+      () => {
+        console.log('AdMobInterstitial => adClosed');
+        AdMobInterstitial.requestAd().catch(error => console.warn(error));
+      }
+    );
+    AdMobInterstitial.addEventListener('adLeftApplication',
+      () => console.log('AdMobInterstitial => adLeftApplication')
+    );
+
+    AdMobInterstitial.requestAd().catch(error => console.warn(error));
+
     }
+    componentWillUnmount() {
+        AdMobRewarded.removeAllListeners();
+        AdMobInterstitial.removeAllListeners();
+      }
+    
+      showRewarded() {
+        AdMobRewarded.showAd().catch(error => console.warn(error));
+      }
+    
+      showInterstitial() {
+        AdMobInterstitial.showAd().catch(error => console.warn(error));
+      }
     async UNSAFE_componentWillMount() {
 
         database = firebase.database();
@@ -144,7 +217,11 @@ class App extends Component {
         return (
             <View style={styles.container}>
 
-                <Swipers text1={" Write Notes"} text2={"Discuss Doubts"} text3={"Unleash The Full Potential Buy Now"}/>
+                <Swipers text1={<AdMobBanner
+              adSize="mediumRectangle"
+              adUnitID="ca-app-pub-7368274303704514/5752280471"
+              ref={el => (this._basicExample = el)}
+            />} text2={"Important Questions"} text3={" India's First Digital Notebook"}/>
                 <View style={styles.contentContainer}>
                     <ScrollView >
                         <View>
@@ -154,7 +231,7 @@ class App extends Component {
                                 home={false}
                                 navigation={this.props.navigation}
                                 data={this.state.PopularArray}/>
-                            <View>
+                            {/* <View>
                                 <Text style={styles.title}>
                                     Your Deck</Text>
                                 {Object
@@ -169,7 +246,7 @@ class App extends Component {
                                         <Text style={styles.Plus}>+</Text>
                                     </View>}
 
-                            </View>
+                            </View> */}
                             <View>
                                 <Text style={styles.title}>
                                     Trending Now</Text>
@@ -182,14 +259,14 @@ class App extends Component {
 
                     </ScrollView>
                 </View>
-                <View style={styles.button}>
+                {/* <View style={styles.button}>
                     <Button onPress={() => this.props.navigation.navigate('AddDeck')}>
                         <View style={[styles.add, styles.imgContainer, styles.round]}>
 
                             <Icon name='add' size={30} color={'white'}/>
                         </View>
                     </Button>
-                </View>
+                </View> */}
             </View>
         );
     }

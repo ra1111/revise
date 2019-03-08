@@ -427,43 +427,7 @@ class QuizCard extends React.Component {
             // 	clearLocalNotification().then(setLocalNotification)
             return this.renderNoMoreCards(result);
         } else if (this.state.counter < this.props.data.questions.length) {
-            if(this.props.ext===true&&this.state.counter>2&& !this.state.purchased)
-            {
-                return(
-                <Animated.View
-               // key={index}
-                style={[
-                this.getCardStyle(),
-                styles.getCardStyle
-            ]}
-                {...this.state.panResponder.panHandlers}>
-                 <Card
-                //key={item}
-                titleStyle={{
-                color: 'white'
-            }}
-                containerStyle={{
-                backgroundColor: '#2286c3',
-                borderRadius: 10,
-                color: 'white',
-    
-            }}
-            wrapperStyle={{justifyContent:'space-between',height:'95%'}}
-                title={this.titleElement(this.state.counter , this.props.data.questions.length)}>
-                <Text style={styles.mainText}> Unlock Your 99% Now</Text>
-                <View style={{justifyContent:'space-evenly',alignItems:'center'}}>
-                <Text style={styles.subText}> 1) Get Mocks  </Text>
-                <Text style={styles.subText}> 2) Ask Doubts</Text>
-                 <Text  style={styles.subText}> 3) Unlock All Tips and Questions</Text>
-                 </View>
-                <TouchableOpacity  style={styles.button}  onPress={()=>this.buyItem('revise')}>
-                <Text style={{color:'blue'}}> Unlock All the Features Now!</Text>
-                </TouchableOpacity>
-                </Card>
-            </Animated.View>)
-               
-            }
-            else{
+         
             return this
                 .props
                 .data
@@ -488,7 +452,7 @@ class QuizCard extends React.Component {
                 })
                 .reverse();
             }
-        }
+        
     }
 
     render() {

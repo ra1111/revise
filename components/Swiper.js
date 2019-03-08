@@ -8,7 +8,7 @@ import Swiper from 'react-native-swiper';
             <View style={styles.wrapper}>
             <Swiper  autoplay={true} autoplayTimeout={2.5}>
             <View style={styles.slide1}>
-              <Text style={styles.text}>{this.props.text1}</Text>
+             {this.props.text1}
             </View>
             <View style={styles.slide2}>
               <Text style={styles.text}>{this.props.text2}</Text>
